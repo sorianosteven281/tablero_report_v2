@@ -61,7 +61,7 @@ class Inspection {
       photosObs: (map['photos_obs'] as String?)?.split(',').where((s) => s.isNotEmpty).toList() ?? [],
       photosAfter: (map['photos_after'] as String?)?.split(',').where((s) => s.isNotEmpty).toList() ?? [],
       observations: map['observations'] as String? ?? '',
-      finalStatus: map['final_status'] as String? ?? 'OPERATIVO',
+      finalStatus: map['final_status'] as String? ?? map['status'] as String? ?? 'OPERATIVO',
       latitude: map['latitude'] != null ? (map['latitude'] as num).toDouble() : null,
       longitude: map['longitude'] != null ? (map['longitude'] as num).toDouble() : null,
       responsible: map['responsible'] as String? ?? 'Técnico',

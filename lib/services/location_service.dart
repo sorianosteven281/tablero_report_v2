@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 
 enum GpsQuality {
-  liveFix,         // Satélite real en vivo (alta precisión)
-  freshCache,      // Coordenada fresca reciente (< 3 minutos)
+  liveFix,         // Satélite real en vivo (< 45m de precisión)
+  freshCache,      // Coordenada fresca reciente (< 3 minutos, < 40m)
   indoorNoSignal,  // Sin satélite (Sala eléctrica, búnker o túnel)
   disabled,        // GPS apagado en el teléfono
   skipped          // Omitido voluntariamente por el usuario
@@ -66,7 +66,7 @@ class LocationService {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Verificar si el servicio GPS está activado
+    // 1. Verificar si el GPS está encendido
     try {
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
@@ -82,7 +82,7 @@ class LocationService {
       );
     }
 
-    // Verificar permisos
+    // 2. Verificar permisos
     try {
       permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
@@ -108,40 +108,45 @@ class LocationService {
       );
     }
 
-    // 1. Intentar obtener posición satelital con timeout corto (2.5s)
+    // 3. Intentar obtener posición satelital real con alta precisión y timeout de 3s
     try {
       final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.medium,
-        timeLimit: const Duration(milliseconds: 2500),
+        desiredAccuracy: LocationAccuracy.high,
+        timeLimit: const Duration(milliseconds: 3000),
       );
 
-      return GpsResult(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        quality: GpsQuality.liveFix,
-        label: 'Satélite en vivo (±${position.accuracy.toStringAsFixed(1)}m)',
-      );
+      // FILTRO DE CALIDAD ESTRICTO:
+      // Si la precisión es mayor a 45m (ej. 600m), es una antena celular o estimación tosca,
+      // NO es satélite GPS real. No lo aceptamos como fix de panel eléctrico.
+      if (position.accuracy <= 45.0) {
+        return GpsResult(
+          latitude: position.latitude,
+          longitude: position.longitude,
+          quality: GpsQuality.liveFix,
+          label: 'Satélite en vivo (±${position.accuracy.toStringAsFixed(0)}m)',
+        );
+      }
     } catch (_) {
-      // Timeout o sin satélite
+      // Timeout o sin cobertura de satélites
     }
 
-    // 2. Comprobar última posición conocida con filtro anti-oficina (< 3 min)
+    // 4. Comprobar última posición conocida reciente (< 3 min y precisión <= 35m)
     try {
       final lastKnown = await Geolocator.getLastKnownPosition();
       if (lastKnown != null) {
         final age = DateTime.now().difference(lastKnown.timestamp);
-        if (age.inMinutes <= 3 && lastKnown.accuracy <= 50.0) {
+        if (age.inMinutes <= 3 && lastKnown.accuracy <= 35.0) {
           return GpsResult(
             latitude: lastKnown.latitude,
             longitude: lastKnown.longitude,
             quality: GpsQuality.freshCache,
-            label: 'Caché reciente (${age.inSeconds}s atrás)',
+            label: 'Caché reciente (${age.inSeconds}s atrás, ±${lastKnown.accuracy.toStringAsFixed(0)}m)',
           );
         }
       }
     } catch (_) {}
 
-    // 3. Fallback seguro
+    // 5. Fallback honesto: reportar sin señal (sala blindada / túnel)
     return GpsResult(
       quality: GpsQuality.indoorNoSignal,
       label: 'Sin señal satelital (Sala/Túnel)',

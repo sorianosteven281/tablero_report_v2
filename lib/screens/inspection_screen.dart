@@ -198,8 +198,8 @@ class _InspectionScreenState extends State<InspectionScreen> {
         photosAfter: _photosAfter.map((p) => p.currentPath).toList(),
         observations: fullObs,
         finalStatus: _finalStatus,
-        latitude: _gpsEnabled ? _currentGps.latitude : null,
-        longitude: _gpsEnabled ? _currentGps.longitude : null,
+        latitude: (_gpsEnabled && _currentGps.hasValidFix) ? _currentGps.latitude : null,
+        longitude: (_gpsEnabled && _currentGps.hasValidFix) ? _currentGps.longitude : null,
         responsible: _responsibleController.text.trim(),
         crew: _crewController.text.trim(),
       );

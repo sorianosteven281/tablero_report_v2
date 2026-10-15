@@ -24,7 +24,7 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE panels (
@@ -74,6 +74,26 @@ class DatabaseService {
 
         await _seedPanels(db);
       },
+      onOpen: (db) async {
+        // Migración automática preventiva en caso de bases de datos restauradas
+        try {
+          final columns = await db.rawQuery('PRAGMA table_info(inspections)');
+          final names = columns.map((c) => c['name'] as String).toSet();
+
+          if (!names.contains('final_status')) {
+            await db.execute('ALTER TABLE inspections ADD COLUMN final_status TEXT');
+            if (names.contains('status')) {
+              await db.execute('UPDATE inspections SET final_status = status WHERE final_status IS NULL');
+            }
+          }
+          if (!names.contains('responsible')) {
+            await db.execute('ALTER TABLE inspections ADD COLUMN responsible TEXT');
+          }
+          if (!names.contains('crew')) {
+            await db.execute('ALTER TABLE inspections ADD COLUMN crew TEXT');
+          }
+        } catch (_) {}
+      },
     );
   }
 
@@ -94,9 +114,7 @@ class DatabaseService {
         }, conflictAlgorithm: ConflictAlgorithm.ignore);
       }
       await batch.commit(noResult: true);
-    } catch (e) {
-      // Error leyendo archivo seed
-    }
+    } catch (_) {}
   }
 
   Future<List<Panel>> getAllPanels({String? query}) async {
@@ -146,20 +164,8 @@ class DatabaseService {
     return maps.map((m) => Inspection.fromMap(m)).toList();
   }
 
-  Future<void> saveDraft(Map<String, dynamic> draft) async {
+  Future<void> deleteDraft(String panelTag) async {
     final db = await database;
-    await db.insert('drafts', draft, conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-
-  Future<Map<String, dynamic>?> getDraft(String tag) async {
-    final db = await database;
-    final maps = await db.query('drafts', where: 'panel_tag = ?', whereArgs: [tag]);
-    if (maps.isNotEmpty) return maps.first;
-    return null;
-  }
-
-  Future<void> deleteDraft(String tag) async {
-    final db = await database;
-    await db.delete('drafts', where: 'panel_tag = ?', whereArgs: [tag]);
+    await db.delete('drafts', where: 'panel_tag = ?', whereArgs: [panelTag]);
   }
 }
