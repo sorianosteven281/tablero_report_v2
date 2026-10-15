@@ -35,7 +35,7 @@ class TableroReportApp extends StatelessWidget {
           centerTitle: false,
           iconTheme: IconThemeData(color: Colors.white),
         ),
-        cardTheme: const CardTheme(
+        cardTheme: const CardThemeData(
           color: Color(0xFF1E293B),
           elevation: 2,
         ),
