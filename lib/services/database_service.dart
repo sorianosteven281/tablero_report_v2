@@ -108,10 +108,10 @@ class DatabaseService {
           'tag': item['tag'],
           'loc': item['loc'],
           'type': item['type'] ?? 'PLC HMI',
-          'latitude': null,
-          'longitude': null,
+          'latitude': item['latitude'] != null ? (item['latitude'] as num).toDouble() : null,
+          'longitude': item['longitude'] != null ? (item['longitude'] as num).toDouble() : null,
           'last_inspected_at': null,
-        }, conflictAlgorithm: ConflictAlgorithm.ignore);
+        }, conflictAlgorithm: ConflictAlgorithm.replace);
       }
       await batch.commit(noResult: true);
     } catch (_) {}

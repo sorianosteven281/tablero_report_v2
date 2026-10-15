@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 
 enum GpsQuality {
-  liveFix,         // Satélite real en vivo (< 45m de precisión)
-  freshCache,      // Coordenada fresca reciente (< 3 minutos, < 40m)
+  liveFix,         // Satélite real en vivo (alta precisión, < 40m)
+  freshCache,      // Coordenada fresca reciente / precisión aceptable (< 150m)
   indoorNoSignal,  // Sin satélite (Sala eléctrica, búnker o túnel)
   disabled,        // GPS apagado en el teléfono
   skipped          // Omitido voluntariamente por el usuario
@@ -108,43 +108,48 @@ class LocationService {
       );
     }
 
-    // 3. Intentar obtener posición satelital real con alta precisión y timeout de 3s
-    try {
-      final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-        timeLimit: const Duration(milliseconds: 3000),
-      );
-
-      // FILTRO DE CALIDAD ESTRICTO:
-      // Si la precisión es mayor a 45m (ej. 600m), es una antena celular o estimación tosca,
-      // NO es satélite GPS real. No lo aceptamos como fix de panel eléctrico.
-      if (position.accuracy <= 45.0) {
-        return GpsResult(
-          latitude: position.latitude,
-          longitude: position.longitude,
-          quality: GpsQuality.liveFix,
-          label: 'Satélite en vivo (±${position.accuracy.toStringAsFixed(0)}m)',
-        );
-      }
-    } catch (_) {
-      // Timeout o sin cobertura de satélites
-    }
-
-    // 4. Comprobar última posición conocida reciente (< 3 min y precisión <= 35m)
+    // 3. Revisar última posición conocida (instantáneo en 0.05s)
     try {
       final lastKnown = await Geolocator.getLastKnownPosition();
       if (lastKnown != null) {
         final age = DateTime.now().difference(lastKnown.timestamp);
-        if (age.inMinutes <= 3 && lastKnown.accuracy <= 35.0) {
+        // Si tiene menos de 15 minutos y precisión realista (< 150m)
+        if (age.inMinutes <= 15 && lastKnown.accuracy <= 150.0) {
+          final isHighAcc = lastKnown.accuracy <= 40.0;
           return GpsResult(
             latitude: lastKnown.latitude,
             longitude: lastKnown.longitude,
-            quality: GpsQuality.freshCache,
-            label: 'Caché reciente (${age.inSeconds}s atrás, ±${lastKnown.accuracy.toStringAsFixed(0)}m)',
+            quality: isHighAcc ? GpsQuality.liveFix : GpsQuality.freshCache,
+            label: isHighAcc
+                ? 'Satélite en vivo (±${lastKnown.accuracy.toStringAsFixed(0)}m)'
+                : 'GPS detectado (±${lastKnown.accuracy.toStringAsFixed(0)}m)',
           );
         }
       }
     } catch (_) {}
+
+    // 4. Intentar lectura satelital fresca con timeout de 5 segundos
+    try {
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+        timeLimit: const Duration(seconds: 5),
+      );
+
+      // Descartar solo si es antena celular muy tosca (> 180m, como el salto de 600m)
+      if (position.accuracy <= 180.0) {
+        final isHighAcc = position.accuracy <= 40.0;
+        return GpsResult(
+          latitude: position.latitude,
+          longitude: position.longitude,
+          quality: isHighAcc ? GpsQuality.liveFix : GpsQuality.freshCache,
+          label: isHighAcc
+              ? 'Satélite en vivo (±${position.accuracy.toStringAsFixed(0)}m)'
+              : 'GPS detectado (±${position.accuracy.toStringAsFixed(0)}m)',
+        );
+      }
+    } catch (_) {
+      // Timeout o sin cobertura directa
+    }
 
     // 5. Fallback honesto: reportar sin señal (sala blindada / túnel)
     return GpsResult(

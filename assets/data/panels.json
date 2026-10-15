@@ -12,12 +12,16 @@
   {
     "tag": "200-CP-001",
     "loc": "Sala Electrica N° 05",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.619815,
+    "longitude": -76.144497
   },
   {
     "tag": "200CV002-CP01",
     "loc": "Sala Electrica N° 06 - Faja 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.620558,
+    "longitude": -76.142261
   },
   {
     "tag": "200CV003-CP-050",
@@ -137,17 +141,23 @@
   {
     "tag": "205-CP-001",
     "loc": "Sala Electrica N° 09",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667326,
+    "longitude": -76.146119
   },
   {
     "tag": "210-CP-001",
     "loc": "Sala Electrica N° 10",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667533,
+    "longitude": -76.146423
   },
   {
     "tag": "210-CP-002",
     "loc": "Sala Electrica N° 10",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667694,
+    "longitude": -76.14655
   },
   {
     "tag": "210-CP-003",
@@ -167,22 +177,30 @@
   {
     "tag": "210-SN-001",
     "loc": "Zaranda",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667732,
+    "longitude": -76.147232
   },
   {
     "tag": "210-SN-101",
     "loc": "Zaranda",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667338,
+    "longitude": -76.14677
   },
   {
     "tag": "210CR001-CP01",
     "loc": "Chancadora Pebbles 1",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667857,
+    "longitude": -76.147034
   },
   {
     "tag": "210CR002-CP01",
     "loc": "Chancadora Pebbles 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667857,
+    "longitude": -76.147034
   },
   {
     "tag": "210LM001-CP02",
@@ -192,37 +210,51 @@
   {
     "tag": "220-CP-001",
     "loc": "Sala Electrica N° 15",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.669488,
+    "longitude": -76.14486
   },
   {
     "tag": "220-CP-002",
     "loc": "Sala Electrica N° 15",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670565,
+    "longitude": -76.145584
   },
   {
     "tag": "220FO001-CP02 (BFLC_PLC1)",
     "loc": "Flotacion Bulk Rogher Banco 1 y 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668864,
+    "longitude": -76.146309
   },
   {
     "tag": "220FO015-CP02 (BFLC_PLC2)",
     "loc": "Flotacion Bulk Rogher Banco 3 y 4",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668606,
+    "longitude": -76.1459
   },
   {
     "tag": "220FO041-CP02 (BFLC_PLC3)",
     "loc": "Flotacion Bulk Cleaner Banco 1 y 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668645,
+    "longitude": -76.145896
   },
   {
     "tag": "220FO080-CP02 (BFLC_PLC4)",
     "loc": "Flotacion Scavenger Cu y Rougher de Mo",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670054,
+    "longitude": -76.144434
   },
   {
     "tag": "220GB001-CP01",
     "loc": "Blower 1",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667674,
+    "longitude": -76.145083
   },
   {
     "tag": "220GB002-CP01",
@@ -247,27 +279,37 @@
   {
     "tag": "220GB006-CP01",
     "loc": "Blower 6",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667955,
+    "longitude": -76.145805
   },
   {
     "tag": "220GB106-CP01",
     "loc": "Blower 106",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668676,
+    "longitude": -76.145909
   },
   {
     "tag": "220GB008-CP01",
     "loc": "Blower 8(moly)",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670356,
+    "longitude": -76.144481
   },
   {
     "tag": "220GB108-CP01",
     "loc": "Blower 108(moly)",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670481,
+    "longitude": -76.144011
   },
   {
     "tag": "220TM007-CP01",
     "loc": "Rastra Espesador Bulk",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670238,
+    "longitude": -76.14658
   },
   {
     "tag": "220FO058-CP02 (BFLC_PLC6)",
@@ -282,32 +324,44 @@
   {
     "tag": "230-CP-001",
     "loc": "Sala Electrica N° 17",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.669435,
+    "longitude": -76.143773
   },
   {
     "tag": "230-CP-002",
     "loc": "Sala Electrica N° 17",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.669176,
+    "longitude": -76.145584
   },
   {
     "tag": "230FO001-CP01 (BFLC_PLC5)",
     "loc": "Flotacion Cleaner 1 y 2 de Mo, Scavnger de Mo",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670491,
+    "longitude": -76.144151
   },
   {
     "tag": "230GB001-CP01",
     "loc": "Blower 1(moly)",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670532,
+    "longitude": -76.144569
   },
   {
     "tag": "230GB101-CP01",
     "loc": "Blower 101(moly)",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670546,
+    "longitude": -76.144487
   },
   {
     "tag": "230TM003-CP01",
     "loc": "Espesador de Molibdeno",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670495,
+    "longitude": -76.144054
   },
   {
     "tag": "240TM001-CP01",
@@ -317,17 +371,23 @@
   {
     "tag": "245-CP-001",
     "loc": "Sala Electrica N° 31",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.670147,
+    "longitude": -76.144135
   },
   {
     "tag": "245FL001-CP01",
     "loc": "Filtro Prensa 1",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.671663,
+    "longitude": -76.14325
   },
   {
     "tag": "245FL002-CP01",
     "loc": "Filtro Prensa 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.6707365,
+    "longitude": -76.141961
   },
   {
     "tag": "245FL003-CP01",
@@ -352,22 +412,30 @@
   {
     "tag": "255-CP-002",
     "loc": "Sala Electrica N° 28",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.668152,
+    "longitude": -76.145947
   },
   {
     "tag": "255-CP-003",
     "loc": "Sala Electrica N° 28",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667198,
+    "longitude": -76.147758
   },
   {
     "tag": "255-HP-101",
     "loc": "Espesador  Nro. 1 (RIO PAS)",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.66901,
+    "longitude": -76.144295
   },
   {
     "tag": "255-HP-201",
     "loc": "Espesador  Nro. 2 (RIO PAS)",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667516,
+    "longitude": -76.145294
   },
   {
     "tag": "255-HP-301",
@@ -377,7 +445,9 @@
   {
     "tag": "255-HP-401",
     "loc": "Espesador  Nro. 4 (RIO PAS)",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.668896,
+    "longitude": -76.145688
   },
   {
     "tag": "255TM001-CP01",
@@ -387,17 +457,23 @@
   {
     "tag": "255TM002-CP01",
     "loc": "Rastra Espesador Relaves 2",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.669835,
+    "longitude": -76.14486
   },
   {
     "tag": "255TM003-CP01",
     "loc": "Rastra Espesador Relaves 3",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668941,
+    "longitude": -76.144469
   },
   {
     "tag": "255TM004-CP01",
     "loc": "Rastra Espesador Relaves 4",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670016,
+    "longitude": -76.146307
   },
   {
     "tag": "255PP048-CP01",
@@ -407,17 +483,23 @@
   {
     "tag": "255PP049-CP01",
     "loc": "Bomba GEHO 49",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668375,
+    "longitude": -76.143931
   },
   {
     "tag": "255PP050-CP01",
     "loc": "Bomba GEHO 50",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668423,
+    "longitude": -76.143863
   },
   {
     "tag": "255PP051-CP01",
     "loc": "Bomba GEHO 51",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668542,
+    "longitude": -76.1438
   },
   {
     "tag": "255PP052-CP01",
@@ -427,27 +509,37 @@
   {
     "tag": "255PP054-CP01",
     "loc": "Bomba GEHO 54",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668864,
+    "longitude": -76.146309
   },
   {
     "tag": "255PP055-CP01",
     "loc": "Bomba GEHO 55",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667328,
+    "longitude": -76.145946
   },
   {
     "tag": "255PP056-CP01",
     "loc": "Bomba GEHO 56",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668864,
+    "longitude": -76.146309
   },
   {
     "tag": "255PP057-CP01",
     "loc": "Bomba GEHO 57",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.669047,
+    "longitude": -76.144388
   },
   {
     "tag": "255PP058-CP01",
     "loc": "Bomba GEHO 58",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668059,
+    "longitude": -76.143862
   },
   {
     "tag": "260-CP-001",
@@ -482,12 +574,16 @@
   {
     "tag": "280-CP-001",
     "loc": "Sala Electrica N° 31",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667867,
+    "longitude": -76.147034
   },
   {
     "tag": "280-CP-002",
     "loc": "Sala Electrica N° 31",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.669176,
+    "longitude": -76.145584
   },
   {
     "tag": "280-CP-003",
@@ -497,12 +593,16 @@
   {
     "tag": "280-CP-004",
     "loc": "Sala Electrica N° 33",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.669817,
+    "longitude": -76.144497
   },
   {
     "tag": "288-CP-001",
     "loc": "Sala Electrica N° 33",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.669835,
+    "longitude": -76.14486
   },
   {
     "tag": "400-CP-001",
@@ -577,7 +677,9 @@
   {
     "tag": "262-WT-003",
     "loc": "LADO LABORATORIO METAL.",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.669702,
+    "longitude": -76.145766
   },
   {
     "tag": "262-WT-004",
@@ -702,12 +804,16 @@
   {
     "tag": "285-TM-097",
     "loc": "FLOTACION",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.669711,
+    "longitude": -76.145926
   },
   {
     "tag": "285-TM-108",
     "loc": "FLOTACION",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.670096,
+    "longitude": -76.145474
   },
   {
     "tag": "262-WT-006",
@@ -757,7 +863,9 @@
   {
     "tag": "2060-FCP-060",
     "loc": "Segundo Nivel - Tunel de Apron Feeders",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.666595,
+    "longitude": -76.148037
   },
   {
     "tag": "2110-CP-010",
@@ -782,7 +890,9 @@
   {
     "tag": "2110-FCP-066",
     "loc": "Segundo Nivel - Edificio Chancado Pebbles",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667127,
+    "longitude": -76.148369
   },
   {
     "tag": "2110-FCP-072",
@@ -817,47 +927,65 @@
   {
     "tag": "2110-FCP-061",
     "loc": "Primer Nivel - Frente al Cooling Tower",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.668388,
+    "longitude": -76.146488
   },
   {
     "tag": "2110-FCP-068",
     "loc": "Segundo Nivel - Lado Norte - Molino SAG ML004",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667788,
+    "longitude": -76.147296
   },
   {
     "tag": "2110-FCP-069",
     "loc": "Segundo Nivel - Molino Bolas ML005",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667754,
+    "longitude": -76.147263
   },
   {
     "tag": "2110-FCP-065",
     "loc": "Tercer Nivel - Nido Hidrociclones CY006",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.667815,
+    "longitude": -76.147197
   },
   {
     "tag": "2110-FCP-064",
     "loc": "Tercer Nivel - Nido Hidrociclones CY005",
-    "type": "PAS SCADA"
+    "type": "PAS SCADA",
+    "latitude": -11.668092,
+    "longitude": -76.147016
   },
   {
     "tag": "2115-CR-003-CP01",
     "loc": "Chancadora de pebbles 3, CP01",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667516,
+    "longitude": -76.148419
   },
   {
     "tag": "2115-CR-003-CP02",
     "loc": "Chancadora de pebbles 3, CP02",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.668217,
+    "longitude": -76.148141
   },
   {
     "tag": "2115-CR-003-CP03",
     "loc": "Chancadora de pebbles 3, CP03",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667545,
+    "longitude": -76.147758
   },
   {
     "tag": "2115-CR-003-CP04",
     "loc": "Chancadora de pebbles 3, CP04",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.667584,
+    "longitude": -76.149017
   },
   {
     "tag": "2115-CR-003-CP05",
