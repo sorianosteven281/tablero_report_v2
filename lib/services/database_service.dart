@@ -1,0 +1,165 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import '../models/panel.dart';
+import '../models/inspection.dart';
+
+class DatabaseService {
+  static final DatabaseService _instance = DatabaseService._internal();
+  factory DatabaseService() => _instance;
+  DatabaseService._internal();
+
+  Database? _db;
+
+  Future<Database> get database async {
+    if (_db != null) return _db!;
+    _db = await _initDb();
+    return _db!;
+  }
+
+  Future<Database> _initDb() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, 'tableros_mantenimiento.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE panels (
+            tag TEXT PRIMARY KEY,
+            loc TEXT NOT NULL,
+            type TEXT NOT NULL,
+            latitude REAL,
+            longitude REAL,
+            last_inspected_at TEXT
+          )
+        ''');
+
+        await db.execute('''
+          CREATE TABLE inspections (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            panel_tag TEXT NOT NULL,
+            panel_loc TEXT NOT NULL,
+            panel_type TEXT NOT NULL,
+            date TEXT NOT NULL,
+            photos_before TEXT,
+            photos_obs TEXT,
+            photos_after TEXT,
+            observations TEXT,
+            final_status TEXT,
+            latitude REAL,
+            longitude REAL,
+            responsible TEXT,
+            crew TEXT
+          )
+        ''');
+
+        await db.execute('''
+          CREATE TABLE drafts (
+            panel_tag TEXT PRIMARY KEY,
+            panel_loc TEXT NOT NULL,
+            panel_type TEXT NOT NULL,
+            crew TEXT,
+            responsible TEXT,
+            photos_before TEXT,
+            photos_obs TEXT,
+            photos_after TEXT,
+            observations TEXT,
+            final_status TEXT,
+            updated_at TEXT
+          )
+        ''');
+
+        await _seedPanels(db);
+      },
+    );
+  }
+
+  Future<void> _seedPanels(Database db) async {
+    try {
+      final jsonString = await rootBundle.loadString('assets/data/panels.json');
+      final List<dynamic> list = json.decode(jsonString);
+      final batch = db.batch();
+
+      for (var item in list) {
+        batch.insert('panels', {
+          'tag': item['tag'],
+          'loc': item['loc'],
+          'type': item['type'] ?? 'PLC HMI',
+          'latitude': null,
+          'longitude': null,
+          'last_inspected_at': null,
+        }, conflictAlgorithm: ConflictAlgorithm.ignore);
+      }
+      await batch.commit(noResult: true);
+    } catch (e) {
+      // Error leyendo archivo seed
+    }
+  }
+
+  Future<List<Panel>> getAllPanels({String? query}) async {
+    final db = await database;
+    List<Map<String, dynamic>> maps;
+
+    if (query != null && query.trim().isNotEmpty) {
+      final q = '%${query.trim()}%';
+      maps = await db.query(
+        'panels',
+        where: 'tag LIKE ? OR loc LIKE ?',
+        whereArgs: [q, q],
+        orderBy: 'tag ASC',
+      );
+    } else {
+      maps = await db.query('panels', orderBy: 'tag ASC');
+    }
+
+    return maps.map((m) => Panel.fromJson(m)).toList();
+  }
+
+  Future<void> updatePanelInspection(String tag, double? lat, double? lon) async {
+    final db = await database;
+    await db.update(
+      'panels',
+      {
+        'latitude': lat,
+        'longitude': lon,
+        'last_inspected_at': DateTime.now().toIso8601String(),
+      },
+      where: 'tag = ?',
+      whereArgs: [tag],
+    );
+  }
+
+  Future<int> insertInspection(Inspection inspection) async {
+    final db = await database;
+    final id = await db.insert('inspections', inspection.toMap());
+    await updatePanelInspection(inspection.panelTag, inspection.latitude, inspection.longitude);
+    await deleteDraft(inspection.panelTag);
+    return id;
+  }
+
+  Future<List<Inspection>> getAllInspections() async {
+    final db = await database;
+    final maps = await db.query('inspections', orderBy: 'id DESC');
+    return maps.map((m) => Inspection.fromMap(m)).toList();
+  }
+
+  Future<void> saveDraft(Map<String, dynamic> draft) async {
+    final db = await database;
+    await db.insert('drafts', draft, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<Map<String, dynamic>?> getDraft(String tag) async {
+    final db = await database;
+    final maps = await db.query('drafts', where: 'panel_tag = ?', whereArgs: [tag]);
+    if (maps.isNotEmpty) return maps.first;
+    return null;
+  }
+
+  Future<void> deleteDraft(String tag) async {
+    final db = await database;
+    await db.delete('drafts', where: 'panel_tag = ?', whereArgs: [tag]);
+  }
+}

@@ -1,0 +1,1092 @@
+[
+  {
+    "tag": "200CR001-CP01",
+    "loc": "Chancadora",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200JIBCRANE",
+    "loc": "JB - Point IO 02",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-001",
+    "loc": "Sala Electrica N° 05",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "200CV002-CP01",
+    "loc": "Sala Electrica N° 06 - Faja 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-050",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-051",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-052",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP01",
+    "loc": "Sala Electrica N° 07 - Faja 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP01A",
+    "loc": "Sala Electrica N° 07 - Faja 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-059",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-059A",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-060",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-060A",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-061",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-061A",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-062",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-062A",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-063",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200-CP-063A",
+    "loc": "Area 200 - Freno de faja",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-053",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-054",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-055",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-056",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-057",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200CV003-CP-058",
+    "loc": "Area 200 - Faja 03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200WINCHE",
+    "loc": "Winche",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "200 SUPRESOR",
+    "loc": "Supresor de Polvos",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "205-CP-001",
+    "loc": "Sala Electrica N° 09",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-CP-001",
+    "loc": "Sala Electrica N° 10",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-CP-002",
+    "loc": "Sala Electrica N° 10",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-CP-003",
+    "loc": "Sala Electrica N° 11",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-CP-004",
+    "loc": "Sala Electrica N° 12",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-CP-005",
+    "loc": "Sala Electrica N° 13",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "210-SN-001",
+    "loc": "Zaranda",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "210-SN-101",
+    "loc": "Zaranda",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "210CR001-CP01",
+    "loc": "Chancadora Pebbles 1",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "210CR002-CP01",
+    "loc": "Chancadora Pebbles 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "210LM001-CP02",
+    "loc": "Silo de Cal 1 Molino SAG",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220-CP-001",
+    "loc": "Sala Electrica N° 15",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220-CP-002",
+    "loc": "Sala Electrica N° 15",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220FO001-CP02 (BFLC_PLC1)",
+    "loc": "Flotacion Bulk Rogher Banco 1 y 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220FO015-CP02 (BFLC_PLC2)",
+    "loc": "Flotacion Bulk Rogher Banco 3 y 4",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220FO041-CP02 (BFLC_PLC3)",
+    "loc": "Flotacion Bulk Cleaner Banco 1 y 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220FO080-CP02 (BFLC_PLC4)",
+    "loc": "Flotacion Scavenger Cu y Rougher de Mo",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB001-CP01",
+    "loc": "Blower 1",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB002-CP01",
+    "loc": "Blower 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB003-CP01",
+    "loc": "Blower 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB004-CP01",
+    "loc": "Blower 4",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB101-CP01",
+    "loc": "Blower 5",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB006-CP01",
+    "loc": "Blower 6",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB106-CP01",
+    "loc": "Blower 106",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB008-CP01",
+    "loc": "Blower 8(moly)",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220GB108-CP01",
+    "loc": "Blower 108(moly)",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220TM007-CP01",
+    "loc": "Rastra Espesador Bulk",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "220FO058-CP02 (BFLC_PLC6)",
+    "loc": "Flotación Rastra Espesador Bulk (RIO PAS)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "220UDL001",
+    "loc": "Dosificador reactivos remolienda UDLine",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "230-CP-001",
+    "loc": "Sala Electrica N° 17",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "230-CP-002",
+    "loc": "Sala Electrica N° 17",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "230FO001-CP01 (BFLC_PLC5)",
+    "loc": "Flotacion Cleaner 1 y 2 de Mo, Scavnger de Mo",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "230GB001-CP01",
+    "loc": "Blower 1(moly)",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "230GB101-CP01",
+    "loc": "Blower 101(moly)",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "230TM003-CP01",
+    "loc": "Espesador de Molibdeno",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "240TM001-CP01",
+    "loc": "Rastra Espesador de cobre",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "245-CP-001",
+    "loc": "Sala Electrica N° 31",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "245FL001-CP01",
+    "loc": "Filtro Prensa 1",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "245FL002-CP01",
+    "loc": "Filtro Prensa 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "245FL003-CP01",
+    "loc": "Filtro Prensa 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "245RR01-CP01",
+    "loc": "Balanza de pesado",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "251-CP-001",
+    "loc": "Subestación 251-US-001",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "251-CP-002",
+    "loc": "Subestación 251-US-002",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-CP-002",
+    "loc": "Sala Electrica N° 28",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-CP-003",
+    "loc": "Sala Electrica N° 28",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-HP-101",
+    "loc": "Espesador  Nro. 1 (RIO PAS)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-HP-201",
+    "loc": "Espesador  Nro. 2 (RIO PAS)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-HP-301",
+    "loc": "Espesador  Nro. 3 (RIO PAS)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255-HP-401",
+    "loc": "Espesador  Nro. 4 (RIO PAS)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "255TM001-CP01",
+    "loc": "Rastra Espesador Relaves 1",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255TM002-CP01",
+    "loc": "Rastra Espesador Relaves 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255TM003-CP01",
+    "loc": "Rastra Espesador Relaves 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255TM004-CP01",
+    "loc": "Rastra Espesador Relaves 4",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP048-CP01",
+    "loc": "Bomba GEHO 48",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP049-CP01",
+    "loc": "Bomba GEHO 49",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP050-CP01",
+    "loc": "Bomba GEHO 50",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP051-CP01",
+    "loc": "Bomba GEHO 51",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP052-CP01",
+    "loc": "Bomba GEHO 52",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP054-CP01",
+    "loc": "Bomba GEHO 54",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP055-CP01",
+    "loc": "Bomba GEHO 55",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP056-CP01",
+    "loc": "Bomba GEHO 56",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP057-CP01",
+    "loc": "Bomba GEHO 57",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "255PP058-CP01",
+    "loc": "Bomba GEHO 58",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "260-CP-001",
+    "loc": "Sala Electrica N° 30",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "260FT001-CP01",
+    "loc": "Reactivos",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "260FT002-CP01",
+    "loc": "Reactivos",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "260FT003-CP01",
+    "loc": "Reactivos",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "260LM001",
+    "loc": "Lechada de Cal",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "260-PK-002",
+    "loc": "REACTIVOS",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "280-CP-001",
+    "loc": "Sala Electrica N° 31",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "280-CP-002",
+    "loc": "Sala Electrica N° 31",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "280-CP-003",
+    "loc": "Sala Electrica N° 33",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "280-CP-004",
+    "loc": "Sala Electrica N° 33",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "288-CP-001",
+    "loc": "Sala Electrica N° 33",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "400-CP-001",
+    "loc": "Sala Electrica N° 33",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "400LM001-CP02",
+    "loc": "Silo de cal 1",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400LM002-CP02",
+    "loc": "Silo de cal 2",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400LM003-CP02",
+    "loc": "Silo de cal 3",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-001",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-002",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-003",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-011",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-012",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-013",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-015",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "400-PK-014",
+    "loc": "Despacho",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "262-WT-001",
+    "loc": "Molinos",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "262-WT-002",
+    "loc": "REACTIVOS",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "262-WT-003",
+    "loc": "LADO LABORATORIO METAL.",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "262-WT-004",
+    "loc": "FRENTE DE FLOTACION",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "291-FL701-CP01",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "284-TM-052/CP01",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "286-CF-110",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "287-PP-120-CP01",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "287-BG-110-CP01",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "294-FL-401/402",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "280-BO-110",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "280-PK-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "280-PK-004",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "280-WT-003",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "282-PK-010",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "284-FL-011",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "284-FL-012",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "284-TM-068",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "289-FT-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "294-OP-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "294-RF-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "294-RF-002",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "291-TM-776",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "291-TM-730",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "291-TM-733",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "293-FL-401",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "10331-TDC-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "285-TM-097",
+    "loc": "FLOTACION",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "285-TM-108",
+    "loc": "FLOTACION",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "262-WT-006",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "294-ZM-410",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "292-GC-001",
+    "loc": "HIDROMETALURGIA",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "700-CP-001",
+    "loc": "Sala Electrica 700",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "800-CP-001",
+    "loc": "Sala Electrica N° 34",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "800-CP-002",
+    "loc": "Sala Electrica N° 35",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "800-CP-003",
+    "loc": "Subestación 800-US-003",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "800US004-CP01",
+    "loc": "Subestación 800-US-004",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "800US008-CP01",
+    "loc": "Campo",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2060-FCP-060",
+    "loc": "Segundo Nivel - Tunel de Apron Feeders",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-CP-010",
+    "loc": "Sala Eléctrica 2110-ER-018 - Área de Molienda",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-063",
+    "loc": "Segundo Nivel - Frente Molino SAG",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-071",
+    "loc": "Segundo Nivel - Cabeza de Faja CV012",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-060",
+    "loc": "Segundo Nivel - Cabeza de Faja CV011",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-066",
+    "loc": "Segundo Nivel - Edificio Chancado Pebbles",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-072",
+    "loc": "Segundo Nivel - Cola de Faja CV015",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-062",
+    "loc": "Tercer Nivel - Cabeza de Faja CV014",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "SPLIT-2111CV011",
+    "loc": "Camara y luminarias faja 2111CV011",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-CP-011",
+    "loc": "Sala Eléctrica 2110-ER-018 - Área de Molienda",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-067",
+    "loc": "Primer Nivel - Bomba PP202",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-070",
+    "loc": "Segundo Nivel - Lado Sur - Molino SAG ML004",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-061",
+    "loc": "Primer Nivel - Frente al Cooling Tower",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-068",
+    "loc": "Segundo Nivel - Lado Norte - Molino SAG ML004",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-069",
+    "loc": "Segundo Nivel - Molino Bolas ML005",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-065",
+    "loc": "Tercer Nivel - Nido Hidrociclones CY006",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2110-FCP-064",
+    "loc": "Tercer Nivel - Nido Hidrociclones CY005",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2115-CR-003-CP01",
+    "loc": "Chancadora de pebbles 3, CP01",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2115-CR-003-CP02",
+    "loc": "Chancadora de pebbles 3, CP02",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2115-CR-003-CP03",
+    "loc": "Chancadora de pebbles 3, CP03",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2115-CR-003-CP04",
+    "loc": "Chancadora de pebbles 3, CP04",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2115-CR-003-CP05",
+    "loc": "Chancadora de pebbles 3, CP05",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2210-CP-010",
+    "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-061",
+    "loc": "Tercer Nivel - Entre los Hidrociclones CY005 y CY006",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-060",
+    "loc": "ROUGHER 5, Entre las Celdas 32 - 33 fila 5",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-067",
+    "loc": "Entre las Celdas 35 - 36 fila 5",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210M079-CP01",
+    "loc": "Blowers 111/112/113 entre linea 5 y 6 de flotacion",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-CP-011",
+    "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-062",
+    "loc": "ROUGHER 6, Entre FO 137 - FO 138 fila 6",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-068",
+    "loc": "ROUGHER 6, Entre FO 141 - FO 142 fila 6",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-063",
+    "loc": "Sobre el Espesador",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-FCP-071",
+    "loc": "Vertimill de cobre, CERCA DE LA PLANTA DE MOLIBDENO",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2210-CP-701",
+    "loc": "Sala Eléctrica 2560-ER-021 - Área de Espesadores de Relaves",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2212TK008-CP01",
+    "loc": "ESPESADOR DE CONCENTRADO 2212-TM-008",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2212-FCP-062",
+    "loc": "Area 2212",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2212-FCP-061",
+    "loc": "Area 2212",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2212-FCP-060",
+    "loc": "Area 2212",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2213-FCP-060",
+    "loc": "Area 2213",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2213-FCP-061",
+    "loc": "Area 2213",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2214-FCP-060",
+    "loc": "Area 2214",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2214-FCP-061",
+    "loc": "Area 2214",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2214-FCP-062",
+    "loc": "Area 2214",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2215-FCP-060",
+    "loc": "Area 2215",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2410-CP-701",
+    "loc": "Sala Eléctrica 2560-ER-021 - Área de Espesadores de Relaves",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2410-FCP-060",
+    "loc": "Area 2410",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2460-FL-004",
+    "loc": "Filtro de concentrado",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2460-FL-005",
+    "loc": "Filtro de concentrado",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2560-CP-010",
+    "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2560-FCP-060",
+    "loc": "Sobre el espesador 006",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2560-FCP-062",
+    "loc": "Entre el espesador 006 y 007 a nivel de piso",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2560-FCP-061",
+    "loc": "Entre el espesador 006 y 007 a nivel de piso",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2560-FCP-064",
+    "loc": "Entre el espesador 006 y 007 a nivel de piso",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2560-FCP-063",
+    "loc": "Entre el espesador 006 y 007 a nivel de piso",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2561-TK-006",
+    "loc": "Espesador de relaves 6",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2561-TK-007",
+    "loc": "Espesador de relaves 7",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2562-PP-451",
+    "loc": "Bomba Geho 451",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2562-PP-452",
+    "loc": "Bomba Geho 452",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2562-PP-453",
+    "loc": "Bomba Geho 453",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2562-PP-454",
+    "loc": "Bomba Geho 454",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2610-CP-010",
+    "loc": "Sala Eléctrica 260-ER-030 (Existente)",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2610-FCP-060",
+    "loc": "FLOCULANTE, Tras del Floculante 260-TK-048",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2610-CP-101",
+    "loc": "CMC",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2615-LM-001",
+    "loc": "Reduccion de Cal",
+    "type": "PLC HMI"
+  },
+  {
+    "tag": "2615-CP-010",
+    "loc": "Sala Eléctrica 2615-ER-020 - Área de Planta de Lechada de Cal",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2615-FCP-062",
+    "loc": "DISTRIBUCIÓN DE CAL",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "2615-FCP-060",
+    "loc": "PREP. Y TRANS. DE CAL",
+    "type": "PAS SCADA"
+  },
+  {
+    "tag": "4011-FCP-060",
+    "loc": "ALIMENTACIÓN DE CAL",
+    "type": "PAS SCADA"
+  }
+]
