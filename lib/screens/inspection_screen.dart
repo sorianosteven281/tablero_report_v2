@@ -123,7 +123,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
   Future<void> _processPhotoInBackground(PhotoItem item, String phase) async {
     try {
       final nowStr = DateFormat('dd/MM/yyyy HH:mm:ss').format(DateTime.now());
-      final gpsText = _gpsEnabled ? _currentGps.watermarkText : 'GPS: Omitido (No requerido)';
+      final gpsText = (_gpsEnabled && _currentGps.hasValidFix) ? _currentGps.watermarkText : '';
 
       final stampedPath = await _watermarkService.watermarkImage(
         imagePath: item.originalPath,

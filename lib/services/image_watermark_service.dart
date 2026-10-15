@@ -22,6 +22,17 @@ class ImageWatermarkService {
     return _cachedLogoBytes;
   }
 
+  // Quita tildes, eñes y caracteres especiales para evitar mojibake en fuentes bitmap
+  static String cleanText(String text) {
+    const withAccents = 'áàäâãéèëêíìïîóòöôõúùüûñÁÀÄÂÃÉÈËÊÍÌÏÎÓÒÖÔÕÚÙÜÛÑçÇ';
+    const withoutAccents = 'aaaaaeeeeiiiiooooouuuunAAAAAEEEEIIIIOOOOOUUUUNcC';
+    String result = text;
+    for (int i = 0; i < withAccents.length; i++) {
+      result = result.replaceAll(withAccents[i], withoutAccents[i]);
+    }
+    return result.replaceAll(RegExp(r'[^\x20-\x7E]'), '');
+  }
+
   Future<String> watermarkImage({
     required String imagePath,
     required String phase, // ANTES, OBSERVACION, DESPUES
@@ -39,24 +50,21 @@ class ImageWatermarkService {
     }
 
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final cleanTag = tag.replaceAll(RegExp(r'[^\w\-]'), '_');
+    final cleanTag = cleanText(tag).replaceAll(RegExp(r'[^\w\-]'), '_');
     final outPath = p.join(fotosDir.path, '${cleanTag}_${phase}_$timestamp.jpg');
 
     try {
-      // Ejecutar procesamiento pesado en segundo plano (Isolate separado)
-      // para mantener la interfaz de usuario fluida y receptiva.
       return await Isolate.run(() => _processWatermark(
         imagePath: imagePath,
         outPath: outPath,
-        phase: phase,
-        tag: tag,
-        location: location,
-        dateStr: dateStr,
-        gpsText: gpsText,
+        phase: cleanText(phase),
+        tag: cleanText(tag),
+        location: cleanText(location),
+        dateStr: cleanText(dateStr),
+        gpsText: cleanText(gpsText),
         logoBytes: logoBytes,
       ));
     } catch (e) {
-      // Fallback seguro: si falla el procesamiento gráfico, devolver la imagen original
       return imagePath;
     }
   }
@@ -103,9 +111,10 @@ class ImageWatermarkService {
       color: img.ColorRgba8(56, 189, 248, 255),
     );
 
-    // Texto del banner
+    // Líneas de texto limpias sin tildes
     final titleLine = '[$phase] $tag - $location';
-    final infoLine = '$dateStr | $gpsText';
+    // Si no hay GPS, se deja completamente en blanco esa parte (solo muestra fecha/hora)
+    final infoLine = gpsText.trim().isNotEmpty ? '$dateStr | $gpsText' : dateStr;
 
     final font = bannerHeight > 140 ? img.arial24 : img.arial14;
     final textY1 = bannerY + (bannerHeight * 0.22).toInt();

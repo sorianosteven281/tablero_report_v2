@@ -30,13 +30,10 @@ class GpsResult {
       quality != GpsQuality.skipped;
 
   String get watermarkText {
-    if (quality == GpsQuality.skipped) {
-      return 'GPS: Omitido (No requerido)';
-    }
     if (hasValidFix) {
       return 'GPS: ${latitude!.toStringAsFixed(6)}, ${longitude!.toStringAsFixed(6)}';
     }
-    return 'GPS: Sin señal (Sala blindada/Túnel)';
+    return ''; // Si no hay GPS o está omitido, queda completamente en blanco
   }
 
   String get displayCoords {

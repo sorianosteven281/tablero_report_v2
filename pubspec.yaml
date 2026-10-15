@@ -1,7 +1,7 @@
 name: tablero_report
 description: "App de Reportes de Mantenimiento de Tableros - UM Chinalco Toromocho"
 publish_to: "none"
-version: 1.2.4+7
+version: 1.2.5+8
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
