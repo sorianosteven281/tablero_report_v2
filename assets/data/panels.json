@@ -613,22 +613,22 @@
     "tag": "400LM001-CP02",
     "loc": "Silo de cal 1",
     "type": "PLC HMI",
-    "latitude": -11.670505,
-    "longitude": -76.143996
+    "latitude": -11.671591,
+    "longitude": -76.145292
   },
   {
     "tag": "400LM002-CP02",
     "loc": "Silo de cal 2",
     "type": "PLC HMI",
-    "latitude": -11.670505,
-    "longitude": -76.143996
+    "latitude": -11.671591,
+    "longitude": -76.145292
   },
   {
     "tag": "400LM003-CP02",
     "loc": "Silo de cal 3",
     "type": "PLC HMI",
-    "latitude": -11.670505,
-    "longitude": -76.143996
+    "latitude": -11.671591,
+    "longitude": -76.145292
   },
   {
     "tag": "400-PK-001",
