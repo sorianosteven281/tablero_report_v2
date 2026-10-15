@@ -95,6 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
         return Colors.orangeAccent;
       case GpsQuality.disabled:
         return Colors.redAccent;
+      case GpsQuality.skipped:
+        return Colors.grey;
     }
   }
 
@@ -108,6 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
         return Icons.roofing;
       case GpsQuality.disabled:
         return Icons.gps_off;
+      case GpsQuality.skipped:
+        return Icons.location_off;
     }
   }
 
