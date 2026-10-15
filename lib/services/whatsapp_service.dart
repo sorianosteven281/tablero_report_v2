@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:share_plus/share_plus.dart';
 import '../models/inspection.dart';
 
@@ -30,20 +31,36 @@ Estado Final: ${inspection.finalStatus}
       ...inspection.photosBefore,
       ...inspection.photosObs,
       ...inspection.photosAfter,
-    ].where((p) => p.isNotEmpty).toList();
+    ];
 
-    if (allPhotoPaths.isNotEmpty) {
-      final xFiles = allPhotoPaths.map((p) => XFile(p)).toList();
-      await Share.shareXFiles(
-        xFiles,
-        text: text,
-        subject: 'Reporte: ${inspection.panelTag}',
-      );
-    } else {
-      await Share.share(
-        text,
-        subject: 'Reporte: ${inspection.panelTag}',
-      );
+    // Filtrar estrictamente solo los archivos que existen físicamente en disco
+    final validPhotos = allPhotoPaths
+        .where((p) => p.isNotEmpty && File(p).existsSync())
+        .toList();
+
+    try {
+      if (validPhotos.isNotEmpty) {
+        final xFiles = validPhotos.map((p) => XFile(p)).toList();
+        await Share.shareXFiles(
+          xFiles,
+          text: text,
+          subject: 'Reporte: ${inspection.panelTag}',
+        );
+      } else {
+        await Share.share(
+          text,
+          subject: 'Reporte: ${inspection.panelTag}',
+        );
+      }
+    } catch (e) {
+      // Fallback seguro: si falla compartir con imágenes (ej. permisos de caché),
+      // compartir al menos el texto del reporte para no bloquear al técnico.
+      try {
+        await Share.share(
+          text,
+          subject: 'Reporte: ${inspection.panelTag}',
+        );
+      } catch (_) {}
     }
   }
 }

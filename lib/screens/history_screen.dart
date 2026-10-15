@@ -71,7 +71,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     borderRadius: BorderRadius.circular(6),
                                     border: Border.all(color: isOperativo ? Colors.green : Colors.amber),
                                   ),
-                                  child: Text(item.finalStatus, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isOperativo ? Colors.greenAccent : Colors.amberAccent)),
+                                  child: Text(
+                                    item.finalStatus,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: isOperativo ? Colors.greenAccent : Colors.amberAccent,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -89,13 +96,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   itemCount: allPhotos.length,
                                   itemBuilder: (context, pIdx) {
                                     final p = allPhotos[pIdx];
+                                    final fileExists = File(p).existsSync();
                                     return Container(
                                       margin: const EdgeInsets.only(right: 6),
                                       width: 50,
                                       decoration: BoxDecoration(
+                                        color: const Color(0xFF0F172A),
                                         borderRadius: BorderRadius.circular(6),
-                                        image: DecorationImage(image: FileImage(File(p)), fit: BoxFit.cover),
+                                        image: fileExists
+                                            ? DecorationImage(image: FileImage(File(p)), fit: BoxFit.cover)
+                                            : null,
                                       ),
+                                      child: !fileExists
+                                          ? const Icon(Icons.image_not_supported, size: 20, color: Colors.white24)
+                                          : null,
                                     );
                                   },
                                 ),
@@ -109,7 +123,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 TextButton.icon(
                                   icon: const Icon(Icons.share, size: 16, color: Color(0xFF25D366)),
                                   label: const Text('Reenviar WhatsApp', style: TextStyle(color: Color(0xFF25D366), fontSize: 12)),
-                                  onPressed: () => _whatsappService.shareInspection(item),
+                                  onPressed: () async {
+                                    try {
+                                      await _whatsappService.shareInspection(item);
+                                    } catch (e) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Error al compartir: $e')),
+                                        );
+                                      }
+                                    }
+                                  },
                                 ),
                               ],
                             ),
