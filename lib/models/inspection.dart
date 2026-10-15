@@ -42,6 +42,7 @@ class Inspection {
       'photos_obs': photosObs.join(','),
       'photos_after': photosAfter.join(','),
       'observations': observations,
+      'status': finalStatus,
       'final_status': finalStatus,
       'latitude': latitude,
       'longitude': longitude,

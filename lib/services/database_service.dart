@@ -152,7 +152,18 @@ class DatabaseService {
 
   Future<int> insertInspection(Inspection inspection) async {
     final db = await database;
-    final id = await db.insert('inspections', inspection.toMap());
+    final cols = await db.rawQuery('PRAGMA table_info(inspections)');
+    final colNames = cols.map((c) => c['name'] as String).toSet();
+
+    final data = inspection.toMap();
+    final validData = <String, dynamic>{};
+    for (var entry in data.entries) {
+      if (colNames.contains(entry.key)) {
+        validData[entry.key] = entry.value;
+      }
+    }
+
+    final id = await db.insert('inspections', validData);
     await updatePanelInspection(inspection.panelTag, inspection.latitude, inspection.longitude);
     await deleteDraft(inspection.panelTag);
     return id;
