@@ -1201,7 +1201,9 @@
   {
     "tag": "2615-LM-001",
     "loc": "Reduccion de Cal",
-    "type": "PLC HMI"
+    "type": "PLC HMI",
+    "latitude": -11.671900,
+    "longitude": -76.144689
   },
   {
     "tag": "2615-CP-010",

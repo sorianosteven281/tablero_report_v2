@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/panel.dart';
 import '../services/database_service.dart';
 import '../services/location_service.dart';
+import '../services/settings_service.dart';
 import 'inspection_screen.dart';
 import 'history_screen.dart';
 import 'map_screen.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final DatabaseService _dbService = DatabaseService();
   final LocationService _locService = LocationService();
+  final SettingsService _settingsService = SettingsService();
   final TextEditingController _searchController = TextEditingController();
 
   List<Panel> _allPanels = [];
@@ -23,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
   String _selectedCategory = 'TODOS';
   GpsResult _currentGps = GpsResult(quality: GpsQuality.indoorNoSignal, label: 'Detectando...');
+  String _currentTech = 'Soriano';
+  String _currentCrew = 'Guardia A - Mantenimiento Eléctrico';
 
   final List<String> _categories = [
     'TODOS',
@@ -39,8 +43,91 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _loadSettings();
     _loadPanels();
     _refreshGps();
+  }
+
+  Future<void> _loadSettings() async {
+    final tech = await _settingsService.getResponsibleName();
+    final crew = await _settingsService.getCrewName();
+    if (mounted) {
+      setState(() {
+        _currentTech = tech;
+        _currentCrew = crew;
+      });
+    }
+  }
+
+  void _showSettingsDialog() {
+    final techCtrl = TextEditingController(text: _currentTech);
+    final crewCtrl = TextEditingController(text: _currentCrew);
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF1E293B),
+        title: const Row(
+          children: [
+            Icon(Icons.badge, color: Colors.cyanAccent),
+            SizedBox(width: 8),
+            Text('Configurar Técnico / Cuadrilla', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: techCtrl,
+                decoration: const InputDecoration(
+                  labelText: 'Técnico Responsable',
+                  hintText: 'Ej. Soriano, Huiza, Limache...',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: crewCtrl,
+                decoration: const InputDecoration(
+                  labelText: 'Nombre de Cuadrilla / Grupo',
+                  hintText: 'Ej. Guardia A - Mantenimiento Eléctrico',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.groups),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar', style: TextStyle(color: Colors.grey)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.cyanAccent.shade700),
+            onPressed: () async {
+              final newTech = techCtrl.text.trim().isEmpty ? 'Soriano' : techCtrl.text.trim();
+              final newCrew = crewCtrl.text.trim().isEmpty ? 'Guardia A - Mantenimiento Eléctrico' : crewCtrl.text.trim();
+              await _settingsService.setResponsibleName(newTech);
+              await _settingsService.setCrewName(newCrew);
+              if (mounted) {
+                setState(() {
+                  _currentTech = newTech;
+                  _currentCrew = newCrew;
+                });
+              }
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Técnico actualizado: $newTech')),
+              );
+            },
+            child: const Text('Guardar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _loadPanels() async {
@@ -61,12 +148,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _applyFilter() {
-    final query = _searchController.text.toLowerCase().trim();
+    final rawQuery = _searchController.text.toLowerCase().trim();
+    final cleanQuery = rawQuery.replaceAll('-', '').replaceAll(' ', '');
+    final normDigitsQuery = cleanQuery.replaceAll(RegExp(r'0+(?=\d)'), '');
+
     setState(() {
       _filteredPanels = _allPanels.where((p) {
-        final matchesQuery = query.isEmpty ||
-            p.tag.toLowerCase().contains(query) ||
-            p.loc.toLowerCase().contains(query);
+        final rawTag = p.tag.toLowerCase();
+        final cleanTag = rawTag.replaceAll('-', '').replaceAll(' ', '');
+        final normDigitsTag = cleanTag.replaceAll(RegExp(r'0+(?=\d)'), '');
+        final rawLoc = p.loc.toLowerCase();
+
+        final matchesQuery = rawQuery.isEmpty ||
+            rawTag.contains(rawQuery) ||
+            cleanTag.contains(cleanQuery) ||
+            normDigitsTag.contains(normDigitsQuery) ||
+            rawLoc.contains(rawQuery);
 
         if (!matchesQuery) return false;
 
@@ -128,6 +225,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
+            icon: const Icon(Icons.manage_accounts),
+            tooltip: 'Configurar Técnico / Cuadrilla',
+            onPressed: _showSettingsDialog,
+          ),
+          IconButton(
             icon: const Icon(Icons.map_outlined),
             tooltip: 'Mapa de Tableros',
             onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MapScreen())),
@@ -141,30 +243,71 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Banner indicador de GPS en vivo
-          GestureDetector(
-            onTap: _refreshGps,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: _getGpsColor().withOpacity(0.5)),
-              ),
-              child: Row(
-                children: [
-                  Icon(_getGpsIcon(), color: _getGpsColor(), size: 18),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'GPS: ${_currentGps.label}',
-                      style: TextStyle(color: _getGpsColor(), fontSize: 12, fontWeight: FontWeight.w600),
+          // Banner indicador de GPS y Técnico
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Row(
+              children: [
+                // GPS Chip
+                Expanded(
+                  flex: 3,
+                  child: GestureDetector(
+                    onTap: _refreshGps,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E293B),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: _getGpsColor().withOpacity(0.5)),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(_getGpsIcon(), color: _getGpsColor(), size: 16),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              'GPS: ${_currentGps.label}',
+                              style: TextStyle(color: _getGpsColor(), fontSize: 11, fontWeight: FontWeight.w600),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const Icon(Icons.refresh, size: 14, color: Colors.grey),
+                        ],
+                      ),
                     ),
                   ),
-                  const Icon(Icons.refresh, size: 16, color: Colors.grey),
-                ],
-              ),
+                ),
+                const SizedBox(width: 8),
+                // Técnico Chip (Clickable para editar)
+                Expanded(
+                  flex: 2,
+                  child: GestureDetector(
+                    onTap: _showSettingsDialog,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E293B),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.cyanAccent.withOpacity(0.4)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.person, color: Colors.cyanAccent, size: 16),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              _currentTech,
+                              style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const Icon(Icons.edit, size: 12, color: Colors.cyanAccent),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -273,13 +416,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: const TextStyle(color: Colors.white70, fontSize: 12),
                               ),
                               trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
-                              onTap: () {
-                                Navigator.push(
+                              onTap: () async {
+                                await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (_) => InspectionScreen(panel: panel),
                                   ),
                                 );
+                                _loadSettings();
                               },
                             ),
                           );

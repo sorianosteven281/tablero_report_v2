@@ -8,6 +8,7 @@ import '../services/database_service.dart';
 import '../services/location_service.dart';
 import '../services/image_watermark_service.dart';
 import '../services/whatsapp_service.dart';
+import '../services/settings_service.dart';
 
 class PhotoItem {
   final String originalPath;
@@ -37,9 +38,10 @@ class _InspectionScreenState extends State<InspectionScreen> {
   final LocationService _locService = LocationService();
   final ImageWatermarkService _watermarkService = ImageWatermarkService();
   final WhatsAppService _whatsappService = WhatsAppService();
+  final SettingsService _settingsService = SettingsService();
 
-  final TextEditingController _responsibleController = TextEditingController(text: 'Soriano');
-  final TextEditingController _crewController = TextEditingController(text: 'Guardia A - Mantenimiento Eléctrico');
+  final TextEditingController _responsibleController = TextEditingController();
+  final TextEditingController _crewController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
 
   final List<PhotoItem> _photosBefore = [];
@@ -67,7 +69,19 @@ class _InspectionScreenState extends State<InspectionScreen> {
   @override
   void initState() {
     super.initState();
+    _loadSettings();
     _refreshGps();
+  }
+
+  Future<void> _loadSettings() async {
+    final tech = await _settingsService.getResponsibleName();
+    final crew = await _settingsService.getCrewName();
+    if (mounted) {
+      setState(() {
+        _responsibleController.text = tech;
+        _crewController.text = crew;
+      });
+    }
   }
 
   Future<void> _refreshGps() async {
@@ -188,6 +202,11 @@ class _InspectionScreenState extends State<InspectionScreen> {
       final nowStr = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
       final fullObs = _buildFullObservations();
 
+      final resp = _responsibleController.text.trim();
+      final crw = _crewController.text.trim();
+      if (resp.isNotEmpty) await _settingsService.setResponsibleName(resp);
+      if (crw.isNotEmpty) await _settingsService.setCrewName(crw);
+
       final inspection = Inspection(
         panelTag: widget.panel.tag,
         panelLoc: widget.panel.loc,
@@ -200,8 +219,8 @@ class _InspectionScreenState extends State<InspectionScreen> {
         finalStatus: _finalStatus,
         latitude: (_gpsEnabled && _currentGps.hasValidFix) ? _currentGps.latitude : null,
         longitude: (_gpsEnabled && _currentGps.hasValidFix) ? _currentGps.longitude : null,
-        responsible: _responsibleController.text.trim(),
-        crew: _crewController.text.trim(),
+        responsible: resp.isEmpty ? 'Soriano' : resp,
+        crew: crw.isEmpty ? 'Guardia A - Mantenimiento Eléctrico' : crw,
       );
 
       await _dbService.insertInspection(inspection);
@@ -436,6 +455,11 @@ class _InspectionScreenState extends State<InspectionScreen> {
                         controller: _responsibleController,
                         decoration: const InputDecoration(labelText: 'Técnico Responsable', border: OutlineInputBorder()),
                         style: const TextStyle(fontSize: 13),
+                        onChanged: (val) {
+                          if (val.trim().isNotEmpty) {
+                            _settingsService.setResponsibleName(val.trim());
+                          }
+                        },
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -444,6 +468,11 @@ class _InspectionScreenState extends State<InspectionScreen> {
                         controller: _crewController,
                         decoration: const InputDecoration(labelText: 'Cuadrilla', border: OutlineInputBorder()),
                         style: const TextStyle(fontSize: 13),
+                        onChanged: (val) {
+                          if (val.trim().isNotEmpty) {
+                            _settingsService.setCrewName(val.trim());
+                          }
+                        },
                       ),
                     ),
                   ],

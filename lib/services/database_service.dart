@@ -72,11 +72,25 @@ class DatabaseService {
           )
         ''');
 
+        await db.execute('''
+          CREATE TABLE IF NOT EXISTS settings (
+            key TEXT PRIMARY KEY,
+            value TEXT
+          )
+        ''');
+
         await _seedPanels(db);
       },
       onOpen: (db) async {
-        // Migración automática preventiva en caso de bases de datos restauradas
+        // Creación preventiva de tabla settings y migración
         try {
+          await db.execute('''
+            CREATE TABLE IF NOT EXISTS settings (
+              key TEXT PRIMARY KEY,
+              value TEXT
+            )
+          ''');
+
           final columns = await db.rawQuery('PRAGMA table_info(inspections)');
           final names = columns.map((c) => c['name'] as String).toSet();
 
@@ -178,5 +192,27 @@ class DatabaseService {
   Future<void> deleteDraft(String panelTag) async {
     final db = await database;
     await db.delete('drafts', where: 'panel_tag = ?', whereArgs: [panelTag]);
+  }
+
+  Future<String> getSetting(String key, String defaultValue) async {
+    final db = await database;
+    try {
+      final res = await db.query('settings', where: 'key = ?', whereArgs: [key]);
+      if (res.isNotEmpty && res.first['value'] != null) {
+        return res.first['value'] as String;
+      }
+    } catch (_) {}
+    return defaultValue;
+  }
+
+  Future<void> setSetting(String key, String value) async {
+    final db = await database;
+    try {
+      await db.insert(
+        'settings',
+        {'key': key, 'value': value},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (_) {}
   }
 }
