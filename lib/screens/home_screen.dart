@@ -208,8 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 tag: tag,
                 loc: loc,
                 type: type.isEmpty ? 'CP' : type,
-                lat: _currentGps.lat,
-                lng: _currentGps.lng,
+                latitude: _currentGps.lat,
+                longitude: _currentGps.lng,
               );
 
               await _dbService.insertPanel(newPanel);
