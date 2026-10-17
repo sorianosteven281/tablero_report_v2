@@ -10,7 +10,7 @@ class SettingsService {
   static const String keyResponsible = 'settings_responsible_name';
   static const String keyCrew = 'settings_crew_name';
 
-  static const String defaultResponsible = 'Soriano';
+  static const String defaultResponsible = 'Pon tu nombre';
   static const String defaultCrew = 'Guardia A - Mantenimiento Eléctrico';
 
   Future<String> getResponsibleName() async {

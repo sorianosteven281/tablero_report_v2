@@ -189,6 +189,60 @@ class DatabaseService {
     return maps.map((m) => Inspection.fromMap(m)).toList();
   }
 
+  Future<void> insertPanel(Panel panel) async {
+    final db = await database;
+    await db.insert(
+      'panels',
+      panel.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<int> updateInspection(Inspection inspection) async {
+    final db = await database;
+    final data = inspection.toMap();
+    return await db.update(
+      'inspections',
+      data,
+      where: 'id = ?',
+      whereArgs: [inspection.id],
+    );
+  }
+
+  Future<void> saveDraft(String panelTag, Map<String, dynamic> draftData) async {
+    final db = await database;
+    try {
+      await db.insert(
+        'drafts',
+        {
+          'panel_tag': panelTag,
+          'panel_loc': draftData['panel_loc'] ?? '',
+          'panel_type': draftData['panel_type'] ?? '',
+          'crew': draftData['crew'] ?? '',
+          'responsible': draftData['responsible'] ?? '',
+          'photos_before': draftData['photos_before'] ?? '[]',
+          'photos_obs': draftData['photos_obs'] ?? '[]',
+          'photos_after': draftData['photos_after'] ?? '[]',
+          'observations': draftData['observations'] ?? '',
+          'final_status': draftData['final_status'] ?? 'OPERATIVO',
+          'updated_at': DateTime.now().toIso8601String(),
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (_) {}
+  }
+
+  Future<Map<String, dynamic>?> getDraft(String panelTag) async {
+    final db = await database;
+    try {
+      final res = await db.query('drafts', where: 'panel_tag = ?', whereArgs: [panelTag]);
+      if (res.isNotEmpty) {
+        return res.first;
+      }
+    } catch (_) {}
+    return null;
+  }
+
   Future<void> deleteDraft(String panelTag) async {
     final db = await database;
     await db.delete('drafts', where: 'panel_tag = ?', whereArgs: [panelTag]);

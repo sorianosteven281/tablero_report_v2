@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,8 +70,61 @@ class _InspectionScreenState extends State<InspectionScreen> {
   @override
   void initState() {
     super.initState();
-    _loadSettings();
+    _loadSettings().then((_) => _checkDraft());
     _refreshGps();
+  }
+
+  Future<void> _checkDraft() async {
+    final draft = await _dbService.getDraft(widget.panel.tag);
+    if (draft != null && mounted) {
+      try {
+        final bList = jsonDecode(draft['photos_before'] ?? '[]') as List;
+        final oList = jsonDecode(draft['photos_obs'] ?? '[]') as List;
+        final aList = jsonDecode(draft['photos_after'] ?? '[]') as List;
+
+        setState(() {
+          for (var p in bList) {
+            if (File(p).existsSync()) _photosBefore.add(PhotoItem(originalPath: p, stampedPath: p));
+          }
+          for (var p in oList) {
+            if (File(p).existsSync()) _photosObs.add(PhotoItem(originalPath: p, stampedPath: p));
+          }
+          for (var p in aList) {
+            if (File(p).existsSync()) _photosAfter.add(PhotoItem(originalPath: p, stampedPath: p));
+          }
+          _notesController.text = draft['observations'] ?? '';
+          _finalStatus = draft['final_status'] ?? 'OPERATIVO';
+          if ((draft['responsible'] as String?)?.isNotEmpty == true) {
+            _responsibleController.text = draft['responsible'];
+          }
+          if ((draft['crew'] as String?)?.isNotEmpty == true) {
+            _crewController.text = draft['crew'];
+          }
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Borrador anterior recuperado automáticamente.'),
+            backgroundColor: Color(0xFF0284C7),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } catch (_) {}
+    }
+  }
+
+  void _autoSaveDraft() {
+    _dbService.saveDraft(widget.panel.tag, {
+      'panel_loc': widget.panel.loc,
+      'panel_type': widget.panel.type,
+      'crew': _crewController.text.trim(),
+      'responsible': _responsibleController.text.trim(),
+      'photos_before': jsonEncode(_photosBefore.map((p) => p.currentPath).toList()),
+      'photos_obs': jsonEncode(_photosObs.map((p) => p.currentPath).toList()),
+      'photos_after': jsonEncode(_photosAfter.map((p) => p.currentPath).toList()),
+      'observations': _notesController.text.trim(),
+      'final_status': _finalStatus,
+    });
   }
 
   Future<void> _loadSettings() async {
@@ -122,6 +176,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
           _photosAfter.add(item);
         }
       });
+      _autoSaveDraft();
 
       // Procesamiento de estampado en segundo plano (no congela la pantalla)
       _processPhotoInBackground(item, phase);
@@ -153,10 +208,12 @@ class _InspectionScreenState extends State<InspectionScreen> {
           item.stampedPath = stampedPath;
           item.isStamping = false;
         });
+        _autoSaveDraft();
       }
     } catch (_) {
       if (mounted) {
         setState(() => item.isStamping = false);
+        _autoSaveDraft();
       }
     }
   }
@@ -412,7 +469,10 @@ class _InspectionScreenState extends State<InspectionScreen> {
                       top: 2,
                       right: 10,
                       child: GestureDetector(
-                        onTap: () => setState(() => photos.removeAt(i)),
+                        onTap: () {
+                          setState(() => photos.removeAt(i));
+                          _autoSaveDraft();
+                        },
                         child: const CircleAvatar(
                           radius: 10,
                           backgroundColor: Colors.black87,
@@ -453,12 +513,17 @@ class _InspectionScreenState extends State<InspectionScreen> {
                     Expanded(
                       child: TextField(
                         controller: _responsibleController,
-                        decoration: const InputDecoration(labelText: 'Técnico Responsable', border: OutlineInputBorder()),
+                        decoration: const InputDecoration(
+                          labelText: 'Técnico Responsable',
+                          hintText: 'Pon tu nombre',
+                          border: OutlineInputBorder(),
+                        ),
                         style: const TextStyle(fontSize: 13),
                         onChanged: (val) {
                           if (val.trim().isNotEmpty) {
                             _settingsService.setResponsibleName(val.trim());
                           }
+                          _autoSaveDraft();
                         },
                       ),
                     ),
@@ -466,12 +531,17 @@ class _InspectionScreenState extends State<InspectionScreen> {
                     Expanded(
                       child: TextField(
                         controller: _crewController,
-                        decoration: const InputDecoration(labelText: 'Cuadrilla', border: OutlineInputBorder()),
+                        decoration: const InputDecoration(
+                          labelText: 'Cuadrilla',
+                          hintText: 'Guardia A - Mantenimiento Eléctrico',
+                          border: OutlineInputBorder(),
+                        ),
                         style: const TextStyle(fontSize: 13),
                         onChanged: (val) {
                           if (val.trim().isNotEmpty) {
                             _settingsService.setCrewName(val.trim());
                           }
+                          _autoSaveDraft();
                         },
                       ),
                     ),
@@ -480,9 +550,9 @@ class _InspectionScreenState extends State<InspectionScreen> {
                 const SizedBox(height: 16),
 
                 // Secciones de Fotos
-                _buildPhotoSection('📸 FOTOS ANTES (Obligatorio)', 'ANTES', _photosBefore, Colors.cyanAccent),
-                _buildPhotoSection('⚠️ FOTOS OBSERVACIÓN (Opcional)', 'OBSERVACION', _photosObs, Colors.amberAccent),
-                _buildPhotoSection('✅ FOTOS DESPUÉS (Obligatorio)', 'DESPUES', _photosAfter, Colors.greenAccent),
+                _buildPhotoSection('📸 FOTOS ANTES (Obligatorio)', 'ANTES', _photosBefore, const Color(0xFF38BDF8)),
+                _buildPhotoSection('⚠️ FOTOS OBSERVACIÓN (Opcional)', 'OBSERVACION', _photosObs, const Color(0xFFF59E0B)),
+                _buildPhotoSection('✅ FOTOS DESPUÉS (Obligatorio)', 'DESPUES', _photosAfter, const Color(0xFF10B981)),
 
                 const SizedBox(height: 10),
 
@@ -497,7 +567,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
                     return FilterChip(
                       label: Text(obs, style: TextStyle(fontSize: 11, color: isSel ? Colors.black : Colors.white70)),
                       selected: isSel,
-                      selectedColor: Colors.cyanAccent,
+                      selectedColor: const Color(0xFF38BDF8),
                       backgroundColor: const Color(0xFF1E293B),
                       checkmarkColor: Colors.black,
                       onSelected: (val) {
@@ -508,6 +578,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
                             _selectedObs.remove(obs);
                           }
                         });
+                        _autoSaveDraft();
                       },
                     );
                   }).toList(),
@@ -519,6 +590,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
                   maxLines: 2,
                   decoration: const InputDecoration(hintText: 'Detalle adicional de observaciones...', border: OutlineInputBorder()),
                   style: const TextStyle(fontSize: 13),
+                  onChanged: (val) => _autoSaveDraft(),
                 ),
                 const SizedBox(height: 16),
 
@@ -530,15 +602,21 @@ class _InspectionScreenState extends State<InspectionScreen> {
                     ChoiceChip(
                       label: const Text('OPERATIVO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                       selected: _finalStatus == 'OPERATIVO',
-                      selectedColor: Colors.green,
-                      onSelected: (_) => setState(() => _finalStatus = 'OPERATIVO'),
+                      selectedColor: const Color(0xFF10B981),
+                      onSelected: (_) {
+                        setState(() => _finalStatus = 'OPERATIVO');
+                        _autoSaveDraft();
+                      },
                     ),
                     const SizedBox(width: 8),
                     ChoiceChip(
                       label: const Text('OBSERVADO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                       selected: _finalStatus == 'OBSERVADO',
-                      selectedColor: Colors.amber[800],
-                      onSelected: (_) => setState(() => _finalStatus = 'OBSERVADO'),
+                      selectedColor: const Color(0xFFF59E0B),
+                      onSelected: (_) {
+                        setState(() => _finalStatus = 'OBSERVADO');
+                        _autoSaveDraft();
+                      },
                     ),
                   ],
                 ),
