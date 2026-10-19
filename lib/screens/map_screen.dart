@@ -21,7 +21,14 @@ class PlantIconInfo {
 }
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  final Panel? focusPanel;
+  final bool startPlacing;
+
+  const MapScreen({
+    super.key,
+    this.focusPanel,
+    this.startPlacing = false,
+  });
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -88,6 +95,27 @@ class _MapScreenState extends State<MapScreen> {
         }
         _isLoading = false;
       });
+
+      // Si se abrió para enfocar o ubicar un tablero específico desde la lista
+      if (widget.focusPanel != null) {
+        final target = all.firstWhere(
+          (p) => p.tag == widget.focusPanel!.tag,
+          orElse: () => widget.focusPanel!,
+        );
+
+        if (widget.startPlacing || target.latitude == null || target.longitude == null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) _startPlacingMode(target);
+          });
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              _mapController.move(LatLng(target.latitude!, target.longitude!), 18.5);
+              _showPanelDetails(target);
+            }
+          });
+        }
+      }
     }
   }
 

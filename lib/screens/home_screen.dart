@@ -333,7 +333,10 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.map_outlined),
             tooltip: 'Mapa GPS Satelital',
-            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MapScreen())),
+            onPressed: () async {
+              await Navigator.push(context, MaterialPageRoute(builder: (_) => const MapScreen()));
+              _loadPanels();
+            },
           ),
           IconButton(
             icon: const Icon(Icons.history),
@@ -511,27 +514,95 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: _filteredPanels.length,
                         itemBuilder: (context, index) {
                           final panel = _filteredPanels[index];
+                          final hasGps = panel.latitude != null && panel.longitude != null;
+                          final hasNote = panel.note != null && panel.note!.trim().isNotEmpty;
+
+                          IconData panelIcon = Icons.bolt;
+                          final locUpper = panel.loc.toUpperCase();
+                          final tagUpper = panel.tag.toUpperCase();
+
+                          if (panel.icon == 'room' || locUpper.contains('SALA') || locUpper.contains('ER-')) {
+                            panelIcon = Icons.meeting_room;
+                          } else if (panel.icon == 'container' || locUpper.contains('CONTAINER') || locUpper.contains('CONT')) {
+                            panelIcon = Icons.inventory_2;
+                          } else if (panel.icon == 'pump' || locUpper.contains('BOMBA') || locUpper.contains('GEHO') || tagUpper.contains('WT')) {
+                            panelIcon = Icons.settings;
+                          } else if (panel.icon == 'substation' || locUpper.contains('SUBEST')) {
+                            panelIcon = Icons.electrical_services;
+                          } else if (panel.icon == 'refugio' || tagUpper.contains('REFUGIO')) {
+                            panelIcon = Icons.health_and_safety;
+                          } else if (panel.icon == 'faja' || locUpper.contains('FAJA') || locUpper.contains('OVERLAND')) {
+                            panelIcon = Icons.alt_route;
+                          }
+
                           return Card(
                             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                             color: const Color(0xFF1E293B),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color: hasGps ? Colors.cyanAccent.withOpacity(0.35) : Colors.transparent,
+                                width: 1,
+                              ),
+                            ),
                             child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                               leading: CircleAvatar(
                                 backgroundColor: const Color(0xFF0F172A),
-                                child: Text(
-                                  panel.tag.split('-').first.replaceAll(RegExp(r'[^0-9]'), ''),
-                                  style: const TextStyle(color: Colors.cyanAccent, fontSize: 11, fontWeight: FontWeight.bold),
+                                child: Icon(
+                                  panelIcon,
+                                  size: 20,
+                                  color: hasGps ? Colors.cyanAccent : const Color(0xFF94A3B8),
                                 ),
                               ),
-                              title: Text(
-                                panel.tag,
-                                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
+                              title: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      panel.tag,
+                                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
+                                    ),
+                                  ),
+                                  if (hasNote)
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 4),
+                                      child: Icon(Icons.edit_note, size: 16, color: Colors.cyanAccent),
+                                    ),
+                                ],
                               ),
                               subtitle: Text(
                                 panel.loc,
                                 style: const TextStyle(color: Colors.white70, fontSize: 12),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // Botón Ver en Mapa / Ubicar
+                                  IconButton(
+                                    icon: Icon(
+                                      hasGps ? Icons.location_on : Icons.add_location_alt_outlined,
+                                      color: hasGps ? Colors.cyanAccent : const Color(0xFFF59E0B),
+                                      size: 24,
+                                    ),
+                                    tooltip: hasGps ? 'Ver en Mapa Satelital' : 'Ubicar en Mapa',
+                                    onPressed: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => MapScreen(
+                                            focusPanel: panel,
+                                            startPlacing: !hasGps,
+                                          ),
+                                        ),
+                                      );
+                                      _loadPanels();
+                                    },
+                                  ),
+                                  const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+                                ],
+                              ),
                               onTap: () async {
                                 await Navigator.push(
                                   context,

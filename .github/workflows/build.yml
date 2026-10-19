@@ -47,13 +47,15 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/heads/')
         with:
-          tag_name: v1.2.0-${{ github.run_number }}
-          name: "Tablero Report v1.2.0 (Build ${{ github.run_number }})"
+          tag_name: v1.2.10-b${{ github.run_number }}
+          name: "Tablero Report v1.2.10 (Build ${{ github.run_number }})"
           body: |
-            ### 🚀 Nueva Versión de Tablero Report
-            - **Mejora de GPS:** Cero coordenadas falsas en oficinas. Detección automática de salas blindadas / túneles.
-            - **Catálogo de Tableros:** 218 tableros con búsqueda rápida multicriterio.
-            - **Estampado:** Banner optimizado para UM Chinalco Toromocho.
+            ### 🚀 Tablero Report v1.2.10
+            - **Acceso Directo al Mapa:** Botón "Ver en mapa / Ubicar" directamente en cada tarjeta de la lista principal.
+            - **Satélite Google HD:** Zoom profundo nítido sin errores de "map data not yet available".
+            - **Íconos Personalizados:** Salas Eléctricas 🚪, Containers 📦, Bombas/Motores ⚙️, Subestaciones 🔌, Refugios 🛡️ y Tableros ⚡.
+            - **Colores Automáticos:** Identificación visual inteligente por área de planta minera (Molienda, Flotación, Silos, Relaves, etc.).
+            - **Exportar a WhatsApp:** Captura en alta resolución del plano para compartirlo.
           files: build/app/outputs/flutter-apk/app-release.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
