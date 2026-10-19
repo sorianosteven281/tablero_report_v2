@@ -35,7 +35,8 @@ class DatabaseService {
             longitude REAL,
             last_inspected_at TEXT,
             color TEXT,
-            note TEXT
+            note TEXT,
+            icon TEXT
           )
         ''');
 
@@ -100,6 +101,9 @@ class DatabaseService {
           }
           if (!panelColNames.contains('note')) {
             await db.execute('ALTER TABLE panels ADD COLUMN note TEXT');
+          }
+          if (!panelColNames.contains('icon')) {
+            await db.execute('ALTER TABLE panels ADD COLUMN icon TEXT');
           }
 
           final columns = await db.rawQuery('PRAGMA table_info(inspections)');
@@ -181,6 +185,7 @@ class DatabaseService {
     double? longitude,
     String? color,
     String? note,
+    String? icon,
     bool clearGps = false,
   }) async {
     final db = await database;
@@ -194,6 +199,7 @@ class DatabaseService {
     }
     if (color != null) updates['color'] = color;
     if (note != null) updates['note'] = note;
+    if (icon != null) updates['icon'] = icon;
 
     if (updates.isNotEmpty) {
       await db.update(
@@ -204,6 +210,7 @@ class DatabaseService {
       );
     }
   }
+
 
 
   Future<int> insertInspection(Inspection inspection) async {

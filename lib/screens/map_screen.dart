@@ -12,6 +12,14 @@ import '../services/database_service.dart';
 import '../services/location_service.dart';
 import 'inspection_screen.dart';
 
+class PlantIconInfo {
+  final String key;
+  final String label;
+  final IconData icon;
+
+  const PlantIconInfo(this.key, this.label, this.icon);
+}
+
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
@@ -31,11 +39,24 @@ class _MapScreenState extends State<MapScreen> {
   bool _isLoading = true;
   bool _isExporting = false;
   bool _showLabels = true;
-  bool _useSatellite = true;
+
+  // Modos de mapa: 0 = Google Hybrid HD (con zoom profundo), 1 = Google Satélite Puro, 2 = Esri Satélite, 3 = Callejero OSM
+  int _mapLayerMode = 0;
 
   // Modo Ubicar / Reubicar
   bool _isPlacingMode = false;
   Panel? _placingPanel;
+
+  static const List<PlantIconInfo> availableIcons = [
+    PlantIconInfo('bolt', 'Tablero', Icons.bolt),
+    PlantIconInfo('room', 'Sala Eléc.', Icons.meeting_room),
+    PlantIconInfo('container', 'Container', Icons.inventory_2),
+    PlantIconInfo('pump', 'Bomba/Motor', Icons.settings),
+    PlantIconInfo('substation', 'Subestación', Icons.electrical_services),
+    PlantIconInfo('refugio', 'Refugio', Icons.health_and_safety),
+    PlantIconInfo('faja', 'Faja/Overland', Icons.alt_route),
+    PlantIconInfo('taller', 'Taller/Mant.', Icons.build),
+  ];
 
   static const List<Map<String, dynamic>> _palette = [
     {'name': 'Cian', 'hex': '#06B6D4', 'color': Color(0xFF06B6D4)},
@@ -78,6 +99,73 @@ class _MapScreenState extends State<MapScreen> {
     } catch (_) {
       return const Color(0xFF06B6D4);
     }
+  }
+
+  // Detección inteligente de color por Área/TAG si no fue personalizado
+  Color _resolvePanelColor(Panel p) {
+    if (p.color != null && p.color!.isNotEmpty) {
+      return _parseColor(p.color);
+    }
+
+    final tag = p.tag.toUpperCase();
+    final loc = p.loc.toUpperCase();
+
+    if (tag.startsWith('400') || loc.contains('SILO')) return const Color(0xFF8B5CF6); // Púrpura (Silos)
+    if (tag.startsWith('2615') || tag.startsWith('2610') || loc.contains('CAL') || loc.contains('REACTIVO')) return const Color(0xFFEAB308); // Amarillo (Cal/Reactivos)
+    if (tag.startsWith('2562') || tag.startsWith('2561') || tag.startsWith('2560') || tag.startsWith('255') || loc.contains('RELAVE') || loc.contains('GEHO')) {
+      return const Color(0xFFEF4444); // Rojo (Relaves/Geho)
+    }
+    if (tag.startsWith('245') || tag.startsWith('240') || loc.contains('FILTR') || loc.contains('COBRE')) return const Color(0xFF10B981); // Verde (Filtros)
+    if (tag.startsWith('2214') || tag.startsWith('2210') || tag.startsWith('2211') || loc.contains('FLOTAC')) return const Color(0xFF0284C7); // Azul (Flotación)
+    if (tag.startsWith('2212') || tag.startsWith('2215') || loc.contains('ESPESADOR BULK') || loc.contains('REMOLIENDA')) return const Color(0xFF06B6D4); // Cian
+    if (tag.startsWith('2115') || loc.contains('PEBBLES')) return const Color(0xFFD97706); // Naranja oscuro
+    if (tag.startsWith('2110') || loc.contains('MOLIENDA')) return const Color(0xFFF59E0B); // Ámbar (Molienda)
+    if (tag.startsWith('200') || tag.startsWith('210') || tag.startsWith('206') || loc.contains('FAJA') || loc.contains('OVERLAND') || loc.contains('TUNEL')) {
+      return const Color(0xFF94A3B8); // Pizarra (Chancado/Fajas)
+    }
+
+    if (loc.contains('CONTAINER') || loc.contains('MODULO')) return const Color(0xFFF97316); // Naranja
+    if (loc.contains('SALA') || loc.contains('ER-')) return const Color(0xFF38BDF8); // Azul claro
+
+    if (tag.contains('FCP')) return const Color(0xFF0EA5E9);
+    if (tag.contains('CP')) return const Color(0xFF10B981);
+
+    return const Color(0xFF06B6D4);
+  }
+
+  // Detección inteligente de ícono (Sala, Container, Bomba, Refugio, Tablero)
+  PlantIconInfo _resolvePanelIcon(Panel p) {
+    if (p.icon != null && p.icon!.isNotEmpty) {
+      final found = availableIcons.firstWhere((i) => i.key == p.icon, orElse: () => availableIcons.first);
+      return found;
+    }
+
+    final loc = p.loc.toUpperCase();
+    final tag = p.tag.toUpperCase();
+
+    if (loc.contains('CONTAINER') || loc.contains('MODULO') || tag.contains('CONT')) {
+      return availableIcons.firstWhere((i) => i.key == 'container');
+    }
+    if (loc.contains('SALA') || loc.contains('ER-') || loc.contains('SUBEST') && !loc.contains('US-')) {
+      return availableIcons.firstWhere((i) => i.key == 'room');
+    }
+    if (loc.contains('BOMBA') || loc.contains('GEHO') || loc.contains('MOTOR') || tag.contains('WT') || tag.contains('PP')) {
+      return availableIcons.firstWhere((i) => i.key == 'pump');
+    }
+    if (loc.contains('SUBESTACION') || loc.contains('US-') || loc.contains('TRANSFORM')) {
+      return availableIcons.firstWhere((i) => i.key == 'substation');
+    }
+    if (tag.contains('REFUGIO') || loc.contains('REFUGIO')) {
+      return availableIcons.firstWhere((i) => i.key == 'refugio');
+    }
+    if (loc.contains('FAJA') || loc.contains('OVERLAND') || tag.contains('FL') || tag.contains('TM')) {
+      return availableIcons.firstWhere((i) => i.key == 'faja');
+    }
+    if (loc.contains('TALLER') || loc.contains('MANTENIMIENTO')) {
+      return availableIcons.firstWhere((i) => i.key == 'taller');
+    }
+
+    return availableIcons.firstWhere((i) => i.key == 'bolt'); // Tablero por defecto
   }
 
   Future<void> _centerOnMe() async {
@@ -180,8 +268,8 @@ class _MapScreenState extends State<MapScreen> {
         final totalGps = _panelsWithGps.length;
         await Share.shareXFiles(
           [XFile(file.path)],
-          text: '📍 *MAPA DE TABLEROS Y PUNTOS TÉCNICOS - CHINALCO*\nTableros georreferenciados: $totalGps\nGenerado con Tablero Report App.',
-          subject: 'Mapa de Tableros Chinalco',
+          text: '📍 *PLANO Y MAPA DE TABLEROS - UM CHINALCO*\nTableros georreferenciados: $totalGps\nGenerado con Tablero Report App.',
+          subject: 'Plano de Tableros Chinalco',
         );
       }
     } catch (e) {
@@ -248,10 +336,11 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-  // Modal de detalles y edición del punto (color, notas, reubicar)
+  // Modal de detalles y edición del punto (color, notas, ícono, reubicar)
   void _showPanelDetails(Panel p) {
     final noteCtrl = TextEditingController(text: p.note ?? '');
-    String selectedHex = p.color ?? '#06B6D4';
+    String selectedHex = p.color ?? '#${_resolvePanelColor(p).value.toRadixString(16).substring(2)}';
+    String selectedIconKey = p.icon ?? _resolvePanelIcon(p).key;
 
     showModalBottomSheet(
       context: context,
@@ -262,6 +351,7 @@ class _MapScreenState extends State<MapScreen> {
         return StatefulBuilder(
           builder: (context, setModalState) {
             final currentColor = _parseColor(selectedHex);
+            final currentIcon = availableIcons.firstWhere((i) => i.key == selectedIconKey, orElse: () => availableIcons.first);
 
             return Padding(
               padding: EdgeInsets.only(
@@ -290,14 +380,14 @@ class _MapScreenState extends State<MapScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 44,
-                          height: 44,
+                          width: 48,
+                          height: 48,
                           decoration: BoxDecoration(
                             color: currentColor.withOpacity(0.2),
                             shape: BoxShape.circle,
                             border: Border.all(color: currentColor, width: 2),
                           ),
-                          child: Icon(Icons.bolt, color: currentColor, size: 24),
+                          child: Icon(currentIcon.icon, color: currentColor, size: 26),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -314,7 +404,7 @@ class _MapScreenState extends State<MapScreen> {
                               ),
                               Text(p.loc, style: const TextStyle(color: Colors.white70, fontSize: 13)),
                               Text(
-                                'GPS: ${p.latitude?.toStringAsFixed(6)}, ${p.longitude?.toStringAsFixed(6)}',
+                                'Tipo: ${p.type} • GPS: ${p.latitude?.toStringAsFixed(6)}, ${p.longitude?.toStringAsFixed(6)}',
                                 style: const TextStyle(color: Colors.grey, fontSize: 11),
                               ),
                             ],
@@ -324,8 +414,58 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                     const SizedBox(height: 16),
 
+                    // Selector de Ícono Personalizado (Sala, Container, Bomba, etc.)
+                    const Text('Tipo de Instalación / Ícono:', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      height: 52,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: availableIcons.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 8),
+                        itemBuilder: (context, idx) {
+                          final item = availableIcons[idx];
+                          final isSel = item.key == selectedIconKey;
+
+                          return GestureDetector(
+                            onTap: () async {
+                              setModalState(() => selectedIconKey = item.key);
+                              await _dbService.updatePanelDetails(p.tag, icon: item.key);
+                              await _loadData();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: isSel ? currentColor.withOpacity(0.25) : const Color(0xFF1E293B),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: isSel ? currentColor : Colors.white12,
+                                  width: isSel ? 2 : 1,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(item.icon, size: 18, color: isSel ? currentColor : Colors.white70),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    item.label,
+                                    style: TextStyle(
+                                      color: isSel ? Colors.white : Colors.white70,
+                                      fontSize: 11,
+                                      fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
                     // Selector de Color
-                    const Text('Color identificador del TAG:', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                    const Text('Color Identificador del TAG:', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 10,
@@ -370,7 +510,7 @@ class _MapScreenState extends State<MapScreen> {
                       maxLines: 2,
                       style: const TextStyle(color: Colors.white, fontSize: 13),
                       decoration: InputDecoration(
-                        hintText: 'Ej. Acceso por escalera posterior, llevar llave 1/2, pulsador observado...',
+                        hintText: 'Ej. Subir al 2do piso, ingresar por pasarela este, llave 1/2 requerida...',
                         hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
                         filled: true,
                         fillColor: const Color(0xFF1E293B),
@@ -462,6 +602,71 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+  void _showLayerSelectorDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: const Color(0xFF1E293B),
+        title: const Row(
+          children: [
+            Icon(Icons.layers, color: Colors.cyanAccent),
+            SizedBox(width: 8),
+            Text('Capa Satelital / Mapa', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RadioListTile<int>(
+              value: 0,
+              groupValue: _mapLayerMode,
+              title: const Text('Google Híbrido HD (Recomendado)', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
+              subtitle: const Text('Satelital nítido con zoom profundo sin errores', style: TextStyle(color: Colors.grey, fontSize: 11)),
+              activeColor: Colors.cyanAccent,
+              onChanged: (v) {
+                setState(() => _mapLayerMode = v!);
+                Navigator.pop(ctx);
+              },
+            ),
+            RadioListTile<int>(
+              value: 1,
+              groupValue: _mapLayerMode,
+              title: const Text('Google Satélite Puro', style: TextStyle(color: Colors.white, fontSize: 13)),
+              subtitle: const Text('Fotografía satelital limpia', style: TextStyle(color: Colors.grey, fontSize: 11)),
+              activeColor: Colors.cyanAccent,
+              onChanged: (v) {
+                setState(() => _mapLayerMode = v!);
+                Navigator.pop(ctx);
+              },
+            ),
+            RadioListTile<int>(
+              value: 2,
+              groupValue: _mapLayerMode,
+              title: const Text('Esri ArcGIS World Imagery', style: TextStyle(color: Colors.white, fontSize: 13)),
+              subtitle: const Text('Satelital Esri (zoom ajustado anti-error)', style: TextStyle(color: Colors.grey, fontSize: 11)),
+              activeColor: Colors.cyanAccent,
+              onChanged: (v) {
+                setState(() => _mapLayerMode = v!);
+                Navigator.pop(ctx);
+              },
+            ),
+            RadioListTile<int>(
+              value: 3,
+              groupValue: _mapLayerMode,
+              title: const Text('OpenStreetMap Callejero', style: TextStyle(color: Colors.white, fontSize: 13)),
+              subtitle: const Text('Mapa vectorial de caminos e instalaciones', style: TextStyle(color: Colors.grey, fontSize: 11)),
+              activeColor: Colors.cyanAccent,
+              onChanged: (v) {
+                setState(() => _mapLayerMode = v!);
+                Navigator.pop(ctx);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final initialCenter = _myLocation ?? const LatLng(-11.6685, -76.1455); // UM Chinalco Toromocho
@@ -474,19 +679,19 @@ class _MapScreenState extends State<MapScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Mapa Satelital de Tableros', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const Text('Plano Satelital de Tableros', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             Text(
-              '${_panelsWithGps.length} de ${_allPanels.length} tableros en mapa',
+              '${_panelsWithGps.length} de ${_allPanels.length} tableros ubicados',
               style: const TextStyle(fontSize: 11, color: Colors.cyanAccent),
             ),
           ],
         ),
         actions: [
-          // Alternar Satélite vs Calles
+          // Selector de capa (Google Satélite HD sin error de zoom)
           IconButton(
-            icon: Icon(_useSatellite ? Icons.layers : Icons.satellite_alt, color: Colors.white70),
-            tooltip: _useSatellite ? 'Cambiar a Mapa Callejero' : 'Cambiar a Vista Satelital',
-            onPressed: () => setState(() => _useSatellite = !_useSatellite),
+            icon: const Icon(Icons.layers, color: Colors.cyanAccent),
+            tooltip: 'Cambiar Capa de Mapa',
+            onPressed: _showLayerSelectorDialog,
           ),
 
           // Alternar Etiquetas TAG
@@ -501,7 +706,7 @@ class _MapScreenState extends State<MapScreen> {
             icon: _isExporting
                 ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.cyanAccent))
                 : const Icon(Icons.share, color: Colors.cyanAccent),
-            tooltip: 'Exportar Mapa y Compartir',
+            tooltip: 'Exportar Plano y Compartir',
             onPressed: _isExporting ? null : _exportMap,
           ),
         ],
@@ -526,13 +731,30 @@ class _MapScreenState extends State<MapScreen> {
                       },
                     ),
                     children: [
-                      // Capa de mapa: Satélite ArcGIS HD o Vector OSM
-                      if (_useSatellite)
+                      // Capa 0: Google Híbrido HD (Satelital con caminos y zoom profundo sin "not yet available")
+                      if (_mapLayerMode == 0)
                         TileLayer(
-                          urlTemplate: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                          maxZoom: 21,
+                          urlTemplate: 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+                          userAgentPackageName: 'com.example.tablero_report',
+                          maxZoom: 21.0,
                           maxNativeZoom: 19,
                         )
+                      // Capa 1: Google Satélite Puro
+                      else if (_mapLayerMode == 1)
+                        TileLayer(
+                          urlTemplate: 'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+                          userAgentPackageName: 'com.example.tablero_report',
+                          maxZoom: 21.0,
+                          maxNativeZoom: 19,
+                        )
+                      // Capa 2: Esri ArcGIS (con maxNativeZoom: 17 para evitar que pida tiles que dicen not yet available)
+                      else if (_mapLayerMode == 2)
+                        TileLayer(
+                          urlTemplate: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                          maxZoom: 21.0,
+                          maxNativeZoom: 17,
+                        )
+                      // Capa 3: OpenStreetMap
                       else
                         TileLayer(
                           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -543,7 +765,7 @@ class _MapScreenState extends State<MapScreen> {
                       // Marcadores de Tableros y Puntos
                       MarkerLayer(
                         markers: [
-                          // Marcador de Mi Ubicación
+                          // Marcador de Mi Ubicación (Punto azul como Google Maps)
                           if (_myLocation != null)
                             Marker(
                               point: _myLocation!,
@@ -559,15 +781,16 @@ class _MapScreenState extends State<MapScreen> {
                               ),
                             ),
 
-                          // Pines de Tableros con Color y Badge de TAG
+                          // Pines de Tableros con Color Inteligente, Ícono y Badge de TAG
                           ..._panelsWithGps.map((p) {
-                            final pinColor = _parseColor(p.color);
+                            final pinColor = _resolvePanelColor(p);
+                            final iconInfo = _resolvePanelIcon(p);
                             final hasNote = p.note != null && p.note!.trim().isNotEmpty;
 
                             return Marker(
                               point: LatLng(p.latitude!, p.longitude!),
-                              width: _showLabels ? 100 : 36,
-                              height: _showLabels ? 56 : 36,
+                              width: _showLabels ? 110 : 38,
+                              height: _showLabels ? 60 : 38,
                               child: GestureDetector(
                                 onTap: () => _showPanelDetails(p),
                                 child: Column(
@@ -577,9 +800,9 @@ class _MapScreenState extends State<MapScreen> {
                                       Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF0F172A).withOpacity(0.88),
+                                          color: const Color(0xFF0F172A).withOpacity(0.90),
                                           borderRadius: BorderRadius.circular(6),
-                                          border: Border.all(color: pinColor, width: 1.2),
+                                          border: Border.all(color: pinColor, width: 1.4),
                                           boxShadow: const [BoxShadow(color: Colors.black87, blurRadius: 4)],
                                         ),
                                         child: Row(
@@ -603,17 +826,17 @@ class _MapScreenState extends State<MapScreen> {
                                       ),
                                     const SizedBox(height: 2),
                                     Container(
-                                      width: 28,
-                                      height: 28,
+                                      width: 30,
+                                      height: 30,
                                       decoration: BoxDecoration(
                                         color: pinColor,
                                         shape: BoxShape.circle,
                                         border: Border.all(color: Colors.white, width: 2),
                                         boxShadow: [
-                                          BoxShadow(color: Colors.black.withOpacity(0.6), blurRadius: 4, offset: const Offset(0, 2))
+                                          BoxShadow(color: Colors.black.withOpacity(0.65), blurRadius: 5, offset: const Offset(0, 2))
                                         ],
                                       ),
-                                      child: const Icon(Icons.bolt, size: 16, color: Colors.black),
+                                      child: Icon(iconInfo.icon, size: 17, color: Colors.black),
                                     ),
                                   ],
                                 ),
@@ -633,7 +856,7 @@ class _MapScreenState extends State<MapScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
                             color: const Color(0xFF0F172A).withOpacity(0.95),
                             borderRadius: BorderRadius.circular(8),
@@ -649,7 +872,7 @@ class _MapScreenState extends State<MapScreen> {
                         const Icon(
                           Icons.location_searching,
                           color: Colors.cyanAccent,
-                          size: 38,
+                          size: 42,
                           shadows: [Shadow(color: Colors.black, blurRadius: 6)],
                         ),
                       ],
@@ -673,7 +896,7 @@ class _MapScreenState extends State<MapScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Mueve el mapa hacia el punto de "${_placingPanel!.tag}"',
+                            'Mueve el mapa hacia la posición de "${_placingPanel!.tag}"',
                             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
                             textAlign: TextAlign.center,
                           ),
@@ -796,6 +1019,7 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
     final locCtrl = TextEditingController();
     final noteCtrl = TextEditingController();
     String selectedHex = '#06B6D4';
+    String selectedIconKey = 'bolt';
 
     showDialog(
       context: context,
@@ -808,7 +1032,7 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
                 children: [
                   Icon(Icons.add_location, color: Colors.cyanAccent),
                   SizedBox(width: 8),
-                  Text('Nuevo Punto / Guía Manual', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+                  Text('Nuevo Punto / Instalación', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
                 ],
               ),
               content: SingleChildScrollView(
@@ -822,7 +1046,7 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
                       style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
                         labelText: 'TAG o Nombre del Punto *',
-                        hintText: 'Ej. REFUGIO-01, BOMBA-400...',
+                        hintText: 'Ej. SALA-2210, CONT-03, BOMBA-400...',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -832,7 +1056,7 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
                       style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
                         labelText: 'Ubicación / Área *',
-                        hintText: 'Ej. Espesadores, Flotación...',
+                        hintText: 'Ej. Espesadores, Flotación, Nivel 2...',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -841,13 +1065,51 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
                       controller: noteCtrl,
                       style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
-                        labelText: 'Guía / Nota / Sugerencia',
-                        hintText: 'Ej. Acceso directo por faja 03...',
+                        labelText: 'Guía / Nota de acceso',
+                        hintText: 'Ej. Subir por pasarela norte...',
                         border: OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text('Color identificador:', style: TextStyle(color: Colors.white70, fontSize: 12)),
+
+                    // Selector de tipo de instalación / ícono
+                    const Text('Tipo de Instalación:', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      height: 48,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _MapScreenState.availableIcons.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 6),
+                        itemBuilder: (context, idx) {
+                          final item = _MapScreenState.availableIcons[idx];
+                          final isSel = item.key == selectedIconKey;
+
+                          return GestureDetector(
+                            onTap: () => setDlgState(() => selectedIconKey = item.key),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: isSel ? Colors.cyanAccent.withOpacity(0.2) : const Color(0xFF0F172A),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: isSel ? Colors.cyanAccent : Colors.white10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(item.icon, size: 16, color: isSel ? Colors.cyanAccent : Colors.white70),
+                                  const SizedBox(width: 4),
+                                  Text(item.label, style: TextStyle(color: isSel ? Colors.white : Colors.white70, fontSize: 10)),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // Color
+                    const Text('Color identificador:', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 6),
                     Wrap(
                       spacing: 8,
@@ -890,11 +1152,12 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
                     final newP = Panel(
                       tag: tag,
                       loc: loc,
-                      type: 'PUNTO MANUAL',
+                      type: selectedIconKey.toUpperCase(),
                       latitude: widget.initialCoord?.latitude,
                       longitude: widget.initialCoord?.longitude,
                       color: selectedHex,
                       note: noteCtrl.text.trim().isEmpty ? null : noteCtrl.text.trim(),
+                      icon: selectedIconKey,
                     );
                     widget.onNewManualCreated(newP);
                   },
@@ -947,7 +1210,7 @@ class _SelectPanelModalState extends State<_SelectPanelModal> {
             onChanged: (_) => _applyFilter(),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: 'Buscar por TAG o área (ej. 2214, CP060)...',
+              hintText: 'Buscar por TAG o área (ej. 2214, CP060, Sala)...',
               hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
               prefixIcon: const Icon(Icons.search, color: Colors.cyanAccent),
               filled: true,

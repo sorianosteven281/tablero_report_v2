@@ -7,6 +7,7 @@ class Panel {
   final String? lastInspectedAt;
   final String? color;
   final String? note;
+  final String? icon;
 
   Panel({
     required this.tag,
@@ -17,6 +18,7 @@ class Panel {
     this.lastInspectedAt,
     this.color,
     this.note,
+    this.icon,
   });
 
   factory Panel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Panel {
       lastInspectedAt: json['last_inspected_at'] as String?,
       color: json['color'] as String?,
       note: json['note'] as String?,
+      icon: json['icon'] as String?,
     );
   }
 
@@ -42,6 +45,7 @@ class Panel {
       'last_inspected_at': lastInspectedAt,
       'color': color,
       'note': note,
+      'icon': icon,
     };
   }
 
@@ -54,6 +58,7 @@ class Panel {
     String? lastInspectedAt,
     String? color,
     String? note,
+    String? icon,
   }) {
     return Panel(
       tag: tag ?? this.tag,
@@ -64,7 +69,9 @@ class Panel {
       lastInspectedAt: lastInspectedAt ?? this.lastInspectedAt,
       color: color ?? this.color,
       note: note ?? this.note,
+      icon: icon ?? this.icon,
     );
   }
 }
+
 
