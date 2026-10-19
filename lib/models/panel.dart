@@ -5,6 +5,8 @@ class Panel {
   final double? latitude;
   final double? longitude;
   final String? lastInspectedAt;
+  final String? color;
+  final String? note;
 
   Panel({
     required this.tag,
@@ -13,6 +15,8 @@ class Panel {
     this.latitude,
     this.longitude,
     this.lastInspectedAt,
+    this.color,
+    this.note,
   });
 
   factory Panel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class Panel {
       latitude: json['latitude'] != null ? (json['latitude'] as num).toDouble() : null,
       longitude: json['longitude'] != null ? (json['longitude'] as num).toDouble() : null,
       lastInspectedAt: json['last_inspected_at'] as String?,
+      color: json['color'] as String?,
+      note: json['note'] as String?,
     );
   }
 
@@ -34,6 +40,8 @@ class Panel {
       'latitude': latitude,
       'longitude': longitude,
       'last_inspected_at': lastInspectedAt,
+      'color': color,
+      'note': note,
     };
   }
 
@@ -44,6 +52,8 @@ class Panel {
     double? latitude,
     double? longitude,
     String? lastInspectedAt,
+    String? color,
+    String? note,
   }) {
     return Panel(
       tag: tag ?? this.tag,
@@ -52,6 +62,9 @@ class Panel {
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
       lastInspectedAt: lastInspectedAt ?? this.lastInspectedAt,
+      color: color ?? this.color,
+      note: note ?? this.note,
     );
   }
 }
+

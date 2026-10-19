@@ -33,7 +33,9 @@ class DatabaseService {
             type TEXT NOT NULL,
             latitude REAL,
             longitude REAL,
-            last_inspected_at TEXT
+            last_inspected_at TEXT,
+            color TEXT,
+            note TEXT
           )
         ''');
 
@@ -90,6 +92,15 @@ class DatabaseService {
               value TEXT
             )
           ''');
+
+          final panelCols = await db.rawQuery('PRAGMA table_info(panels)');
+          final panelColNames = panelCols.map((c) => c['name'] as String).toSet();
+          if (!panelColNames.contains('color')) {
+            await db.execute('ALTER TABLE panels ADD COLUMN color TEXT');
+          }
+          if (!panelColNames.contains('note')) {
+            await db.execute('ALTER TABLE panels ADD COLUMN note TEXT');
+          }
 
           final columns = await db.rawQuery('PRAGMA table_info(inspections)');
           final names = columns.map((c) => c['name'] as String).toSet();
@@ -163,6 +174,37 @@ class DatabaseService {
       whereArgs: [tag],
     );
   }
+
+  Future<void> updatePanelDetails(
+    String tag, {
+    double? latitude,
+    double? longitude,
+    String? color,
+    String? note,
+    bool clearGps = false,
+  }) async {
+    final db = await database;
+    final updates = <String, dynamic>{};
+    if (clearGps) {
+      updates['latitude'] = null;
+      updates['longitude'] = null;
+    } else {
+      if (latitude != null) updates['latitude'] = latitude;
+      if (longitude != null) updates['longitude'] = longitude;
+    }
+    if (color != null) updates['color'] = color;
+    if (note != null) updates['note'] = note;
+
+    if (updates.isNotEmpty) {
+      await db.update(
+        'panels',
+        updates,
+        where: 'tag = ?',
+        whereArgs: [tag],
+      );
+    }
+  }
+
 
   Future<int> insertInspection(Inspection inspection) async {
     final db = await database;
