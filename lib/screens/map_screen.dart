@@ -10,6 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import '../models/panel.dart';
 import '../services/database_service.dart';
 import '../services/location_service.dart';
+import '../services/cached_tile_provider.dart';
 import 'inspection_screen.dart';
 
 class PlantIconInfo {
@@ -46,6 +47,7 @@ class _MapScreenState extends State<MapScreen> {
   bool _isLoading = true;
   bool _isExporting = false;
   bool _showLabels = true;
+  bool _hasHandledInitialFocus = false;
 
   // Modos de mapa: 0 = Google Hybrid HD (con zoom profundo), 1 = Google Satélite Puro, 2 = Esri Satélite, 3 = Callejero OSM
   int _mapLayerMode = 0;
@@ -79,25 +81,32 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    _loadData(isInitial: true);
   }
 
-  Future<void> _loadData() async {
+  Future<void> _loadData({bool isInitial = false}) async {
     final all = await _dbService.getAllPanels();
-    final gps = await _locService.getLocation(allowGps: true);
+    LatLng? gpsLoc;
+    if (isInitial || _myLocation == null) {
+      final gps = await _locService.getLocation(allowGps: true);
+      if (gps.hasValidFix) {
+        gpsLoc = LatLng(gps.latitude!, gps.longitude!);
+      }
+    }
 
     if (mounted) {
       setState(() {
         _allPanels = all;
         _panelsWithGps = all.where((p) => p.latitude != null && p.longitude != null).toList();
-        if (gps.hasValidFix) {
-          _myLocation = LatLng(gps.latitude!, gps.longitude!);
+        if (gpsLoc != null) {
+          _myLocation = gpsLoc;
         }
         _isLoading = false;
       });
 
-      // Si se abrió para enfocar o ubicar un tablero específico desde la lista
-      if (widget.focusPanel != null) {
+      // Solo enfocar o centrar la primera vez que se entra a la pantalla
+      if (isInitial && !_hasHandledInitialFocus && widget.focusPanel != null) {
+        _hasHandledInitialFocus = true;
         final target = all.firstWhere(
           (p) => p.tag == widget.focusPanel!.tag,
           orElse: () => widget.focusPanel!,
@@ -117,6 +126,19 @@ class _MapScreenState extends State<MapScreen> {
         }
       }
     }
+  }
+
+  void _updatePanelInState(String tag, Panel Function(Panel) updater) {
+    setState(() {
+      final allIdx = _allPanels.indexWhere((x) => x.tag == tag);
+      if (allIdx != -1) {
+        _allPanels[allIdx] = updater(_allPanels[allIdx]);
+      }
+      final gpsIdx = _panelsWithGps.indexWhere((x) => x.tag == tag);
+      if (gpsIdx != -1) {
+        _panelsWithGps[gpsIdx] = updater(_panelsWithGps[gpsIdx]);
+      }
+    });
   }
 
   Color _parseColor(String? hexString) {
@@ -459,7 +481,7 @@ class _MapScreenState extends State<MapScreen> {
                             onTap: () async {
                               setModalState(() => selectedIconKey = item.key);
                               await _dbService.updatePanelDetails(p.tag, icon: item.key);
-                              await _loadData();
+                              _updatePanelInState(p.tag, (prev) => prev.copyWith(icon: item.key));
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -507,7 +529,7 @@ class _MapScreenState extends State<MapScreen> {
                           onTap: () async {
                             setModalState(() => selectedHex = hex);
                             await _dbService.updatePanelDetails(p.tag, color: hex);
-                            await _loadData();
+                            _updatePanelInState(p.tag, (prev) => prev.copyWith(color: hex));
                           },
                           child: Container(
                             width: 34,
@@ -549,7 +571,7 @@ class _MapScreenState extends State<MapScreen> {
                           onPressed: () async {
                             final note = noteCtrl.text.trim();
                             await _dbService.updatePanelDetails(p.tag, note: note);
-                            await _loadData();
+                            _updatePanelInState(p.tag, (prev) => prev.copyWith(note: note));
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Nota guardada con éxito'), duration: Duration(seconds: 2)),
@@ -766,6 +788,7 @@ class _MapScreenState extends State<MapScreen> {
                           userAgentPackageName: 'com.example.tablero_report',
                           maxZoom: 21.0,
                           maxNativeZoom: 19,
+                          tileProvider: CachedTileProvider(),
                         )
                       // Capa 1: Google Satélite Puro
                       else if (_mapLayerMode == 1)
@@ -774,6 +797,7 @@ class _MapScreenState extends State<MapScreen> {
                           userAgentPackageName: 'com.example.tablero_report',
                           maxZoom: 21.0,
                           maxNativeZoom: 19,
+                          tileProvider: CachedTileProvider(),
                         )
                       // Capa 2: Esri ArcGIS (con maxNativeZoom: 17 para evitar que pida tiles que dicen not yet available)
                       else if (_mapLayerMode == 2)
@@ -781,6 +805,7 @@ class _MapScreenState extends State<MapScreen> {
                           urlTemplate: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
                           maxZoom: 21.0,
                           maxNativeZoom: 17,
+                          tileProvider: CachedTileProvider(),
                         )
                       // Capa 3: OpenStreetMap
                       else
@@ -788,6 +813,7 @@ class _MapScreenState extends State<MapScreen> {
                           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                           userAgentPackageName: 'com.example.tablero_report',
                           maxZoom: 19,
+                          tileProvider: CachedTileProvider(),
                         ),
 
                       // Marcadores de Tableros y Puntos

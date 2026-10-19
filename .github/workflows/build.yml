@@ -47,15 +47,14 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/heads/')
         with:
-          tag_name: v1.2.10-b${{ github.run_number }}
-          name: "Tablero Report v1.2.10 (Build ${{ github.run_number }})"
+          tag_name: v1.2.11-b${{ github.run_number }}
+          name: "Tablero Report v1.2.11 (Build ${{ github.run_number }})"
           body: |
-            ### 🚀 Tablero Report v1.2.10
-            - **Acceso Directo al Mapa:** Botón "Ver en mapa / Ubicar" directamente en cada tarjeta de la lista principal.
-            - **Satélite Google HD:** Zoom profundo nítido sin errores de "map data not yet available".
-            - **Íconos Personalizados:** Salas Eléctricas 🚪, Containers 📦, Bombas/Motores ⚙️, Subestaciones 🔌, Refugios 🛡️ y Tableros ⚡.
-            - **Colores Automáticos:** Identificación visual inteligente por área de planta minera (Molienda, Flotación, Silos, Relaves, etc.).
-            - **Exportar a WhatsApp:** Captura en alta resolución del plano para compartirlo.
+            ### 🚀 Tablero Report v1.2.11
+            - **Caché Persistente y Offline del Mapa:** Cada tesela satelital que se descarga se almacena localmente en memoria flash (hasta 20,000 bloques por 6 meses). No vuelve a descargarse nunca y funciona 100% sin conexión en campo.
+            - **Edición Fluida de Puntos sin Solapamiento:** Se eliminó el error que relanzaba la ventana de configuración y recentraba el mapa cada vez que se cambiaba de color, ícono o nota. Ahora los cambios se reflejan al instante en tiempo real sobre el mapa sin saltos de cámara.
+            - **Google Satelital Híbrido HD:** Zoom profundo continuo con nombres de vías e instalaciones.
+            - **Íconos y Colores Inteligentes:** Visualización optimizada de Salas Eléctricas, Containers, Bombas, Refugios y Tableros.
           files: build/app/outputs/flutter-apk/app-release.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

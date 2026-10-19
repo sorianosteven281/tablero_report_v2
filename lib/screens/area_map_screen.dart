@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import '../models/panel.dart';
 import '../services/database_service.dart';
 import '../services/location_service.dart';
+import '../services/cached_tile_provider.dart';
 import 'inspection_screen.dart';
 
 class AreaZoneInfo {
@@ -324,6 +325,7 @@ class _AreaMapScreenState extends State<AreaMapScreen> {
                         urlTemplate: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
                         maxZoom: 21,
                         maxNativeZoom: 19,
+                        tileProvider: CachedTileProvider(),
                       ),
                       MarkerLayer(
                         markers: [
