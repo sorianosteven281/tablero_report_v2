@@ -8,7 +8,9 @@
     "last_inspected_at": null,
     "color": "#F59E0B",
     "note": null,
-    "icon": "substation"
+    "icon": "substation",
+    "photo": "photos/10331-TDC-001.jpg",
+    "photo_count": 7
   },
   {
     "tag": "200 SUPRESOR",
@@ -30,7 +32,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/200-CP-001.jpg",
+    "photo_count": 9
   },
   {
     "tag": "200-CP-059",
@@ -162,7 +166,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/200CV002-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "200CV003-CP-050",
@@ -316,7 +322,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/205-CP-001.jpg",
+    "photo_count": 12
   },
   {
     "tag": "2060-FCP-060",
@@ -327,7 +335,9 @@
     "last_inspected_at": "2026-10-12T15:08:30.673928",
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2060-FCP-060.jpg",
+    "photo_count": 8
   },
   {
     "tag": "210-CP-001",
@@ -338,7 +348,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210-CP-001.jpg",
+    "photo_count": 8
   },
   {
     "tag": "210-CP-002",
@@ -349,7 +361,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210-CP-002.jpg",
+    "photo_count": 7
   },
   {
     "tag": "210-CP-003",
@@ -393,7 +407,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210-SN-001.jpg",
+    "photo_count": 5
   },
   {
     "tag": "210-SN-101",
@@ -404,7 +420,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210-SN-101.jpg",
+    "photo_count": 5
   },
   {
     "tag": "210CR001-CP01",
@@ -415,7 +433,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210CR001-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "210CR002-CP01",
@@ -426,7 +446,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210CR002-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "210LM001-CP02",
@@ -437,7 +459,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/210LM001-CP02.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2110-CP-010",
@@ -448,7 +472,9 @@
     "last_inspected_at": "2026-10-17T13:40:27.830013",
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-CP-010.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2110-CP-011",
@@ -459,7 +485,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-CP-011.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2110-FCP-060",
@@ -481,7 +509,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-061.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2110-FCP-062",
@@ -492,7 +522,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": "faja",
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-062.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2110-FCP-063",
@@ -503,7 +535,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-063.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2110-FCP-064",
@@ -514,7 +548,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-064.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2110-FCP-065",
@@ -525,7 +561,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-065.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2110-FCP-066",
@@ -536,7 +574,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-066.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2110-FCP-067",
@@ -547,7 +587,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-067.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2110-FCP-068",
@@ -558,7 +600,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-068.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2110-FCP-069",
@@ -569,7 +613,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-069.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2110-FCP-070",
@@ -580,7 +626,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": "arriba",
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-070.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2110-FCP-071",
@@ -602,7 +650,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2110-FCP-072.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2115-CR-003-CP01",
@@ -613,7 +663,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2115-CR-003-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2115-CR-003-CP02",
@@ -624,7 +676,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2115-CR-003-CP02.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2115-CR-003-CP03",
@@ -635,7 +689,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2115-CR-003-CP03.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2115-CR-003-CP04",
@@ -646,7 +702,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2115-CR-003-CP04.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2115-CR-003-CP05",
@@ -657,7 +715,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2115-CR-003-CP05.jpg",
+    "photo_count": 2
   },
   {
     "tag": "220-CP-001",
@@ -668,7 +728,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220-CP-001.jpg",
+    "photo_count": 4
   },
   {
     "tag": "220-CP-002",
@@ -679,7 +741,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220-CP-002.jpg",
+    "photo_count": 5
   },
   {
     "tag": "220FO001-CP02 (BFLC_PLC1)",
@@ -690,7 +754,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220FO001-CP02__BFLC_PLC1_.jpg",
+    "photo_count": 5
   },
   {
     "tag": "220FO015-CP02 (BFLC_PLC2)",
@@ -701,7 +767,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220FO015-CP02__BFLC_PLC2_.jpg",
+    "photo_count": 5
   },
   {
     "tag": "220FO041-CP02 (BFLC_PLC3)",
@@ -712,7 +780,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220FO041-CP02__BFLC_PLC3_.jpg",
+    "photo_count": 7
   },
   {
     "tag": "220FO058-CP02 (BFLC_PLC6)",
@@ -723,7 +793,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220FO058-CP02__BFLC_PLC6_.jpg",
+    "photo_count": 6
   },
   {
     "tag": "220FO080-CP02 (BFLC_PLC4)",
@@ -734,7 +806,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220FO080-CP02__BFLC_PLC4_.jpg",
+    "photo_count": 8
   },
   {
     "tag": "220GB001-CP01",
@@ -745,7 +819,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB001-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "220GB002-CP01",
@@ -756,7 +832,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB002-CP01.jpg",
+    "photo_count": 9
   },
   {
     "tag": "220GB003-CP01",
@@ -767,7 +845,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB003-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "220GB004-CP01",
@@ -778,7 +858,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB004-CP01.jpg",
+    "photo_count": 9
   },
   {
     "tag": "220GB006-CP01",
@@ -789,7 +871,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB006-CP01.jpg",
+    "photo_count": 5
   },
   {
     "tag": "220GB008-CP01",
@@ -800,7 +884,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB008-CP01.jpg",
+    "photo_count": 5
   },
   {
     "tag": "220GB101-CP01",
@@ -811,7 +897,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB101-CP01.jpg",
+    "photo_count": 9
   },
   {
     "tag": "220GB106-CP01",
@@ -822,7 +910,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB106-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "220GB108-CP01",
@@ -833,7 +923,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220GB108-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "220TM007-CP01",
@@ -844,7 +936,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220TM007-CP01.jpg",
+    "photo_count": 4
   },
   {
     "tag": "220UDL001",
@@ -855,7 +949,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/220UDL001.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2210-CP-010",
@@ -866,7 +962,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-CP-010.jpg",
+    "photo_count": 9
   },
   {
     "tag": "2210-CP-011",
@@ -877,7 +975,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-CP-011.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2210-CP-701",
@@ -888,7 +988,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-CP-701.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2210-FCP-060",
@@ -899,7 +1001,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-FCP-060.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2210-FCP-061",
@@ -921,7 +1025,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-FCP-062.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2210-FCP-063",
@@ -932,7 +1038,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-FCP-063.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2210-FCP-067",
@@ -943,7 +1051,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-FCP-067.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2210-FCP-068",
@@ -965,7 +1075,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210-FCP-071.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2210M079-CP01",
@@ -976,7 +1088,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2210M079-CP01.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2210MO79-902",
@@ -998,7 +1112,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2212-FCP-060.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2212-FCP-061",
@@ -1009,7 +1125,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2212-FCP-061.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2212-FCP-062",
@@ -1020,7 +1138,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2212-FCP-062.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2212TK008-CP01",
@@ -1031,7 +1151,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2212TK008-CP01.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2213-FCP-060",
@@ -1042,7 +1164,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2213-FCP-060.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2213-FCP-061",
@@ -1053,7 +1177,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2213-FCP-061.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2214-FCP-060",
@@ -1064,7 +1190,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2214-FCP-060.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2214-FCP-061",
@@ -1075,7 +1203,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2214-FCP-061.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2214-FCP-062",
@@ -1086,7 +1216,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2214-FCP-062.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2214-FCP-063",
@@ -1097,7 +1229,9 @@
     "last_inspected_at": null,
     "color": "#06B6D4",
     "note": null,
-    "icon": "bolt"
+    "icon": "bolt",
+    "photo": "photos/2214-FCP-063.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2215-FCP-060",
@@ -1108,7 +1242,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2215-FCP-060.jpg",
+    "photo_count": 4
   },
   {
     "tag": "230-CP-001",
@@ -1119,7 +1255,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230-CP-001.jpg",
+    "photo_count": 9
   },
   {
     "tag": "230-CP-002",
@@ -1130,7 +1268,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230-CP-002.jpg",
+    "photo_count": 9
   },
   {
     "tag": "230FO001-CP01 (BFLC_PLC5)",
@@ -1141,7 +1281,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230FO001-CP01__BFLC_PLC5_.jpg",
+    "photo_count": 8
   },
   {
     "tag": "230GB001-CP01",
@@ -1152,7 +1294,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230GB001-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "230GB101-CP01",
@@ -1163,7 +1307,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230GB101-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "230TM003-CP01",
@@ -1174,7 +1320,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/230TM003-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "240TM001-CP01",
@@ -1185,7 +1333,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/240TM001-CP01.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2410-CP-701",
@@ -1196,7 +1346,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2410-CP-701.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2410-FCP-060",
@@ -1207,7 +1359,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2410-FCP-060.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2410TM001",
@@ -1229,7 +1383,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/245-CP-001.jpg",
+    "photo_count": 5
   },
   {
     "tag": "245FL001-CP01",
@@ -1240,7 +1396,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/245FL001-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "245FL002-CP01",
@@ -1251,7 +1409,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/245FL002-CP01.jpg",
+    "photo_count": 8
   },
   {
     "tag": "245FL003-CP01",
@@ -1262,7 +1422,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/245FL003-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "245RR01-CP01",
@@ -1273,7 +1435,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/245RR01-CP01.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2460-FL-004",
@@ -1284,7 +1448,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2460-FL-004.jpg",
+    "photo_count": 9
   },
   {
     "tag": "2460-FL-005",
@@ -1295,7 +1461,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2460-FL-005.jpg",
+    "photo_count": 6
   },
   {
     "tag": "251-CP-001",
@@ -1328,7 +1496,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-CP-002.jpg",
+    "photo_count": 3
   },
   {
     "tag": "255-CP-003",
@@ -1339,7 +1509,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-CP-003.jpg",
+    "photo_count": 3
   },
   {
     "tag": "255-HP-101",
@@ -1350,7 +1522,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-HP-101.jpg",
+    "photo_count": 5
   },
   {
     "tag": "255-HP-201",
@@ -1361,7 +1535,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-HP-201.jpg",
+    "photo_count": 5
   },
   {
     "tag": "255-HP-301",
@@ -1372,7 +1548,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-HP-301.jpg",
+    "photo_count": 4
   },
   {
     "tag": "255-HP-401",
@@ -1383,7 +1561,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255-HP-401.jpg",
+    "photo_count": 3
   },
   {
     "tag": "255PP048-CP01",
@@ -1394,7 +1574,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP048-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "255PP049-CP01",
@@ -1405,7 +1587,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP049-CP01.jpg",
+    "photo_count": 4
   },
   {
     "tag": "255PP050-CP01",
@@ -1416,7 +1600,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP050-CP01.jpg",
+    "photo_count": 9
   },
   {
     "tag": "255PP051-CP01",
@@ -1427,7 +1613,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP051-CP01.jpg",
+    "photo_count": 8
   },
   {
     "tag": "255PP052-CP01",
@@ -1438,7 +1626,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP052-CP01.jpg",
+    "photo_count": 5
   },
   {
     "tag": "255PP054-CP01",
@@ -1449,7 +1639,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP054-CP01.jpg",
+    "photo_count": 4
   },
   {
     "tag": "255PP055-CP01",
@@ -1460,7 +1652,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP055-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "255PP056-CP01",
@@ -1482,7 +1676,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP057-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "255PP058-CP01",
@@ -1493,7 +1689,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255PP058-CP01.jpg",
+    "photo_count": 4
   },
   {
     "tag": "255TM001-CP01",
@@ -1515,7 +1713,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255TM002-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "255TM003-CP01",
@@ -1537,7 +1737,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/255TM004-CP01.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2560-CP-010",
@@ -1548,7 +1750,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-CP-010.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2560-FCP-060",
@@ -1559,7 +1763,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-FCP-060.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2560-FCP-061",
@@ -1570,7 +1776,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-FCP-061.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2560-FCP-062",
@@ -1581,7 +1789,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-FCP-062.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2560-FCP-063",
@@ -1592,7 +1802,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-FCP-063.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2560-FCP-064",
@@ -1603,7 +1815,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2560-FCP-064.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2561-TK-006",
@@ -1614,7 +1828,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2561-TK-006.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2561-TK-007",
@@ -1625,7 +1841,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2561-TK-007.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2562-PP-451",
@@ -1636,7 +1854,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2562-PP-451.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2562-PP-452",
@@ -1647,7 +1867,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2562-PP-452.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2562-PP-453",
@@ -1658,7 +1880,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2562-PP-453.jpg",
+    "photo_count": 3
   },
   {
     "tag": "2562-PP-454",
@@ -1669,7 +1893,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2562-PP-454.jpg",
+    "photo_count": 4
   },
   {
     "tag": "260-CP-001",
@@ -1680,7 +1906,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/260-CP-001.jpg",
+    "photo_count": 9
   },
   {
     "tag": "260-PK-002",
@@ -1735,7 +1963,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/260LM001.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2610-CP-010",
@@ -1746,7 +1976,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2610-CP-010.jpg",
+    "photo_count": 5
   },
   {
     "tag": "2610-CP-101",
@@ -1757,7 +1989,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2610-CP-101.jpg",
+    "photo_count": 4
   },
   {
     "tag": "2610-FCP-060",
@@ -1768,7 +2002,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2610-FCP-060.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2615-CP-010",
@@ -1779,7 +2015,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2615-CP-010.jpg",
+    "photo_count": 8
   },
   {
     "tag": "2615-FCP-060",
@@ -1790,7 +2028,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2615-FCP-060.jpg",
+    "photo_count": 7
   },
   {
     "tag": "2615-FCP-062",
@@ -1801,7 +2041,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/2615-FCP-062.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2615-LM-001",
@@ -1812,7 +2054,9 @@
     "last_inspected_at": null,
     "color": "#EF4444",
     "note": "ultimo piso subir con full face",
-    "icon": null
+    "icon": null,
+    "photo": "photos/2615-LM-001.jpg",
+    "photo_count": 6
   },
   {
     "tag": "2615LM01",
@@ -1845,7 +2089,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/262-WT-002.jpg",
+    "photo_count": 3
   },
   {
     "tag": "262-WT-003",
@@ -1856,7 +2102,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/262-WT-003.jpg",
+    "photo_count": 4
   },
   {
     "tag": "262-WT-004",
@@ -1889,7 +2137,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-BO-110.jpg",
+    "photo_count": 6
   },
   {
     "tag": "280-CP-001",
@@ -1900,7 +2150,9 @@
     "last_inspected_at": "2026-10-14T14:40:06.108689",
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-CP-001.jpg",
+    "photo_count": 7
   },
   {
     "tag": "280-CP-002",
@@ -1911,7 +2163,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-CP-002.jpg",
+    "photo_count": 9
   },
   {
     "tag": "280-CP-003",
@@ -1922,7 +2176,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-CP-003.jpg",
+    "photo_count": 7
   },
   {
     "tag": "280-CP-004",
@@ -1933,7 +2189,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-CP-004.jpg",
+    "photo_count": 4
   },
   {
     "tag": "280-PK-001",
@@ -1944,7 +2202,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-PK-001.jpg",
+    "photo_count": 6
   },
   {
     "tag": "280-PK-004",
@@ -1955,7 +2215,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-PK-004.jpg",
+    "photo_count": 5
   },
   {
     "tag": "280-WT-003",
@@ -1966,7 +2228,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/280-WT-003.jpg",
+    "photo_count": 6
   },
   {
     "tag": "282-PK-010",
@@ -1977,7 +2241,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/282-PK-010.jpg",
+    "photo_count": 3
   },
   {
     "tag": "284-FL-011",
@@ -1988,7 +2254,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/284-FL-011.jpg",
+    "photo_count": 7
   },
   {
     "tag": "284-FL-012",
@@ -1999,7 +2267,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/284-FL-012.jpg",
+    "photo_count": 5
   },
   {
     "tag": "284-TM-052/CP01",
@@ -2010,7 +2280,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/284-TM-052_CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "284-TM-068",
@@ -2021,7 +2293,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/284-TM-068.jpg",
+    "photo_count": 7
   },
   {
     "tag": "284ET001",
@@ -2043,7 +2317,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/285-TM-097.jpg",
+    "photo_count": 8
   },
   {
     "tag": "285-TM-108",
@@ -2054,7 +2330,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/285-TM-108.jpg",
+    "photo_count": 8
   },
   {
     "tag": "286-CF-110",
@@ -2087,7 +2365,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/287-PP-120-CP01.jpg",
+    "photo_count": 7
   },
   {
     "tag": "288-CP-001",
@@ -2098,7 +2378,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/288-CP-001.jpg",
+    "photo_count": 5
   },
   {
     "tag": "289-FT-001",
@@ -2131,7 +2413,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/291-TM-730.jpg",
+    "photo_count": 7
   },
   {
     "tag": "291-TM-733",
@@ -2153,7 +2437,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/291-TM-776.jpg",
+    "photo_count": 7
   },
   {
     "tag": "292-GC-001",
@@ -2175,7 +2461,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/293-FL-401.jpg",
+    "photo_count": 7
   },
   {
     "tag": "294-FL-401/402",
@@ -2186,7 +2474,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/294-FL-401_402.jpg",
+    "photo_count": 2
   },
   {
     "tag": "294-OP-001",
@@ -2208,7 +2498,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/294-RF-001.jpg",
+    "photo_count": 3
   },
   {
     "tag": "294-RF-002",
@@ -2230,7 +2522,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/294-ZM-410.jpg",
+    "photo_count": 5
   },
   {
     "tag": "400-CP-001",
@@ -2241,7 +2535,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400-CP-001.jpg",
+    "photo_count": 9
   },
   {
     "tag": "400-PK-001",
@@ -2263,7 +2559,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400-PK-002.jpg",
+    "photo_count": 2
   },
   {
     "tag": "400-PK-003",
@@ -2274,7 +2572,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400-PK-003.jpg",
+    "photo_count": 2
   },
   {
     "tag": "400-PK-011",
@@ -2296,7 +2596,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400-PK-012.jpg",
+    "photo_count": 3
   },
   {
     "tag": "400-PK-013",
@@ -2329,7 +2631,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400-PK-015.jpg",
+    "photo_count": 3
   },
   {
     "tag": "400LM001-CP02",
@@ -2340,7 +2644,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400LM001-CP02.jpg",
+    "photo_count": 8
   },
   {
     "tag": "400LM002-CP02",
@@ -2351,7 +2657,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400LM002-CP02.jpg",
+    "photo_count": 8
   },
   {
     "tag": "400LM003-CP02",
@@ -2362,7 +2670,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/400LM003-CP02.jpg",
+    "photo_count": 6
   },
   {
     "tag": "4011-FCP-060",
@@ -2373,7 +2683,9 @@
     "last_inspected_at": null,
     "color": null,
     "note": null,
-    "icon": null
+    "icon": null,
+    "photo": "photos/4011-FCP-060.jpg",
+    "photo_count": 6
   },
   {
     "tag": "700-CP-001",
