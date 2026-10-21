@@ -314,166 +314,41 @@ if (btnLoc) {
   });
 }
 
-// Modal de Exportación
-const exportModal = document.getElementById('export-modal');
-const btnOpenExport = document.getElementById('btn-open-export');
-const btnCloseExport = document.getElementById('btn-close-export');
-
-if (btnOpenExport && exportModal) {
-  btnOpenExport.addEventListener('click', () => {
-    exportModal.style.display = 'flex';
-  });
-}
-if (btnCloseExport && exportModal) {
-  btnCloseExport.addEventListener('click', () => {
-    exportModal.style.display = 'none';
-  });
-}
-if (exportModal) {
-  exportModal.addEventListener('click', (e) => {
-    if (e.target === exportModal) exportModal.style.display = 'none';
-  });
-}
-
-// Impresión Informal de Campo (Tipo Maps)
-window.printInformalMap = function() {
-  if (exportModal) exportModal.style.display = 'none';
-  
+// Impresión Directa del Plano Satelital para Campo
+window.printMapDirectly = function() {
   const q = searchQuery.toLowerCase().replace(/[-_ ]/g, '');
-  const visible = ALL_PANELS.filter(p => {
-    if (p.latitude == null || p.longitude == null) return false;
-    if (activeZone !== 'ALL' && activeZone !== 'PENDING') {
-      if (!(p.tag || '').toUpperCase().startsWith(activeZone)) return false;
+  const bounds = [];
+  let visibleCount = 0;
+
+  ALL_PANELS.forEach(p => {
+    if (p.latitude != null && p.longitude != null) {
+      if (activeZone === 'ALL' || (p.tag || '').toUpperCase().startsWith(activeZone)) {
+        if (!q || (p.tag || '').toLowerCase().replace(/[-_ ]/g, '').includes(q) || (p.loc || '').toLowerCase().replace(/[-_ ]/g, '').includes(q)) {
+          bounds.push([p.latitude, p.longitude]);
+          visibleCount++;
+        }
+      }
     }
-    if (q.length > 0) {
-      const cleanTag = (p.tag || '').toLowerCase().replace(/[-_ ]/g, '');
-      const cleanLoc = (p.loc || '').toLowerCase().replace(/[-_ ]/g, '');
-      if (!cleanTag.includes(q) && !cleanLoc.includes(q)) return false;
-    }
-    return true;
   });
 
-  const container = document.getElementById('print-container');
-  if (!container) return;
+  const metaText = document.getElementById('print-meta-text');
   const nowStr = new Date().toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  
-  let html = '<div class="print-header">' +
-               '<h1>UM CHINALCO TOROMOCHO — CROQUIS DE CAMPO DE TABLEROS</h1>' +
-               '<div class="print-meta">' +
-                 '<span><b>Filtro:</b> ' + (activeZone === 'ALL' ? 'Todos los tableros' : activeZone) + ' | <b>Total:</b> ' + visible.length + ' tableros</span>' +
-                 '<span><b>Fecha:</b> ' + nowStr + '</span>' +
-               '</div>' +
-             '</div>' +
-             '<div class="print-grid">';
+  const zoneName = activeZone === 'ALL' ? 'Toda la Planta' : ('Zona ' + activeZone);
+  if (metaText) {
+    metaText.innerText = zoneName + ' | ' + visibleCount + ' tableros visibles | ' + nowStr;
+  }
 
-  visible.forEach(p => {
-    const photoSrc = p.photo ? p.photo : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>';
-    const note = p.note ? '<div class="print-card-note">📌 <b>Acceso:</b> ' + p.note + '</div>' : '';
-    html += '<div class="print-card">' +
-              '<img class="print-card-img" src="' + photoSrc + '" />' +
-              '<div class="print-card-body">' +
-                '<div class="print-card-tag">' + p.tag + '</div>' +
-                '<div class="print-card-loc">' + (p.loc || '') + '</div>' +
-                '<div class="print-card-gps">GPS: ' + p.latitude.toFixed(6) + ', ' + p.longitude.toFixed(6) + ' (' + (p.type || '') + ')</div>' +
-                note +
-              '</div>' +
-            '</div>';
-  });
+  // Ajustar cámara para que todos los puntos de la zona entren en la hoja
+  if (bounds.length > 0) {
+    map.fitBounds(bounds, { padding: [40, 40] });
+  }
 
-  html += '</div>';
-  container.innerHTML = html;
+  showToast('Preparando plano satelital para impresión...');
 
+  // Dar tiempo para que Leaflet renderice teselas completas en el nuevo zoom
   setTimeout(() => {
     window.print();
-  }, 300);
-};
-
-function downloadFile(content, fileName, mimeType) {
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  if (exportModal) exportModal.style.display = 'none';
-  showToast('Descargado: ' + fileName);
-}
-
-window.exportData = function(format) {
-  const locatedPanels = ALL_PANELS.filter(p => p.latitude != null && p.longitude != null);
-
-  if (format === 'kml') {
-    let kml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-              '<kml xmlns="http://www.opengis.net/kml/2.2">\n' +
-              '  <Document>\n' +
-              '    <name>Tableros Chinalco Toromocho</name>\n' +
-              '    <description>Mapeo de tableros eléctricos y salas UM Chinalco</description>\n';
-    locatedPanels.forEach(p => {
-      const desc = '<![CDATA[' +
-        '<b>TAG:</b> ' + p.tag + '<br>' +
-        '<b>Ubicación:</b> ' + (p.loc || '') + '<br>' +
-        '<b>Tipo:</b> ' + (p.type || '') + '<br>' +
-        '<b>Coordenadas:</b> ' + p.latitude + ', ' + p.longitude + '<br>' +
-        (p.note ? '<b>Nota:</b> ' + p.note + '<br>' : '') +
-      ']]>';
-      kml += '    <Placemark>\n' +
-             '      <name>' + p.tag + '</name>\n' +
-             '      <description>' + desc + '</description>\n' +
-             '      <Point>\n' +
-             '        <coordinates>' + p.longitude + ',' + p.latitude + ',0</coordinates>\n' +
-             '      </Point>\n' +
-             '    </Placemark>\n';
-    });
-    kml += '  </Document>\n</kml>';
-    downloadFile(kml, 'tableros_chinalco.kml', 'application/vnd.google-earth.kml+xml;charset=utf-8');
-  } 
-  else if (format === 'csv') {
-    const rows = ['\uFEFFTAG,Ubicacion,Tipo,Latitud,Longitud,Color,Icono,Nota,Foto,Ultima_Inspeccion'];
-    ALL_PANELS.forEach(p => {
-      rows.push([
-        '"' + (p.tag || '').replace(/"/g, '""') + '"',
-        '"' + (p.loc || '').replace(/"/g, '""') + '"',
-        '"' + (p.type || '').replace(/"/g, '""') + '"',
-        p.latitude != null ? p.latitude : '',
-        p.longitude != null ? p.longitude : '',
-        '"' + (p.color || '') + '"',
-        '"' + (p.icon || '') + '"',
-        '"' + (p.note || '').replace(/"/g, '""') + '"',
-        '"' + (p.photo || '') + '"',
-        '"' + (p.last_inspected_at || '') + '"'
-      ].join(','));
-    });
-    downloadFile(rows.join('\r\n'), 'tableros_chinalco.csv', 'text/csv;charset=utf-8;');
-  }
-  else if (format === 'geojson') {
-    const geojson = {
-      type: "FeatureCollection",
-      features: locatedPanels.map(p => ({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [p.longitude, p.latitude]
-        },
-        properties: {
-          tag: p.tag,
-          loc: p.loc,
-          type: p.type,
-          color: p.color,
-          icon: p.icon,
-          note: p.note,
-          photo: p.photo,
-          last_inspected_at: p.last_inspected_at
-        }
-      }))
-    };
-    downloadFile(JSON.stringify(geojson, null, 2), 'tableros_chinalco.geojson', 'application/geo+json;charset=utf-8');
-  }
-  else if (format === 'json') {
-    downloadFile(JSON.stringify(ALL_PANELS, null, 2), 'panels.json', 'application/json;charset=utf-8');
-  }
+  }, 600);
 };
 
 // Respaldo dinámico si data.js estuviese vacío
