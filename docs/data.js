@@ -2782,910 +2782,490 @@ window.FASE2_DATA = [
     "tag": "2060-FCP-060",
     "loc": "Segundo Nivel - Tunel de Apron Feeders",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.666679260553467,
-    "longitude": -76.148234343293,
-    "photo": "photos/2060-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardiaww A - Mantenimiento Eléctrico",
-    "default_obs": "Falta protector antihumedad, Planos en buen estado, Modulos de comunicacion se encuentran flojos, Limpieza general"
+    "longitude": -76.148234343293
   },
   {
     "tag": "2110-CP-010",
     "loc": "Sala Eléctrica 2110-ER-018 - Área de Molienda",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66704202068991,
-    "longitude": -76.14714717954988,
-    "photo": "photos/2110-CP-010.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Filtro saturado, se reemplazo"
+    "longitude": -76.14714717954988
   },
   {
     "tag": "2110-CP-011",
     "loc": "Sala Eléctrica 2110-ER-018 - Área de Molienda",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667058272012927,
-    "longitude": -76.14712468350069,
-    "photo": "photos/2110-CP-011.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Filtro saturado, se reemplazo"
+    "longitude": -76.14712468350069
   },
   {
     "tag": "2110-FCP-060",
     "loc": "Segundo Nivel - Cabeza de Faja CV011",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": null,
-    "longitude": null,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": null
   },
   {
     "tag": "2110-FCP-061",
     "loc": "Primer Nivel - Frente al Cooling Tower",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667090444408226,
-    "longitude": -76.14761452674159,
-    "photo": "photos/2110-FCP-061.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo,Humedecedor petrificado se reemplazo, Tageo deteriorado se reemplazo, Planos en mal estado"
+    "longitude": -76.14761452674159
   },
   {
     "tag": "2110-FCP-062",
     "loc": "Tercer Nivel - Cabeza de Faja CV014",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668224832342547,
-    "longitude": -76.14725696304819,
-    "photo": "photos/2110-FCP-062.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, planos en mal estado"
+    "longitude": -76.14725696304819
   },
   {
     "tag": "2110-FCP-063",
     "loc": "Segundo Nivel - Frente Molino SAG",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667649633817785,
-    "longitude": -76.14759160291996,
-    "photo": "photos/2110-FCP-063.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Planos un poco deteriorados, instalacion de antihumedecedor, se coloco cubierta para manija de tablero."
+    "longitude": -76.14759160291996
   },
   {
     "tag": "2110-FCP-064",
     "loc": "Tercer Nivel - Nido Hidrociclones CY005",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668092,
-    "longitude": -76.147016,
-    "photo": "photos/2110-FCP-064.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "- Limpieza general - Cambio de humedecedor"
+    "longitude": -76.147016
   },
   {
     "tag": "2110-FCP-065",
     "loc": "Tercer Nivel - Nido Hidrociclones CY006",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668282707980111,
-    "longitude": -76.1470230133477,
-    "photo": "photos/2110-FCP-065.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "- Cambio de humedecedor - Cambio de forro"
+    "longitude": -76.1470230133477
   },
   {
     "tag": "2110-FCP-066",
     "loc": "Segundo Nivel - Edificio Chancado Pebbles",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66740820414313,
-    "longitude": -76.14846811922801,
-    "photo": "photos/2110-FCP-066.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardiaww A - Mantenimiento Eléctrico",
-    "default_obs": "Sin portaplanos, Limpieza general, Falta tag de modulo DO - 04, Rele suelto sin conexion"
+    "longitude": -76.14846811922801
   },
   {
     "tag": "2110-FCP-067",
     "loc": "Primer Nivel - Bomba PP202",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668338448552257,
-    "longitude": -76.14711840166,
-    "photo": "photos/2110-FCP-067.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Polvo excesivo, Limpieza general, Sellador de cables"
+    "longitude": -76.14711840166
   },
   {
     "tag": "2110-FCP-068",
     "loc": "Segundo Nivel - Lado Norte - Molino SAG ML004",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667902258382904,
-    "longitude": -76.14723514275515,
-    "photo": "photos/2110-FCP-068.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cableado ordenado, Rajadura de Canaleta debido a sobrecarga de cables"
+    "longitude": -76.14723514275515
   },
   {
     "tag": "2110-FCP-069",
     "loc": "Segundo Nivel - Molino Bolas ML005",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668001059859447,
-    "longitude": -76.14711456984811,
-    "photo": "photos/2110-FCP-069.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cableado ordenado"
+    "longitude": -76.14711456984811
   },
   {
     "tag": "2110-FCP-070",
     "loc": "Segundo Nivel - Lado Sur - Molino SAG ML004",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668115808798836,
-    "longitude": -76.14737702225865,
-    "photo": "photos/2110-FCP-070.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cambio de forro de cubierta de tablero, cambio de anti humedecedor y cables sin conexion"
+    "longitude": -76.14737702225865
   },
   {
     "tag": "2110-FCP-071",
     "loc": "Segundo Nivel - Cabeza de Faja CV012",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667137879480151,
-    "longitude": -76.14825123842952,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": -76.14825123842952
   },
   {
     "tag": "2110-FCP-072",
     "loc": "Segundo Nivel - Cola de Faja CV015",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66825963315658,
-    "longitude": -76.1472089543792,
-    "photo": "photos/2110-FCP-072.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo, jebe de puerta parte inferior dañado"
+    "longitude": -76.1472089543792
   },
   {
     "tag": "2115-CR-003-CP01",
     "loc": "Chancadora de pebbles 3, CP01",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.667516,
-    "longitude": -76.148419,
-    "photo": "photos/2115-CR-003-CP01.jpg",
-    "default_resp": "TITO callupe.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, no funciona iluminación y se  cambió absorbedor de humedad"
+    "longitude": -76.148419
   },
   {
     "tag": "2115-CR-003-CP02",
     "loc": "Chancadora de pebbles 3, CP02",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.667457595523135,
-    "longitude": -76.14841620237989,
-    "photo": "photos/2115-CR-003-CP02.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cableado ordenado, Bornera suelta, Polvo excesivo, planos en mal estado, interruptor rotativo del tablero está defectuoso"
+    "longitude": -76.14841620237989
   },
   {
     "tag": "2115-CR-003-CP03",
     "loc": "Chancadora de pebbles 3, CP03",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.667433607905004,
-    "longitude": -76.14846052821902,
-    "photo": "photos/2115-CR-003-CP03.jpg",
-    "default_resp": "TITO callupe.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, cambio de absorbedor de humedad"
+    "longitude": -76.14846052821902
   },
   {
     "tag": "2115-CR-003-CP04",
     "loc": "Chancadora de pebbles 3, CP04",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.667455542306863,
-    "longitude": -76.14851710673845,
-    "photo": "photos/2115-CR-003-CP04.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardiaww A - Mantenimiento Eléctrico",
-    "default_obs": "Se encontro un monitor de velocidad estacional sin conexion, el controlador muestra errores de Network Point, los modulos 1734IA4 muestran errores de Network, Maneta rotativa suelta., Limpieza general"
+    "longitude": -76.14851710673845
   },
   {
     "tag": "2115-CR-003-CP05",
     "loc": "Chancadora de pebbles 3, CP05",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.667464841006298,
-    "longitude": -76.14845811153693,
-    "photo": "photos/2115-CR-003-CP05.jpg",
-    "default_resp": "Ronaldiño Landeo",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza superficial, Polvo excesivo, No se logró abrir el tablero debido a que se tiene que desactivarlo antes de intervenir."
+    "longitude": -76.14845811153693
   },
   {
     "tag": "2210-CP-010",
     "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669370427866054,
-    "longitude": -76.1456449762493,
-    "photo": "photos/2210-CP-010.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general (Exceso de polvo), Cambio de filtro, Cables de ethernet desconectados, El controlador A tiene el led F encendido en rojo, Corrosion."
+    "longitude": -76.1456449762493
   },
   {
     "tag": "2210-CP-011",
     "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669375207227255,
-    "longitude": -76.14560277375318,
-    "photo": "photos/2210-CP-011.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general (exceso de polvo), cambio de filtros y ventilador con ajustes rotos, cables de ethernet desconectados, el controlador B tiene la led \"F\" encendida en rojo, luminaria no enciende."
+    "longitude": -76.14560277375318
   },
   {
     "tag": "2210-CP-701",
     "loc": "Sala Eléctrica 2560-ER-021 - Área de Espesadores de Relaves",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669224901509825,
-    "longitude": -76.14277881604056,
-    "photo": "photos/2210-CP-701.jpg",
-    "default_resp": "Ronaldiño Landeo",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cableado ordenado, Cambio de deshumectador, No funciona el ventilador, Cambio de filtro"
+    "longitude": -76.14277881604056
   },
   {
     "tag": "2210-FCP-060",
     "loc": "ROUGHER 5, Entre las Celdas 32 - 33 fila 5",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668499971590812,
-    "longitude": -76.14603974907963,
-    "photo": "photos/2210-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14603974907963
   },
   {
     "tag": "2210-FCP-061",
     "loc": "Tercer Nivel - Entre los Hidrociclones CY005 y CY006",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.667759180931991,
-    "longitude": -76.14758601319895,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": -76.14758601319895
   },
   {
     "tag": "2210-FCP-062",
     "loc": "ROUGHER 6, Entre FO 137 - FO 138 fila 6",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668743105766627,
-    "longitude": -76.14624810353536,
-    "photo": "photos/2210-FCP-062.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14624810353536
   },
   {
     "tag": "2210-FCP-063",
     "loc": "Sobre el Espesador",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66956640469206,
-    "longitude": -76.14483446601865,
-    "photo": "photos/2210-FCP-063.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.14483446601865
   },
   {
     "tag": "2210-FCP-067",
     "loc": "Entre las Celdas 35 - 36 fila 5",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668650957215988,
-    "longitude": -76.14578505294645,
-    "photo": "photos/2210-FCP-067.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14578505294645
   },
   {
     "tag": "2210-FCP-068",
     "loc": "ROUGHER 6, Entre FO 141 - FO 142 fila 6",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668961102533565,
-    "longitude": -76.14594903375367,
-    "photo": "",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14594903375367
   },
   {
     "tag": "2210-FCP-071",
     "loc": "Vertimill de cobre, CERCA DE LA PLANTA DE MOLIBDENO",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.67027707708297,
-    "longitude": -76.14465800421172,
-    "photo": "photos/2210-FCP-071.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general"
+    "longitude": -76.14465800421172
   },
   {
     "tag": "2210M079-CP01",
     "loc": "Blowers 111/112/113 entre linea 5 y 6 de flotacion",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": null,
-    "longitude": null,
-    "photo": "photos/2210M079-CP01.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": null
   },
   {
     "tag": "2210MO79-902",
     "loc": "2210",
     "type": "BOLT",
-    "color": "#06B6D4",
-    "icon": "bolt",
     "latitude": -11.669215604446212,
-    "longitude": -76.14323026653018,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": -76.14323026653018
   },
   {
     "tag": "2212-FCP-060",
     "loc": "Area 2212",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669388098232687,
-    "longitude": -76.14315451264416,
-    "photo": "photos/2212-FCP-060.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo, Cambio de deshumectante, Cableado ordenado"
+    "longitude": -76.14315451264416
   },
   {
     "tag": "2212-FCP-061",
     "loc": "Area 2212",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669368522978715,
-    "longitude": -76.14319365818842,
-    "photo": "photos/2212-FCP-061.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cambio de deshumectante, Polvo excesivo"
+    "longitude": -76.14319365818842
   },
   {
     "tag": "2212-FCP-062",
     "loc": "Area 2212",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669759824824327,
-    "longitude": -76.14277159518532,
-    "photo": "photos/2212-FCP-062.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14277159518532
   },
   {
     "tag": "2212TK008-CP01",
     "loc": "ESPESADOR DE CONCENTRADO 2212-TM-008",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.669350782738055,
-    "longitude": -76.1448492300879,
-    "photo": "photos/2212TK008-CP01.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.1448492300879
   },
   {
     "tag": "2213-FCP-060",
     "loc": "Area 2213",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669351259853126,
-    "longitude": -76.14314016501908,
-    "photo": "photos/2213-FCP-060.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo, Cambio de deshumectante"
+    "longitude": -76.14314016501908
   },
   {
     "tag": "2213-FCP-061",
     "loc": "Area 2213",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669804058034437,
-    "longitude": -76.1427153916463,
-    "photo": "photos/2213-FCP-061.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.1427153916463
   },
   {
     "tag": "2214-FCP-060",
     "loc": "Area 2214",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669177940996505,
-    "longitude": -76.14342958232189,
-    "photo": "photos/2214-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14342958232189
   },
   {
     "tag": "2214-FCP-061",
     "loc": "Area 2214",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669097993855367,
-    "longitude": -76.14349510059508,
-    "photo": "photos/2214-FCP-061.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Mansilla eléctrica desgastada cambio de endumesedor"
+    "longitude": -76.14349510059508
   },
   {
     "tag": "2214-FCP-062",
     "loc": "Area 2214",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669141660446162,
-    "longitude": -76.14345538295701,
-    "photo": "photos/2214-FCP-062.jpg",
-    "default_resp": "Huiza Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14345538295701
   },
   {
     "tag": "2214-FCP-063",
     "loc": "2214",
     "type": "BOLT",
-    "color": "#06B6D4",
-    "icon": "bolt",
     "latitude": -11.66918003145977,
-    "longitude": -76.14347711503068,
-    "photo": "photos/2214-FCP-063.jpg",
-    "default_resp": "Huiza.Y",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "falta masilla dieléctrica en cable a tierra"
+    "longitude": -76.14347711503068
   },
   {
     "tag": "2215-FCP-060",
     "loc": "Area 2215",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66881242326161,
-    "longitude": -76.145419121571,
-    "photo": "photos/2215-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general"
+    "longitude": -76.145419121571
   },
   {
     "tag": "2410-CP-701",
     "loc": "Sala Eléctrica 2560-ER-021 - Área de Espesadores de Relaves",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669262115156265,
-    "longitude": -76.14271903508713,
-    "photo": "photos/2410-CP-701.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cambio de filtro, Cableado ordenado, Cambio de deshumectante, No opera el ventilador"
+    "longitude": -76.14271903508713
   },
   {
     "tag": "2410-FCP-060",
     "loc": "Area 2410",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.670942710428385,
-    "longitude": -76.1434371589353,
-    "photo": "photos/2410-FCP-060.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general"
+    "longitude": -76.1434371589353
   },
   {
     "tag": "2410TM001",
     "loc": "2410",
     "type": "BOLT",
-    "color": "#06B6D4",
-    "icon": "bolt",
     "latitude": -11.670790395667764,
-    "longitude": -76.14348579596646,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": -76.14348579596646
   },
   {
     "tag": "2460-FL-004",
     "loc": "Filtro de concentrado",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.671800008296557,
-    "longitude": -76.14348844292815,
-    "photo": "photos/2460-FL-004.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor, Cables sueltos, Panel View dañado"
+    "longitude": -76.14348844292815
   },
   {
     "tag": "2460-FL-005",
     "loc": "Filtro de concentrado",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.671735081645222,
-    "longitude": -76.14358143813924,
-    "photo": "photos/2460-FL-005.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Falta de planos"
+    "longitude": -76.14358143813924
   },
   {
     "tag": "2560-CP-010",
     "loc": "Sala Eléctrica 2210-ER-019 - Área de Flotación",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669353633441025,
-    "longitude": -76.14561912556306,
-    "photo": "photos/2560-CP-010.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, cambionde filtros y ventilador con ajustes rotos, falta fe canaletas, cables de ethernet desconectados, instalacion de anti humedecedores."
+    "longitude": -76.14561912556306
   },
   {
     "tag": "2560-FCP-060",
     "loc": "Sobre el espesador 006",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668839417745719,
-    "longitude": -76.14418353748451,
-    "photo": "photos/2560-FCP-060.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.14418353748451
   },
   {
     "tag": "2560-FCP-061",
     "loc": "Entre el espesador 006 y 007 a nivel de piso",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.66897413632234,
-    "longitude": -76.14424142123636,
-    "photo": "photos/2560-FCP-061.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.14424142123636
   },
   {
     "tag": "2560-FCP-062",
     "loc": "Entre el espesador 006 y 007 a nivel de piso",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668974004994235,
-    "longitude": -76.14427996098392,
-    "photo": "photos/2560-FCP-062.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.14427996098392
   },
   {
     "tag": "2560-FCP-063",
     "loc": "Entre el espesador 006 y 007 a nivel de piso",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": null,
-    "longitude": null,
-    "photo": "photos/2560-FCP-063.jpg",
-    "default_resp": "TITO Callupe",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": null
   },
   {
     "tag": "2560-FCP-064",
     "loc": "Entre el espesador 006 y 007 a nivel de piso",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668933431476152,
-    "longitude": -76.1442243918646,
-    "photo": "photos/2560-FCP-064.jpg",
-    "default_resp": "CALLUPE Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Se cambió anti humedecedor"
+    "longitude": -76.1442243918646
   },
   {
     "tag": "2561-TK-006",
     "loc": "Espesador de relaves 6",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.668931709184697,
-    "longitude": -76.14392988326871,
-    "photo": "photos/2561-TK-006.jpg",
-    "default_resp": "Callupe Tito",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, HMI apagado"
+    "longitude": -76.14392988326871
   },
   {
     "tag": "2561-TK-007",
     "loc": "Espesador de relaves 7",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.669340166816413,
-    "longitude": -76.1441845296718,
-    "photo": "photos/2561-TK-007.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cables sueltos, Se cambió anti humedecedor"
+    "longitude": -76.1441845296718
   },
   {
     "tag": "2562-PP-451",
     "loc": "Bomba Geho 451",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.668362667264125,
-    "longitude": -76.14380937447389,
-    "photo": "photos/2562-PP-451.jpg",
-    "default_resp": "Ronaldiño Landeo",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cambio de deshumectador, Polvo excesivo"
+    "longitude": -76.14380937447389
   },
   {
     "tag": "2562-PP-452",
     "loc": "Bomba Geho 452",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.668481333195631,
-    "longitude": -76.14363643223618,
-    "photo": "photos/2562-PP-452.jpg",
-    "default_resp": "Ronaldiño Landeo",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo, Cableado ordenado, Planos en mal estado, Cambio de deshumectador"
+    "longitude": -76.14363643223618
   },
   {
     "tag": "2562-PP-453",
     "loc": "Bomba Geho 453",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.668366018522255,
-    "longitude": -76.1435682272693,
-    "photo": "photos/2562-PP-453.jpg",
-    "default_resp": "Ronaldiño",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Cambio de deshumectante"
+    "longitude": -76.1435682272693
   },
   {
     "tag": "2562-PP-454",
     "loc": "Bomba Geho 454",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.668217672264694,
-    "longitude": -76.14365315363317,
-    "photo": "photos/2562-PP-454.jpg",
-    "default_resp": "Ronaldiño Landeo",
-    "default_crew": "Guardia B - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, Polvo excesivo, cambio de deshumectante, planos en mal estado, borneras sobrecargadas de cables."
+    "longitude": -76.14365315363317
   },
   {
     "tag": "2610-CP-010",
     "loc": "Sala Eléctrica 260-ER-030 (Existente)",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669629503839015,
-    "longitude": -76.14630630527147,
-    "photo": "photos/2610-CP-010.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, carcasa exterior del tablero desajustado, ventilador no funciona, falta actualizar planos."
+    "longitude": -76.14630630527147
   },
   {
     "tag": "2610-CP-101",
     "loc": "CMC",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": -11.669762649103603,
-    "longitude": -76.14594226205169,
-    "photo": "photos/2610-CP-101.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general,"
+    "longitude": -76.14594226205169
   },
   {
     "tag": "2610-FCP-060",
     "loc": "FLOCULANTE, Tras del Floculante 260-TK-048",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.669111372733397,
-    "longitude": -76.14602794814813,
-    "photo": "photos/2610-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14602794814813
   },
   {
     "tag": "2615-CP-010",
     "loc": "Sala Eléctrica 2615-ER-020 - Área de Planta de Lechada de Cal",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.671495280777963,
-    "longitude": -76.14559618381811,
-    "photo": "photos/2615-CP-010.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Ventilador no funciona, Controlador B tiene el led de color rojo encendido (F), de necesita actualizar planos, Se encontro cables de bajo calibre, Limpieza general."
+    "longitude": -76.14559618381811
   },
   {
     "tag": "2615-FCP-060",
     "loc": "PREP. Y TRANS. DE CAL",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.671886149634489,
-    "longitude": -76.1449570354701,
-    "photo": "photos/2615-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Cambio de entumesedor Mal estado de masia dieléctrica"
+    "longitude": -76.1449570354701
   },
   {
     "tag": "2615-FCP-062",
     "loc": "DISTRIBUCIÓN DE CAL",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.668247574179496,
-    "longitude": -76.14773345377867,
-    "photo": "photos/2615-FCP-062.jpg",
-    "default_resp": "Joel Limache",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, cambio de Humedecedor"
+    "longitude": -76.14773345377867
   },
   {
     "tag": "2615-LM-001",
     "loc": "Reduccion de Cal",
     "type": "PLC HMI",
-    "color": "#EF4444",
-    "icon": null,
     "latitude": -11.671885067997687,
-    "longitude": -76.1447256023527,
-    "photo": "photos/2615-LM-001.jpg",
-    "default_resp": "Steven S.",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, sin planos, mantenimiento de cubierta exterior, cambio de anti humedecedor."
+    "longitude": -76.1447256023527
   },
   {
     "tag": "2615LM01",
     "loc": "Reduccion de Cal (Alias)",
     "type": "PLC HMI",
-    "color": null,
-    "icon": null,
     "latitude": null,
-    "longitude": null,
-    "photo": "",
-    "default_resp": "",
-    "default_crew": "",
-    "default_obs": ""
+    "longitude": null
   },
   {
     "tag": "4011-FCP-060",
     "loc": "ALIMENTACIÓN DE CAL",
     "type": "PAS SCADA",
-    "color": null,
-    "icon": null,
     "latitude": -11.671724373182531,
-    "longitude": -76.14522758573587,
-    "photo": "photos/4011-FCP-060.jpg",
-    "default_resp": "Soriano",
-    "default_crew": "Guardia A - Mantenimiento Eléctrico",
-    "default_obs": "Limpieza general, operativo."
+    "longitude": -76.14522758573587
   }
 ];
