@@ -375,11 +375,12 @@ if (window.lucide) lucide.createIcons();
 
 // ==========================================
 // SECCIÓN FASE 2: LISTA SIMPLE DE RETORQUEO
-// CON ASIGNACIÓN DE GRUPOS Y SINCRONIZACIÓN EN NUBE
+// CON ASIGNACIÓN DE GRUPOS Y SINCRONIZACIÓN EN NUBE (FIREBASE)
 // ==========================================
 
 let currentView = 'map';
-const F2_STORAGE = 'retorqueo_fase2_checklist_v1';
+const F2_STORAGE = 'retorqueo_fase2_checklist_v2';
+const DEFAULT_FIREBASE_URL = 'https://swdw-e1a47-default-rtdb.firebaseio.com';
 const F2_FIREBASE_KEY = 'retorqueo_firebase_url_v1';
 
 let f2Filter = 'ALL'; // ALL | PEND | DONE
@@ -388,49 +389,27 @@ let f2Search = '';
 let firebaseDbRef = null;
 let isFirebaseOnline = false;
 
-// Estado inicial precargado con los 25 tableros asignados a los 3 grupos
-const INITIAL_PRESET_CHECKS = {
-  // Grupo 1: Boris Soriano (10)
-  "2210MO79-902": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2212-FCP-060": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2212-FCP-061": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2212-FCP-062": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2213-FCP-060": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2213-FCP-061": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2214-FCP-060": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2214-FCP-061": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2214-FCP-062": { done: true, tech: "Boris Soriano", date: "30/10" },
-  "2214-FCP-063": { done: true, tech: "Boris Soriano", date: "30/10" },
-  // Grupo 2: Tito Callupe (9)
-  "2210-FCP-063": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2212TK008-CP01": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2560-FCP-060": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2560-FCP-061": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2560-FCP-062": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2560-FCP-063": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2560-FCP-064": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2561-TK-006": { done: true, tech: "Tito Callupe", date: "30/10" },
-  "2561-TK-007": { done: true, tech: "Tito Callupe", date: "30/10" },
-  // Grupo 3: Ronaldiño Landeo (6)
-  "2210-CP-701": { done: true, tech: "Ronaldiño Landeo", date: "30/10" },
-  "2410-CP-701": { done: true, tech: "Ronaldiño Landeo", date: "30/10" },
-  "2562-PP-451": { done: true, tech: "Ronaldiño Landeo", date: "30/10" },
-  "2562-PP-452": { done: true, tech: "Ronaldiño Landeo", date: "30/10" },
-  "2562-PP-453": { done: true, tech: "Ronaldiño Landeo", date: "30/10" },
-  "2562-PP-454": { done: true, tech: "Ronaldiño Landeo", date: "30/10" }
-};
-
 function getF2State() {
   try {
     const raw = localStorage.getItem(F2_STORAGE);
     if (!raw) {
-      // Inicializar con la tanda de 25 tableros completados hoy
-      localStorage.setItem(F2_STORAGE, JSON.stringify(INITIAL_PRESET_CHECKS));
-      return { ...INITIAL_PRESET_CHECKS };
+      // Todo en blanco por defecto (0 tableros hechos)
+      const emptyState = {};
+      const allPanels = getFase2Data();
+      allPanels.forEach(p => {
+        emptyState[p.tag] = {
+          done: false,
+          tech: p.assigned_to || '',
+          date: '',
+          updated_at: 0
+        };
+      });
+      localStorage.setItem(F2_STORAGE, JSON.stringify(emptyState));
+      return emptyState;
     }
     return JSON.parse(raw);
   } catch (e) {
-    return { ...INITIAL_PRESET_CHECKS };
+    return {};
   }
 }
 
@@ -623,14 +602,16 @@ window.onToggleCheck = function(tag, isChecked) {
     st[tag] = { tech: (p && p.assigned_to) ? p.assigned_to : '' };
   }
   st[tag].done = isChecked;
-  if (isChecked && !st[tag].date) {
+  if (isChecked) {
     const d = new Date();
     st[tag].date = String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0');
+  } else {
+    st[tag].date = '';
   }
   saveF2State(st);
   renderF2List();
 
-  // Sincronizar en tiempo real si Firebase está conectado
+  // Sincronizar al instante con Firebase
   if (firebaseDbRef) {
     firebaseDbRef.child(tag).update({
       done: isChecked,
@@ -747,13 +728,13 @@ window.shareFase2WhatsApp = function() {
   msg += '📊 *Avance General: ' + done + ' / ' + total + ' (' + percent + '%)*\n\n';
 
   msg += '👥 *ESTADO POR GRUPOS:*\n';
-  msg += '• 👤 *Boris Soriano:* ' + borisDone + ' / ' + borisTot + (borisDone === borisTot ? ' ✅ (100%)' : ' ⏳') + '\n';
-  msg += '• 👤 *Tito Callupe:* ' + titoDone + ' / ' + titoTot + (titoDone === titoTot ? ' ✅ (100%)' : ' ⏳') + '\n';
-  msg += '• 👤 *Ronaldiño Landeo:* ' + ronaldinoDone + ' / ' + ronaldinoTot + (ronaldinoDone === ronaldinoTot ? ' ✅ (100%)' : ' ⏳') + '\n';
-  msg += '• ⏳ *Sin Asignar:* ' + (done - borisDone - titoDone - ronaldinoDone) + ' / 45\n\n';
+  msg += '• 👤 *Boris Soriano:* ' + borisDone + ' / ' + borisTot + (borisDone === borisTot && borisTot > 0 ? ' ✅' : '') + '\n';
+  msg += '• 👤 *Tito Callupe:* ' + titoDone + ' / ' + titoTot + (titoDone === titoTot && titoTot > 0 ? ' ✅' : '') + '\n';
+  msg += '• 👤 *Ronaldiño Landeo:* ' + ronaldinoDone + ' / ' + ronaldinoTot + (ronaldinoDone === ronaldinoTot && ronaldinoTot > 0 ? ' ✅' : '') + '\n';
+  msg += '• ⏳ *Sin Asignar:* ' + (done - borisDone - titoDone - ronaldinoDone) + ' / 45\n';
 
   if (f2GroupFilter !== 'ALL') {
-    msg += '🔍 *Filtrado por:* ' + f2GroupFilter + '\n';
+    msg += '\n🔍 *Filtrado actual:* ' + f2GroupFilter + '\n';
   }
 
   const waUrl = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(msg);
@@ -843,9 +824,22 @@ window.importFase2JSON = function() {
 };
 
 window.resetFase2Data = function() {
-  if (confirm('¿Deseas reiniciar todos los checks del Retorqueo Fase 2?')) {
-    localStorage.removeItem(F2_STORAGE);
-    showToast('Lista de retorqueo reiniciada.');
+  if (confirm('¿Deseas reiniciar TODOS los checks a cero (0% completado)? Esto actualizará también la nube en vivo.')) {
+    const emptyState = {};
+    const allPanels = getFase2Data();
+    allPanels.forEach(p => {
+      emptyState[p.tag] = {
+        done: false,
+        tech: p.assigned_to || '',
+        date: '',
+        updated_at: Date.now()
+      };
+    });
+    saveF2State(emptyState);
+    if (firebaseDbRef) {
+      firebaseDbRef.set(emptyState).catch(e => console.warn(e));
+    }
+    showToast('Lista restablecida a 0% en todos los celulares.');
     renderF2List();
   }
 };
@@ -857,9 +851,9 @@ window.resetFase2Data = function() {
 window.openCloudModal = function() {
   const modal = document.getElementById('cloud-modal');
   const input = document.getElementById('firebase-url-input');
-  const savedUrl = localStorage.getItem(F2_FIREBASE_KEY) || '';
+  const savedUrl = localStorage.getItem(F2_FIREBASE_KEY) || DEFAULT_FIREBASE_URL;
   if (input) input.value = savedUrl;
-  updateCloudUI(isFirebaseOnline, savedUrl ? 'Conectado a la base de datos' : 'Modo Local');
+  updateCloudUI(isFirebaseOnline, isFirebaseOnline ? 'Conectado a Firebase en tiempo real' : 'Conectando...');
   if (modal) modal.style.display = 'flex';
 };
 
@@ -880,7 +874,7 @@ function updateCloudUI(online, msg) {
     if (cloudBtn) { cloudBtn.classList.add('online'); }
     if (statusDesc) {
       statusDesc.style.color = '#10b981';
-      statusDesc.innerHTML = '🟢 <b>Conectado en Tiempo Real</b>' + (msg ? ': ' + msg : '');
+      statusDesc.innerHTML = '🟢 <b>Conectado a la Nube (Firebase)</b><br><span style="font-size:0.7rem;color:#94a3b8;">' + (msg || 'Sincronizando cambios en vivo con todos los celulares') + '</span>';
     }
   } else {
     if (syncDot) { syncDot.className = 'sync-dot dot-local'; }
@@ -888,7 +882,7 @@ function updateCloudUI(online, msg) {
     if (cloudBtn) { cloudBtn.classList.remove('online'); }
     if (statusDesc) {
       statusDesc.style.color = '#facc15';
-      statusDesc.innerHTML = '🟡 <b>Modo Local</b>' + (msg ? ' (' + msg + ')' : ' (Sin sincronización en vivo)');
+      statusDesc.innerHTML = '🟡 <b>Modo Local</b>' + (msg ? ' (' + msg + ')' : ' (Conectando a Firebase...)');
     }
   }
 }
@@ -898,44 +892,54 @@ window.saveFirebaseConfig = function() {
   const url = (input ? input.value : '').trim().replace(/\/+$/, '');
 
   if (!url || !url.startsWith('https://')) {
-    alert('Ingresa una URL válida de Firebase Realtime Database (ej: https://tu-proyecto-default-rtdb.firebaseio.com)');
+    alert('Ingresa una URL válida de Firebase Realtime Database');
     return;
   }
 
   localStorage.setItem(F2_FIREBASE_KEY, url);
   initFirebaseSync();
   closeCloudModal();
-  showToast('Conectando a la nube...');
+  showToast('Conectando a Firebase...');
 };
 
 window.disconnectFirebase = function() {
-  localStorage.removeItem(F2_FIREBASE_KEY);
+  localStorage.setItem(F2_FIREBASE_KEY, 'DISABLED');
   if (firebaseDbRef) {
     try { firebaseDbRef.off(); } catch (e) {}
     firebaseDbRef = null;
   }
   isFirebaseOnline = false;
-  updateCloudUI(false, 'Desconectado');
+  updateCloudUI(false, 'Desconectado manualmente');
   showToast('Modo local activado.');
 };
 
 window.pushLocalToCloud = function() {
   if (!firebaseDbRef) {
-    alert('Primero conecta tu base de datos de Firebase.');
-    return;
+    showToast('Conectando a la nube...');
+    initFirebaseSync();
   }
   const st = getF2State();
-  firebaseDbRef.set(st).then(() => {
-    showToast('⬆️ Datos locales subidos a la nube');
-  }).catch(e => {
-    alert('Error al subir datos a Firebase: ' + e.message);
-  });
+  if (firebaseDbRef) {
+    firebaseDbRef.set(st).then(() => {
+      showToast('⬆️ Datos sincronizados con la nube');
+    }).catch(e => {
+      alert('Error al subir datos a Firebase: ' + e.message);
+    });
+  }
 };
 
 function initFirebaseSync() {
-  const url = localStorage.getItem(F2_FIREBASE_KEY);
-  if (!url || typeof firebase === 'undefined') {
-    updateCloudUI(false);
+  let url = localStorage.getItem(F2_FIREBASE_KEY);
+  if (url === 'DISABLED') {
+    updateCloudUI(false, 'Desconectado');
+    return;
+  }
+  if (!url) {
+    url = DEFAULT_FIREBASE_URL;
+  }
+
+  if (typeof firebase === 'undefined') {
+    updateCloudUI(false, 'Cargando librería...');
     return;
   }
 
@@ -946,20 +950,15 @@ function initFirebaseSync() {
     const db = firebase.database();
     firebaseDbRef = db.ref('retorqueo_fase2');
 
-    // Escuchar cambios en vivo de todos los celulares
+    // Escuchar cambios en vivo de todos los celulares en tiempo real
     firebaseDbRef.on('value', (snapshot) => {
       const cloudData = snapshot.val();
       isFirebaseOnline = true;
       updateCloudUI(true);
 
       if (cloudData && typeof cloudData === 'object') {
-        const local = getF2State();
-        const merged = { ...local, ...cloudData };
-        saveF2State(merged);
+        saveF2State(cloudData);
         renderF2List();
-      } else {
-        // La nube está vacía: subir los 25 iniciales
-        pushLocalToCloud();
       }
     }, (error) => {
       console.warn('Firebase sync error:', error);
