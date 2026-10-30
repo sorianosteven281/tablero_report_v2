@@ -671,11 +671,17 @@
             0 / 70 Listos (0%)
           </div>
           <div class="f2-actions">
-            <button class="btn-f2-sm btn-f2-wa" onclick="shareFase2WhatsApp()">
+            <button class="btn-f2-sm btn-f2-wa" onclick="shareFase2WhatsApp()" title="Enviar resumen a WhatsApp">
               <i data-lucide="share-2" size="13"></i> WhatsApp
             </button>
-            <button class="btn-f2-sm" onclick="exportFase2CSV()">
+            <button class="btn-f2-sm" onclick="exportFase2CSV()" title="Descargar tabla en Excel / CSV">
               <i data-lucide="download" size="13"></i> Excel
+            </button>
+            <button class="btn-f2-sm" onclick="backupFase2JSON()" title="Descargar copia de seguridad en JSON">
+              <i data-lucide="save" size="13"></i> Respaldar
+            </button>
+            <button class="btn-f2-sm" onclick="importFase2JSON()" title="Cargar copia de seguridad">
+              <i data-lucide="upload" size="13"></i> Cargar
             </button>
             <button class="btn-f2-sm" onclick="resetFase2Data()" title="Limpiar todos los checks">
               <i data-lucide="rotate-ccw" size="13"></i> Reiniciar

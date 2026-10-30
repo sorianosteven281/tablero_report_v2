@@ -650,6 +650,47 @@ window.exportFase2CSV = function() {
   showToast('📥 Reporte CSV descargado correctamente');
 };
 
+window.backupFase2JSON = function() {
+  const state = getF2State();
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'backup_retorqueo_' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('💾 Respaldo JSON descargado');
+};
+
+window.importFase2JSON = function() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = JSON.parse(evt.target.result);
+        if (typeof data === 'object' && data !== null) {
+          saveF2State(data);
+          renderF2List();
+          showToast('✅ Respaldo cargado correctamente');
+        } else {
+          alert('El archivo no contiene un formato válido.');
+        }
+      } catch (err) {
+        alert('Error al leer el archivo JSON.');
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+};
+
 window.resetFase2Data = function() {
   if (confirm('¿Deseas reiniciar todos los checks y técnicos del Retorqueo Fase 2?')) {
     localStorage.removeItem(F2_STORAGE);
