@@ -577,6 +577,100 @@
     }
     .f2-btn-map:hover { background: rgba(56, 189, 248, 0.15); }
 
+    .f2-groups-bar {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .f2-groups-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .f2-group-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .f2-group-pills::-webkit-scrollbar { display: none; }
+    .f2-grp-pill {
+      white-space: nowrap;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+    .f2-grp-pill:hover { color: #fff; border-color: #64748b; }
+    .f2-grp-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .grp-badge {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+    }
+    .f2-grp-pill.active .grp-badge {
+      background: var(--accent);
+      color: #0b1120;
+      font-weight: 800;
+    }
+
+    .btn-f2-cloud {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: #94a3b8;
+    }
+    .btn-f2-cloud.online {
+      border-color: #10b981;
+      color: #10b981;
+    }
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-local { background: #f59e0b; }
+    .dot-online { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
+    .cloud-modal-card {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      color: #fff;
+    }
+    .cloud-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
     @media (max-width: 600px) {
       .f2-loc { max-width: 140px; }
       .f2-input-tech { width: 105px; font-size: 0.72rem; }
@@ -671,6 +765,10 @@
             0 / 70 Listos (0%)
           </div>
           <div class="f2-actions">
+            <button class="btn-f2-sm btn-f2-cloud" id="btn-cloud-sync" onclick="openCloudModal()" title="Sincronización en tiempo real por nube">
+              <span class="sync-dot dot-local" id="sync-dot"></span>
+              <span id="sync-label">Nube</span>
+            </button>
             <button class="btn-f2-sm btn-f2-wa" onclick="shareFase2WhatsApp()" title="Enviar resumen a WhatsApp">
               <i data-lucide="share-2" size="13"></i> WhatsApp
             </button>
@@ -695,9 +793,33 @@
 
         <div class="f2-filter-row">
           <input type="text" id="f2-search" class="f2-search" placeholder="Buscar TAG, área o técnico..." oninput="onF2Search(this.value)" />
-          <button class="f2-pill active" id="pill-all" onclick="setF2Filter('ALL')">Todos (70)</button>
+          <button class="f2-pill active" id="pill-all" onclick="setF2Filter('ALL')">Todos (<span id="cnt-total-pill">70</span>)</button>
           <button class="f2-pill" id="pill-pend" onclick="setF2Filter('PEND')">⚪ Pendientes (<span id="cnt-pend">70</span>)</button>
           <button class="f2-pill" id="pill-done" onclick="setF2Filter('DONE')">✅ Listos (<span id="cnt-done">0</span>)</button>
+        </div>
+
+        <div class="f2-groups-bar">
+          <div class="f2-groups-title">
+            <span>👥 Grupos de Trabajo Asignados:</span>
+            <span id="f2-group-active-desc" style="font-weight:700; color:var(--accent);">Todos los grupos</span>
+          </div>
+          <div class="f2-group-pills">
+            <button class="f2-grp-pill active" id="grp-all" onclick="setF2GroupFilter('ALL')">
+              👥 Todos <span class="grp-badge" id="badge-grp-all">0/70</span>
+            </button>
+            <button class="f2-grp-pill" id="grp-boris" onclick="setF2GroupFilter('Boris Soriano')">
+              👤 Boris S. <span class="grp-badge" id="badge-grp-boris">0/10</span>
+            </button>
+            <button class="f2-grp-pill" id="grp-tito" onclick="setF2GroupFilter('Tito Callupe')">
+              👤 Tito C. <span class="grp-badge" id="badge-grp-tito">0/9</span>
+            </button>
+            <button class="f2-grp-pill" id="grp-ronaldino" onclick="setF2GroupFilter('Ronaldiño Landeo')">
+              👤 Ronaldiño L. <span class="grp-badge" id="badge-grp-ronaldino">0/6</span>
+            </button>
+            <button class="f2-grp-pill" id="grp-unassigned" onclick="setF2GroupFilter('UNASSIGNED')">
+              ⏳ Sin Asignar <span class="grp-badge" id="badge-grp-unassigned">0/45</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -726,6 +848,48 @@
     <div class="photo-modal-caption" id="photo-modal-caption"></div>
   </div>
 
+  <!-- Modal de Configuración de Sincronización en Tiempo Real -->
+  <div class="photo-modal-overlay" id="cloud-modal" onclick="if(event.target === this) closeCloudModal()">
+    <div class="cloud-modal-card">
+      <div class="cloud-modal-header">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:0.95rem;color:#fff;">
+          <i data-lucide="cloud" color="#38bdf8" size="18"></i>
+          Sincronización en Tiempo Real
+        </div>
+        <button style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.1rem;" onclick="closeCloudModal()">✕</button>
+      </div>
+
+      <div style="font-size:0.78rem;color:#cbd5e1;line-height:1.4;margin:12px 0;">
+        Conecta una base de datos en tiempo real (Firebase) para que cuando <b>Boris</b>, <b>Tito</b> o <b>Ronaldiño</b> marquen un tablero en su celular, el supervisor lo vea reflejado al instante.
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-size:0.75rem;font-weight:700;color:#94a3b8;display:block;margin-bottom:4px;">URL de Firebase Realtime Database:</label>
+        <input type="text" id="firebase-url-input" class="f2-search" style="width:100%;box-sizing:border-box;" placeholder="https://tu-proyecto-default-rtdb.firebaseio.com" />
+      </div>
+
+      <div id="cloud-status-desc" style="font-size:0.75rem;font-weight:700;margin-bottom:14px;color:#facc15;">
+        ⚪ Estado: Modo Local (Sin sincronización en vivo)
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+        <button class="btn-f2-sm btn-f2-wa" onclick="saveFirebaseConfig()" style="flex:1;">
+          <i data-lucide="link" size="14"></i> Conectar Nube
+        </button>
+        <button class="btn-f2-sm" onclick="disconnectFirebase()" style="background:#ef4444;border-color:#ef4444;color:#fff;">
+          Desconectar
+        </button>
+      </div>
+
+      <div style="padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;">
+        <button class="btn-f2-sm" onclick="pushLocalToCloud()" title="Subir mis checks actuales a la nube">
+          ⬆️ Subir mis datos a la nube
+        </button>
+        <button class="btn-f2-sm" onclick="closeCloudModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast-msg">Coordenadas copiadas</div>
 
   <div id="map"></div>
@@ -734,6 +898,10 @@
     <span>UM Chinalco Toromocho — Sistema de Mantenimiento Eléctrico</span>
     <span>Impreso para orientación técnica en campo</span>
   </div>
+
+  <!-- Firebase SDK para Sincronización en Tiempo Real -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <!-- Carga de datos y lógica de mapa -->
   <script src="data.js"></script>
