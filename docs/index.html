@@ -312,6 +312,369 @@
         padding: 4px 6px !important;
       }
     }
+
+    /* View Switcher Tabs in Top Header */
+    .view-switch-tabs {
+      display: flex;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 2px;
+      gap: 3px;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #fff; }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #0b1120;
+    }
+    .badge-fase2 {
+      background: rgba(15, 23, 42, 0.4);
+      color: inherit;
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+
+    /* Fase 2 Overlay View */
+    #fase2-view {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-dark);
+      z-index: 990;
+      overflow-y: auto;
+      padding: 14px 16px 40px 16px;
+      display: none;
+    }
+    #fase2-view.active {
+      display: block;
+    }
+
+    /* Dashboard / Metrics Card */
+    .fase2-dashboard {
+      max-width: 1050px;
+      margin: 0 auto 14px auto;
+      background: var(--panel-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .fase2-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .fase2-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fase2-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-f2-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #1e293b;
+      color: #fff;
+      text-decoration: none;
+    }
+    .btn-f2-action:hover {
+      background: #334155;
+      transform: translateY(-1px);
+    }
+    .btn-f2-wa {
+      background: #22c55e;
+      color: #052e16;
+      border: none;
+    }
+    .btn-f2-wa:hover { background: #4ade80; }
+    .btn-f2-export {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-f2-export:hover {
+      background: var(--accent);
+      color: #0b1120;
+    }
+
+    /* Counters Grid */
+    .fase2-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .metric-box {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+    .metric-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .metric-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .metric-box.done .metric-num { color: #10b981; }
+    .metric-box.prog .metric-num { color: #f59e0b; }
+    .metric-box.pend .metric-num { color: #94a3b8; }
+    .metric-box.total .metric-num { color: #38bdf8; }
+
+    /* Progress Bar */
+    .f2-progress-wrap {
+      width: 100%;
+      background: #0f172a;
+      border-radius: 10px;
+      height: 10px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      position: relative;
+    }
+    .f2-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7, #10b981);
+      width: 0%;
+      transition: width 0.4s ease-out;
+    }
+    .f2-progress-text {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Controls Bar inside Fase 2 */
+    .fase2-controls-card {
+      max-width: 1050px;
+      margin: 0 auto 14px auto;
+      background: var(--panel-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .f2-filter-group {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .f2-filter-group::-webkit-scrollbar { display: none; }
+
+    /* Cards Container */
+    .fase2-list-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .f2-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+    .f2-card:hover { border-color: #475569; }
+    .f2-card.status-retorqueado { border-left: 4px solid #10b981; }
+    .f2-card.status-proceso { border-left: 4px solid #f59e0b; }
+    .f2-card.status-pendiente { border-left: 4px solid #64748b; }
+
+    .f2-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .f2-tag-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .f2-tag {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+    .f2-badge-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .f2-loc {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    /* Status Selector */
+    .f2-status-select {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .f2-status-select.opt-pendiente {
+      background: #1e293b;
+      color: #94a3b8;
+      border-color: #475569;
+    }
+    .f2-status-select.opt-proceso {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      border-color: #f59e0b;
+    }
+    .f2-status-select.opt-retorqueado {
+      background: rgba(16, 185, 129, 0.25);
+      color: #10b981;
+      border-color: #10b981;
+    }
+
+    /* Card Body Layout */
+    .f2-card-body {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .f2-thumb-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #000;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .f2-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s;
+    }
+    .f2-thumb-wrap:hover .f2-thumb-img {
+      transform: scale(1.08);
+    }
+    .f2-form-grid {
+      flex: 1;
+      min-width: 260px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .f2-input-wrap label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .f2-input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 7px;
+      padding: 6px 10px;
+      color: #fff;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .f2-input:focus { border-color: var(--accent); }
+    .f2-card-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .btn-f2-locate {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-f2-locate:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+    }
+
   </style>
 </head>
 <body>
@@ -328,13 +691,23 @@
         <i data-lucide="map-pin" color="#38bdf8" size="20"></i>
         <div>Plano <span>Chinalco Toromocho</span></div>
       </div>
+
+      <div class="view-switch-tabs">
+        <button class="tab-btn active" id="tab-btn-map" onclick="switchView('map')">
+          <i data-lucide="map" size="14"></i> Mapa
+        </button>
+        <button class="tab-btn" id="tab-btn-fase2" onclick="switchView('fase2')">
+          <i data-lucide="wrench" size="14"></i> Fase 2: Retorqueo <span class="badge-fase2" id="fase2-header-badge">70</span>
+        </button>
+      </div>
+
       <div class="header-actions">
         <div class="stats-badge" id="stats-badge">
           <i data-lucide="check-circle-2" size="13"></i>
           <span>161 / 224 Ubicados</span>
         </div>
-        <button class="btn-action btn-print" onclick="printMapDirectly()" title="Imprimir plano satelital para ubicarse en campo">
-          <i data-lucide="printer" size="15"></i> Imprimir Plano
+        <button class="btn-action btn-print" id="btn-print-map" onclick="printMapDirectly()" title="Imprimir plano satelital para ubicarse en campo">
+          <i data-lucide="printer" size="14"></i> Imprimir
         </button>
         <a class="btn-action btn-apk" href="https://github.com/sorianosteven281/tablero_report_v2/releases/latest" target="_blank">
           <i data-lucide="smartphone" size="14"></i> APK
@@ -375,6 +748,107 @@
     <button class="layer-btn" data-layer="esri">Esri ArcGIS</button>
     <button class="layer-btn" data-layer="osm">OpenStreetMap</button>
   </div>
+
+
+  <!-- Vista Fase 2: Retorqueo de Tableros (Supervisor) -->
+  <div id="fase2-view">
+    <div class="fase2-dashboard">
+      <div class="fase2-title-row">
+        <div class="fase2-title">
+          <i data-lucide="wrench" color="#38bdf8" size="22"></i>
+          <div>Control de Retorqueo — <span>Fase 2 (4 Cifras)</span></div>
+        </div>
+        <div class="fase2-actions">
+          <button class="btn-f2-action btn-f2-wa" onclick="shareFase2WhatsApp()">
+            <i data-lucide="share-2" size="14"></i> Reporte WhatsApp
+          </button>
+          <button class="btn-f2-action btn-f2-export" onclick="exportFase2CSV()">
+            <i data-lucide="download" size="14"></i> Exportar CSV
+          </button>
+          <button class="btn-f2-action" onclick="resetFase2Data()" title="Restablecer o limpiar datos guardados">
+            <i data-lucide="rotate-ccw" size="14"></i> Limpiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Métricas del Supervisor -->
+      <div class="fase2-metrics-grid">
+        <div class="metric-box total">
+          <div class="metric-num" id="f2-metric-total">70</div>
+          <div class="metric-label">Total Fase 2</div>
+        </div>
+        <div class="metric-box done">
+          <div class="metric-num" id="f2-metric-done">0</div>
+          <div class="metric-label">✅ Retorqueados</div>
+        </div>
+        <div class="metric-box prog">
+          <div class="metric-num" id="f2-metric-prog">0</div>
+          <div class="metric-label">⏳ En Proceso</div>
+        </div>
+        <div class="metric-box pend">
+          <div class="metric-num" id="f2-metric-pend">70</div>
+          <div class="metric-label">⚪ Pendientes</div>
+        </div>
+      </div>
+
+      <!-- Barra de Progreso -->
+      <div class="f2-progress-wrap">
+        <div class="f2-progress-bar" id="f2-progress-bar"></div>
+      </div>
+      <div class="f2-progress-text">
+        <span id="f2-progress-percent">0% completado</span>
+        <span id="f2-progress-count">0 de 70 tableros</span>
+      </div>
+    </div>
+
+    <!-- Filtros y Búsqueda de Fase 2 -->
+    <div class="fase2-controls-card">
+      <div class="search-row">
+        <i data-lucide="search" size="16" color="#94a3b8"></i>
+        <input type="text" id="f2-search-input" placeholder="Buscar TAG, área, técnico o estado (ej. 2110, Steven, Molino)..." />
+        <button class="search-clear" id="f2-search-clear"><i data-lucide="x" size="14"></i></button>
+      </div>
+
+      <!-- Filtro por Estado -->
+      <div class="f2-filter-group" id="f2-status-chips">
+        <button class="chip active" data-f2-status="ALL">Todos (70)</button>
+        <button class="chip" data-f2-status="RETORQUEADO">✅ Retorqueados (<span id="chip-cnt-done">0</span>)</button>
+        <button class="chip" data-f2-status="PROCESO">⏳ En Proceso (<span id="chip-cnt-prog">0</span>)</button>
+        <button class="chip" data-f2-status="PENDIENTE">⚪ Pendientes (<span id="chip-cnt-pend">70</span>)</button>
+      </div>
+
+      <!-- Filtro por Zona -->
+      <div class="f2-filter-group" id="f2-zone-chips">
+        <button class="chip active" data-f2-zone="ALL">Todas las Áreas</button>
+        <button class="chip" data-f2-zone="2110">Molienda (2110/2115)</button>
+        <button class="chip" data-f2-zone="2210">Flotación (2210/2214/2215)</button>
+        <button class="chip" data-f2-zone="2212">Espesadores Conc. (2212/2213)</button>
+        <button class="chip" data-f2-zone="2410">Filtros (2410/2460)</button>
+        <button class="chip" data-f2-zone="2560">Relaves/GEHO (2560/2561/2562)</button>
+        <button class="chip" data-f2-zone="2610">Cal y Reactivos (2610/2615)</button>
+        <button class="chip" data-f2-zone="4011">Silos de Cal (4011)</button>
+        <button class="chip" data-f2-zone="2060">Chancado (2060)</button>
+      </div>
+    </div>
+
+    <!-- Lista de Tarjetas de Fase 2 -->
+    <div class="fase2-list-container" id="fase2-cards-container"></div>
+  </div>
+
+  <!-- Datalist para autocompletar nombres de técnicos comunes -->
+  <datalist id="fase2-techs">
+    <option value="Steven Soriano">
+    <option value="Boris Soriano">
+    <option value="Joel Limache">
+    <option value="Tito Callupe">
+    <option value="Dennis Lizana">
+    <option value="Javier Calderón">
+    <option value="Yoel Huiza">
+    <option value="Ronaldiño Landeo">
+    <option value="Bill Pacheco">
+    <option value="Renzo Ledezma">
+    <option value="Jose Riquez">
+  </datalist>
 
   <!-- Lightbox de Foto Ampliada -->
   <div class="photo-modal-overlay" id="photo-modal" onclick="closePhotoModal()">

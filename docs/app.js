@@ -369,3 +369,416 @@ if (ALL_PANELS.length === 0) {
 }
 
 if (window.lucide) lucide.createIcons();
+
+
+// ==========================================
+// SECCIÓN FASE 2: CONTROL DE RETORQUEO (SUPERVISOR)
+// ==========================================
+
+let currentView = 'map';
+const FASE2_STORAGE_KEY = 'toromocho_retorqueo_fase2_v1';
+let fase2StatusFilter = 'ALL';
+let fase2ZoneFilter = 'ALL';
+let fase2SearchQuery = '';
+
+window.switchView = function(viewName) {
+  currentView = viewName;
+  const tabMap = document.getElementById('tab-btn-map');
+  const tabF2 = document.getElementById('tab-btn-fase2');
+  const f2View = document.getElementById('fase2-view');
+  const controlsCard = document.querySelector('.controls-card');
+  const btnLoc = document.getElementById('btn-my-loc');
+  const layerSwitcher = document.querySelector('.layer-switcher');
+  const printBtn = document.getElementById('btn-print-map');
+
+  if (viewName === 'fase2') {
+    if (tabMap) tabMap.classList.remove('active');
+    if (tabF2) tabF2.classList.add('active');
+    if (f2View) f2View.classList.add('active');
+    if (controlsCard) controlsCard.style.display = 'none';
+    if (btnLoc) btnLoc.style.display = 'none';
+    if (layerSwitcher) layerSwitcher.style.display = 'none';
+    if (printBtn) printBtn.style.display = 'none';
+    renderFase2View();
+    if (window.location.hash !== '#fase2') {
+      window.history.replaceState(null, null, '#fase2');
+    }
+  } else {
+    if (tabMap) tabMap.classList.add('active');
+    if (tabF2) tabF2.classList.remove('active');
+    if (f2View) f2View.classList.remove('active');
+    if (controlsCard) controlsCard.style.display = 'flex';
+    if (btnLoc) btnLoc.style.display = 'flex';
+    if (layerSwitcher) layerSwitcher.style.display = 'flex';
+    if (printBtn) printBtn.style.display = 'inline-flex';
+    if (window.location.hash === '#fase2') {
+      window.history.replaceState(null, null, '#');
+    }
+    setTimeout(() => { if (window.map) map.invalidateSize(); }, 200);
+  }
+};
+
+function getFase2SavedState() {
+  try {
+    const saved = localStorage.getItem(FASE2_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveFase2State(state) {
+  try {
+    localStorage.setItem(FASE2_STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function getFase2Data() {
+  if (window.FASE2_DATA && Array.isArray(window.FASE2_DATA)) {
+    return window.FASE2_DATA;
+  }
+  // Fallback filtering 4 digits from ALL_PANELS
+  return (window.ALL_PANELS_DATA || []).filter(p => /^\d{4}(?!\d)/.test(p.tag || ''));
+}
+
+window.updateFase2Status = function(tag, newStatus) {
+  const state = getFase2SavedState();
+  if (!state[tag]) state[tag] = {};
+  state[tag].status = newStatus;
+
+  // Auto asignar fecha de hoy si se marca como retorqueado
+  if (newStatus === 'RETORQUEADO' && !state[tag].date) {
+    const now = new Date();
+    state[tag].date = now.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  saveFase2State(state);
+  updateFase2Metrics();
+  renderFase2Cards();
+  showToast(tag + ': ' + (newStatus === 'RETORQUEADO' ? '✅ Retorqueado' : newStatus === 'PROCESO' ? '⏳ En Proceso' : '⚪ Pendiente'));
+};
+
+window.updateFase2Field = function(tag, field, value) {
+  const state = getFase2SavedState();
+  if (!state[tag]) state[tag] = {};
+  state[tag][field] = value.trim();
+  saveFase2State(state);
+  updateFase2Metrics();
+};
+
+window.locateFase2Panel = function(tag) {
+  switchView('map');
+  setTimeout(() => {
+    selectPanel(tag);
+  }, 250);
+};
+
+function updateFase2Metrics() {
+  const list = getFase2Data();
+  const state = getFase2SavedState();
+  const total = list.length;
+  let done = 0;
+  let prog = 0;
+  let pend = 0;
+
+  list.forEach(p => {
+    const item = state[p.tag] || {};
+    const st = item.status || 'PENDIENTE';
+    if (st === 'RETORQUEADO') done++;
+    else if (st === 'PROCESO') prog++;
+    else pend++;
+  });
+
+  const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  const elTotal = document.getElementById('f2-metric-total');
+  const elDone = document.getElementById('f2-metric-done');
+  const elProg = document.getElementById('f2-metric-prog');
+  const elPend = document.getElementById('f2-metric-pend');
+  const elBar = document.getElementById('f2-progress-bar');
+  const elPct = document.getElementById('f2-progress-percent');
+  const elCnt = document.getElementById('f2-progress-count');
+  const headerBadge = document.getElementById('fase2-header-badge');
+
+  const chipDone = document.getElementById('chip-cnt-done');
+  const chipProg = document.getElementById('chip-cnt-prog');
+  const chipPend = document.getElementById('chip-cnt-pend');
+
+  if (elTotal) elTotal.innerText = total;
+  if (elDone) elDone.innerText = done;
+  if (elProg) elProg.innerText = prog;
+  if (elPend) elPend.innerText = pend;
+  if (elBar) elBar.style.width = percent + '%';
+  if (elPct) elPct.innerText = percent + '% completado';
+  if (elCnt) elCnt.innerText = done + ' de ' + total + ' tableros retorqueados';
+  if (headerBadge) headerBadge.innerText = done + '/' + total;
+
+  if (chipDone) chipDone.innerText = done;
+  if (chipProg) chipProg.innerText = prog;
+  if (chipPend) chipPend.innerText = pend;
+}
+
+function renderFase2Cards() {
+  const container = document.getElementById('fase2-cards-container');
+  if (!container) return;
+
+  const list = getFase2Data();
+  const state = getFase2SavedState();
+  const q = fase2SearchQuery.toLowerCase().replace(/[-_ ]/g, '');
+
+  let filtered = list.filter(p => {
+    const item = state[p.tag] || {};
+    const st = item.status || 'PENDIENTE';
+
+    if (fase2StatusFilter !== 'ALL' && st !== fase2StatusFilter) {
+      return false;
+    }
+
+    if (fase2ZoneFilter !== 'ALL') {
+      const tagUpper = (p.tag || '').toUpperCase();
+      if (!tagUpper.startsWith(fase2ZoneFilter)) {
+        return false;
+      }
+    }
+
+    if (q.length > 0) {
+      const tagClean = (p.tag || '').toLowerCase().replace(/[-_ ]/g, '');
+      const locClean = (p.loc || '').toLowerCase().replace(/[-_ ]/g, '');
+      const respClean = (item.resp || p.default_resp || '').toLowerCase().replace(/[-_ ]/g, '');
+      const obsClean = (item.obs || p.default_obs || '').toLowerCase().replace(/[-_ ]/g, '');
+      if (!tagClean.includes(q) && !locClean.includes(q) && !respClean.includes(q) && !obsClean.includes(q)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.9rem; background: var(--panel-bg); border-radius: 12px; border: 1px dashed var(--card-border);">
+        <i data-lucide="inbox" size="32" style="margin-bottom: 8px; opacity: 0.5;"></i><br>
+        No se encontraron tableros que coincidan con los filtros aplicados.
+      </div>`;
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(p => {
+    const tag = p.tag;
+    const item = state[tag] || {};
+    const st = item.status || 'PENDIENTE';
+    const resp = item.resp !== undefined ? item.resp : (p.default_resp || '');
+    const date = item.date !== undefined ? item.date : (p.default_crew || '');
+    const obs = item.obs !== undefined ? item.obs : (p.default_obs || '');
+
+    const color = resolveColor(p);
+    const iconChar = resolveIconChar(p);
+    const statusClass = st === 'RETORQUEADO' ? 'status-retorqueado' : st === 'PROCESO' ? 'status-proceso' : 'status-pendiente';
+    const optClass = st === 'RETORQUEADO' ? 'opt-retorqueado' : st === 'PROCESO' ? 'opt-proceso' : 'opt-pendiente';
+
+    let thumbHtml = '';
+    if (p.photo) {
+      thumbHtml = `
+        <div class="f2-thumb-wrap" onclick="openPhotoModal('${p.photo}', '${tag}')" title="Ver foto del tablero">
+          <img src="${p.photo}" class="f2-thumb-img" loading="lazy" />
+        </div>`;
+    } else {
+      thumbHtml = `
+        <div class="f2-thumb-wrap" style="display:flex;align-items:center;justify-content:center;color:#64748b;font-size:11px;background:#0f172a;" title="Sin foto disponible">
+          <span>Sin foto</span>
+        </div>`;
+    }
+
+    const safeResp = resp.replace(/"/g, '&quot;');
+    const safeDate = date.replace(/"/g, '&quot;');
+    const safeObs = obs.replace(/"/g, '&quot;');
+
+    html += `
+      <div class="f2-card ${statusClass}">
+        <div class="f2-card-header">
+          <div class="f2-tag-wrap">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:${color};color:#000;font-size:13px;font-weight:bold;">${iconChar}</span>
+            <span class="f2-tag">${tag}</span>
+            <span class="f2-badge-type">${p.type || 'TABLERO'}</span>
+          </div>
+          <select class="f2-status-select ${optClass}" onchange="updateFase2Status('${tag}', this.value)">
+            <option value="PENDIENTE" ${st === 'PENDIENTE' ? 'selected' : ''}>⚪ Pendiente</option>
+            <option value="PROCESO" ${st === 'PROCESO' ? 'selected' : ''}>⏳ En Proceso</option>
+            <option value="RETORQUEADO" ${st === 'RETORQUEADO' ? 'selected' : ''}>✅ Retorqueado</option>
+          </select>
+        </div>
+
+        <div class="f2-loc"><i data-lucide="map-pin" size="13" style="vertical-align:middle;color:var(--accent);"></i> ${p.loc || 'Planta Concentradora'}</div>
+
+        <div class="f2-card-body">
+          ${thumbHtml}
+          <div class="f2-form-grid">
+            <div class="f2-input-wrap">
+              <label>👤 Técnico / Responsable</label>
+              <input type="text" class="f2-input" list="fase2-techs" placeholder="Nombre de quien realizó..." value="${safeResp}" oninput="updateFase2Field('${tag}', 'resp', this.value)" />
+            </div>
+            <div class="f2-input-wrap">
+              <label>📅 Fecha / Guardia</label>
+              <input type="text" class="f2-input" placeholder="Ej. 30/10/2026 - Guardia A" value="${safeDate}" oninput="updateFase2Field('${tag}', 'date', this.value)" />
+            </div>
+            <div class="f2-input-wrap" style="grid-column: 1 / -1;">
+              <label>📝 Observaciones / Torque</label>
+              <input type="text" class="f2-input" placeholder="Ej. Borneras ajustadas a torque, cableado ordenado..." value="${safeObs}" oninput="updateFase2Field('${tag}', 'obs', this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="f2-card-footer">
+          ${p.latitude != null ? `<button class="btn-f2-locate" onclick="locateFase2Panel('${tag}')"><i data-lucide="navigation" size="12"></i> Ver en Mapa</button>` : '<span style="font-size:0.7rem;color:#ef4444;">⚠️ Sin GPS</span>'}
+        </div>
+      </div>`;
+  });
+
+  container.innerHTML = html;
+  if (window.lucide) lucide.createIcons();
+}
+
+
+function renderFase2View() {
+  updateFase2Metrics();
+  renderFase2Cards();
+}
+
+window.shareFase2WhatsApp = function() {
+  const list = getFase2Data();
+  const state = getFase2SavedState();
+  const total = list.length;
+  let done = 0;
+  let prog = 0;
+  let pend = 0;
+  const doneList = [];
+
+  list.forEach(p => {
+    const item = state[p.tag] || {};
+    const st = item.status || 'PENDIENTE';
+    if (st === 'RETORQUEADO') {
+      done++;
+      const resp = item.resp || p.default_resp || 'Técnico';
+      doneList.push(`• *${p.tag}* (${resp})`);
+    } else if (st === 'PROCESO') {
+      prog++;
+    } else {
+      pend++;
+    }
+  });
+
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const nowStr = new Date().toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+  let text = `⚡ *CONTROL DE RETORQUEO — FASE 2*
+🏢 *UM CHINALCO TOROMOCHO*
+📅 *Fecha:* ${nowStr}
+-----------------------------------
+📊 *Avance General: ${pct}%*
+✅ *Retorqueados:* ${done} de ${total}
+⏳ *En Proceso:* ${prog}
+⚪ *Pendientes:* ${pend}
+-----------------------------------
+`;
+
+  if (doneList.length > 0) {
+    text += `*Últimos retorqueados:*
+${doneList.slice(-10).join('\n')}
+
+`;
+  }
+  text += `🔗 *Plano y lista en vivo:* https://sorianosteven281.github.io/tablero_report_v2/#fase2`;
+
+  const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, '_blank');
+};
+
+window.exportFase2CSV = function() {
+  const list = getFase2Data();
+  const state = getFase2SavedState();
+
+  const rows = ['\uFEFFTAG,Ubicacion,Tipo,Estado_Retorqueo,Responsable,Fecha_Guardia,Observaciones,Latitud,Longitud'];
+  list.forEach(p => {
+    const item = state[p.tag] || {};
+    const st = item.status || 'PENDIENTE';
+    const resp = item.resp !== undefined ? item.resp : (p.default_resp || '');
+    const date = item.date !== undefined ? item.date : (p.default_crew || '');
+    const obs = item.obs !== undefined ? item.obs : (p.default_obs || '');
+
+    rows.push([
+      `"${(p.tag || '').replace(/"/g, '""')}"`,
+      `"${(p.loc || '').replace(/"/g, '""')}"`,
+      `"${(p.type || '').replace(/"/g, '""')}"`,
+      `"${st}"`,
+      `"${resp.replace(/"/g, '""')}"`,
+      `"${date.replace(/"/g, '""')}"`,
+      `"${obs.replace(/"/g, '""')}"`,
+      p.latitude != null ? p.latitude : '',
+      p.longitude != null ? p.longitude : ''
+    ].join(','));
+  });
+
+  downloadFile(rows.join('\r\n'), 'retorqueo_fase2_toromocho.csv', 'text/csv;charset=utf-8;');
+};
+
+
+window.resetFase2Data = function() {
+  if (confirm('¿Estás seguro de que deseas reiniciar todos los estados y datos guardados de Retorqueo Fase 2?')) {
+    localStorage.removeItem(FASE2_STORAGE_KEY);
+    showToast('Datos de retorqueo restablecidos.');
+    renderFase2View();
+  }
+};
+
+// Listeners de búsqueda y filtros en Fase 2
+document.addEventListener('DOMContentLoaded', () => {
+  const f2SearchInput = document.getElementById('f2-search-input');
+  const f2SearchClear = document.getElementById('f2-search-clear');
+
+  if (f2SearchInput) {
+    f2SearchInput.addEventListener('input', (e) => {
+      fase2SearchQuery = e.target.value.trim();
+      if (f2SearchClear) f2SearchClear.style.display = fase2SearchQuery ? 'block' : 'none';
+      renderFase2Cards();
+    });
+  }
+
+  if (f2SearchClear) {
+    f2SearchClear.addEventListener('click', () => {
+      if (f2SearchInput) {
+        f2SearchInput.value = '';
+        fase2SearchQuery = '';
+        f2SearchClear.style.display = 'none';
+        renderFase2Cards();
+        f2SearchInput.focus();
+      }
+    });
+  }
+
+  document.querySelectorAll('#f2-status-chips .chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      document.querySelectorAll('#f2-status-chips .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      fase2StatusFilter = chip.getAttribute('data-f2-status') || 'ALL';
+      renderFase2Cards();
+    });
+  });
+
+  document.querySelectorAll('#f2-zone-chips .chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      document.querySelectorAll('#f2-zone-chips .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      fase2ZoneFilter = chip.getAttribute('data-f2-zone') || 'ALL';
+      renderFase2Cards();
+    });
+  });
+
+  // Inicializar vista basada en URL hash (ej. index.html#fase2)
+  if (window.location.hash === '#fase2') {
+    switchView('fase2');
+  } else {
+    updateFase2Metrics();
+  }
+});
