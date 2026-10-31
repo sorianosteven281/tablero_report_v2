@@ -1083,14 +1083,25 @@ window.ALL_PANELS_DATA = [
     "tag": "2210M079-CP01",
     "loc": "Blowers 111/112/113 entre linea 5 y 6 de flotacion",
     "type": "PAS SCADA",
-    "latitude": null,
-    "longitude": null,
+    "latitude": -11.668447013973491,
+    "longitude": -76.14631746505339,
     "last_inspected_at": null,
     "color": null,
     "note": null,
     "icon": null,
     "photo": "photos/2210M079-CP01.jpg",
     "photo_count": 8
+  },
+  {
+    "tag": "2210M079-CP02",
+    "loc": "Almacén Concentradora",
+    "type": "PAS SCADA",
+    "latitude": null,
+    "longitude": null,
+    "last_inspected_at": null,
+    "color": null,
+    "note": null,
+    "icon": null
   },
   {
     "tag": "2210MO79-902",
@@ -1102,6 +1113,17 @@ window.ALL_PANELS_DATA = [
     "color": "#06B6D4",
     "note": "punto en duda",
     "icon": "bolt"
+  },
+  {
+    "tag": "2211-FCP-060",
+    "loc": "Zona de Espesadores",
+    "type": "PAS SCADA",
+    "latitude": null,
+    "longitude": null,
+    "last_inspected_at": null,
+    "color": null,
+    "note": null,
+    "icon": null
   },
   {
     "tag": "2212-FCP-060",
@@ -3030,9 +3052,17 @@ window.FASE2_DATA = [
     "tag": "2210M079-CP01",
     "loc": "Blowers 111/112/113 entre linea 5 y 6 de flotacion",
     "type": "PAS SCADA",
+    "latitude": -11.668447013973491,
+    "longitude": -76.14631746505339,
+    "assigned_to": null
+  },
+  {
+    "tag": "2210M079-CP02",
+    "loc": "Almacén Concentradora",
+    "type": "PAS SCADA",
     "latitude": null,
     "longitude": null,
-    "assigned_to": null
+    "assigned_to": "Ronaldiño Landeo"
   },
   {
     "tag": "2210MO79-902",
@@ -3041,6 +3071,14 @@ window.FASE2_DATA = [
     "latitude": -11.669215604446212,
     "longitude": -76.14323026653018,
     "assigned_to": "Boris Soriano"
+  },
+  {
+    "tag": "2211-FCP-060",
+    "loc": "Zona de Espesadores",
+    "type": "PAS SCADA",
+    "latitude": null,
+    "longitude": null,
+    "assigned_to": "Ronaldiño Landeo"
   },
   {
     "tag": "2212-FCP-060",

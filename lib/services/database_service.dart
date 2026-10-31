@@ -167,13 +167,17 @@ class DatabaseService {
 
   Future<void> updatePanelInspection(String tag, double? lat, double? lon) async {
     final db = await database;
+    final updates = <String, dynamic>{
+      'last_inspected_at': DateTime.now().toIso8601String(),
+    };
+    // Solo actualizar coordenadas si no son nulas, para proteger coordenadas existentes
+    if (lat != null && lon != null) {
+      updates['latitude'] = lat;
+      updates['longitude'] = lon;
+    }
     await db.update(
       'panels',
-      {
-        'latitude': lat,
-        'longitude': lon,
-        'last_inspected_at': DateTime.now().toIso8601String(),
-      },
+      updates,
       where: 'tag = ?',
       whereArgs: [tag],
     );
